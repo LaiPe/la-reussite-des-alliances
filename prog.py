@@ -13,8 +13,14 @@ def carte_to_chaine(carte):
         return dico["valeur"]+chr(9826)
     else:
         return dico["valeur"]+chr(9827)
+def afficher_reussite(liCartes):
+    for carte in liCartes:
+        print((carte_to_chaine(carte)),end=" ")
+    print("\n")
 if __name__ == "__main__":
     print("Bonjour")
     carte={"valeur":3,"couleur":"C"}
-    print(carte_to_chaine(carte))
+    liCartes=[{"valeur":3,"couleur":"C"},{"valeur":10, "couleur":"K"},{"valeur":9,"couleur":"T"}]
+    afficher_reussite(liCartes)
+    #print(carte_to_chaine(carte))
     
