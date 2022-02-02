@@ -1,6 +1,6 @@
 def carte_to_chaine(carte):
     dico=dict(carte)
-    if type(carte["valeur"])=="int":
+    if not(carte["valeur"] in ["A","V","D","K"]):
         dico["valeur"]=str(carte["valeur"])
     if dico["valeur"]!="10":
         dico["valeur"]=" "+dico["valeur"]
@@ -15,6 +15,6 @@ def carte_to_chaine(carte):
         return dico["valeur"]+chr(9827)
 if __name__ == "__main__":
     print("Bonjour")
-    carte1={"valeur":"3","couleur":"C"}
-    print(carte_to_chaine(carte1))
+    carte={"valeur":3,"couleur":"C"}
+    print(carte_to_chaine(carte))
     
