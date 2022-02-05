@@ -1,6 +1,7 @@
+#=========AFFICHAGE=============
 def carte_to_chaine(carte):
     dico=dict(carte)
-    if not(carte["valeur"] in ["A","V","D","K"]):
+    if not(carte["valeur"] in ["A","V","D","R"]):
         dico["valeur"]=str(carte["valeur"])
     if dico["valeur"]!="10":
         dico["valeur"]=" "+dico["valeur"]
@@ -9,18 +10,42 @@ def carte_to_chaine(carte):
         return dico["valeur"]+chr(9825)
     elif dico["couleur"]=="P":
         return dico["valeur"]+chr(9824)
-    elif dico["couleur"]=="P":
+    elif dico["couleur"]=="K":
         return dico["valeur"]+chr(9826)
-    else:
+    else: #trèfle
         return dico["valeur"]+chr(9827)
 def afficher_reussite(liCartes):
     for carte in liCartes:
         print((carte_to_chaine(carte)),end=" ")
     print("\n")
+#=======LECTURE/ECRITURE FICHIERS=======
+def init_pioche_fichier(nomFichier):
+    f=open(nomFichier)
+    txt=f.read()
+    li=txt.split()
+    dico={}
+    liCartes=[]
+    for e in li:
+        carte=e.split("-")
+        dico["valeur"]=carte[0]
+        dico["couleur"]=carte[1]
+        liCartes+=[dict(dico)]
+    f.close()
+    return liCartes
+def ecrire_fichier_reussite(nomFichier,liCartes):
+    f=open(nomFichier,"w")
+    for carte in liCartes:
+        f.write(carte["valeur"]+"-"+carte["couleur"]+" ")
+    f.close()
 if __name__ == "__main__":
     print("Bonjour")
     carte={"valeur":3,"couleur":"C"}
     liCartes=[{"valeur":3,"couleur":"C"},{"valeur":10, "couleur":"K"},{"valeur":9,"couleur":"T"}]
-    afficher_reussite(liCartes)
+
+    #afficher_reussite(liCartes)
     #print(carte_to_chaine(carte))
-    
+    jeu=init_pioche_fichier("data_init.txt")
+    afficher_reussite(jeu)
+    ecrire_fichier_reussite("test.txt",jeu)
+    jeu=init_pioche_fichier("test.txt")
+    afficher_reussite(jeu)
