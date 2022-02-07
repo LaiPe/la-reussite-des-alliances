@@ -38,7 +38,7 @@ def ecrire_fichier_reussite(nomFichier,liCartes):
     for carte in liCartes:
         f.write(carte["valeur"]+"-"+carte["couleur"]+" ")
     f.close()
-#=======CREATION DE PIOCHE========
+#==========CREATION DE PIOCHE==========
 def init_pioche_alea(nb_cartes = 32):
     liCartes=[]
     carte={}
@@ -67,12 +67,35 @@ def saut_si_possible(liste_tas,num_tas):
         return True
     else:
         return False
+def piocher(liste_tas,pioche):
+    liste_tas+=[pioche.pop(0)]
+#=========================ETAPE========================
+def une_etape_reussite(liste_tas,pioche,affiche=False):
+    piocher(liste_tas,pioche)
+    if affiche:
+        print("Pioche:",end=" ")
+        afficher_reussite(liste_tas)
+
+    saut=saut_si_possible(liste_tas,len(liste_tas)-1)
+    if affiche and saut:
+        print("Saut de pioche:",end=" ")
+        afficher_reussite(liste_tas)
+    if saut:
+        i=2
+        while i<len(liste_tas):
+            saut=saut_si_possible(liste_tas,len(liste_tas)-1)
+            i+=1
+            if affiche and saut:
+                print("Saut:",end=" ")
+                afficher_reussite(liste_tas)
+            if saut:
+                i=2
 
 if __name__ == "__main__":
     print("Bonjour")
     carte1={"valeur":"A","couleur":"C"}
     carte2={"valeur":"R","couleur":"T"}
-    liCartes=[{"valeur":3,"couleur":"C"},{"valeur":10, "couleur":"K"},{"valeur":3,"couleur":"K"}]
+    liCartes=[{"valeur":9,"couleur":"C"},{"valeur":10, "couleur":"K"},{"valeur":9,"couleur":"T"}]
     
     #afficher_reussite(liCartes)
     #print(carte_to_chaine(carte))
@@ -85,13 +108,21 @@ if __name__ == "__main__":
     
     #jeu2 = init_pioche_alea()
     #afficher_reussite(jeu2)
-
-    a=alliance(carte1,carte2)
-    if a:
-        print("il y a une alliance")
-    else:
-        print("y'a pas d'alliance")
-
-    print(saut_si_possible(liCartes,2))
-    print(liCartes)
-
+    
+    #a=alliance(carte1,carte2)
+    #if a:
+    #    print("il y a une alliance")
+    #else:
+    #    print("y'a pas d'alliance")
+    #print(saut_si_possible(liCartes,2))
+    #print(liCartes)
+    
+    pioche=init_pioche_alea()
+    liCartes2=[]
+    for i in range(6):
+        piocher(liCartes2,pioche)
+    print("INIT:",end=" ")
+    afficher_reussite(liCartes2)
+    une_etape_reussite(liCartes2,pioche,True)
+    print("FIN DE L'ETAPE:",end=" ")
+    afficher_reussite(liCartes2)
