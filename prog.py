@@ -53,6 +53,27 @@ def init_pioche_alea(nb_cartes = 32):
             liCartes += [dict(carte)]   
     random.shuffle(liCartes)
     return liCartes
+def alliance(carte1,carte2):
+    memesvaleurs = False
+    for valeur in carte1:
+        if (valeur in carte2) and memesvaleurs == False:
+            memesvaleurs = True
+    return memesvaleurs
+def saut_si_possible(liste_tas,num_tas = 0):
+    carte = liste_tas
+    place = num_tas
+    saut = False
+    for valeur in carte[place-1]:
+        if saut == False and valeur in carte[place-3] and carte[place-3][valeur] == carte[place-1][valeur]:
+            saut = True
+            carte[place-3]=carte[place-1]
+            del(carte[place-1])
+            print(*carte)
+    return saut
+
+
+
+    
         
     
 if __name__ == "__main__":
