@@ -100,11 +100,11 @@ if __name__ == "__main__":
     #afficher_reussite(liCartes)
     #print(carte_to_chaine(carte))
     
-    #jeu=init_pioche_fichier("data_init.txt")
-    #afficher_reussite(jeu)
-    #ecrire_fichier_reussite("test.txt",jeu)
-    #jeu=init_pioche_fichier("test.txt")
-    #afficher_reussite(jeu)
+    jeu=init_pioche_fichier("../ressources/data_init.txt")
+    afficher_reussite(jeu)
+    ecrire_fichier_reussite("../ressources/test.txt",jeu)
+    jeu=init_pioche_fichier("../ressources/test.txt")
+    afficher_reussite(jeu)
     
     #jeu2 = init_pioche_alea()
     #afficher_reussite(jeu2)
@@ -116,7 +116,7 @@ if __name__ == "__main__":
     #    print("y'a pas d'alliance")
     #print(saut_si_possible(liCartes,2))
     #print(liCartes)
-    
+    """
     pioche=init_pioche_alea()
     liCartes2=[]
     for i in range(6):
@@ -126,3 +126,4 @@ if __name__ == "__main__":
     une_etape_reussite(liCartes2,pioche,True)
     print("FIN DE L'ETAPE:",end=" ")
     afficher_reussite(liCartes2)
+    """
