@@ -69,7 +69,6 @@ def saut_si_possible(liste_tas,num_tas = 0):
             saut = True
             carte[place-3]=carte[place-1]
             del(carte[place-1])
-            print(*carte)
     return saut
 
 
