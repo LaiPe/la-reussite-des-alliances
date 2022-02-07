@@ -100,11 +100,11 @@ if __name__ == "__main__":
     #afficher_reussite(liCartes)
     #print(carte_to_chaine(carte))
     
-    jeu=init_pioche_fichier("../ressources/data_init.txt")
-    afficher_reussite(jeu)
-    ecrire_fichier_reussite("../ressources/test.txt",jeu)
-    jeu=init_pioche_fichier("../ressources/test.txt")
-    afficher_reussite(jeu)
+    #jeu=init_pioche_fichier("../ressources/data_init.txt")
+    #afficher_reussite(jeu)
+    #ecrire_fichier_reussite("../ressources/test.txt",jeu)
+    #jeu=init_pioche_fichier("../ressources/test.txt")
+    #afficher_reussite(jeu)
     
     #jeu2 = init_pioche_alea()
     #afficher_reussite(jeu2)
@@ -128,3 +128,4 @@ if __name__ == "__main__":
     afficher_reussite(liCartes2)
     """
     import test
+    test.test()
