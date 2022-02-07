@@ -1,4 +1,5 @@
 import random
+import test
 #=========AFFICHAGE=============
 def carte_to_chaine(carte):
     dico=dict(carte)
@@ -127,5 +128,4 @@ if __name__ == "__main__":
     print("FIN DE L'ETAPE:",end=" ")
     afficher_reussite(liCartes2)
     """
-    import test
     test.test()
