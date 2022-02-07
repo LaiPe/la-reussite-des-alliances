@@ -127,3 +127,4 @@ if __name__ == "__main__":
     print("FIN DE L'ETAPE:",end=" ")
     afficher_reussite(liCartes2)
     """
+    import test
