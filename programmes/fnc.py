@@ -19,6 +19,8 @@ def afficher_reussite(liCartes):
     for carte in liCartes:
         print((carte_to_chaine(carte)),end=" ")
     print("\n")
+def texte_encadre(texte):
+    print("="*len(texte),texte,"="*len(texte))
 #=======LECTURE/ECRITURE FICHIERS=======
 def init_pioche_fichier(nomFichier):
     f=open(nomFichier)

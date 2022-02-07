@@ -1,13 +1,14 @@
 import fnc
 import test
+tab="    "
 if __name__ == "__main__":
     print("Bonjour")
     carte1={"valeur":"A","couleur":"C"}
     carte2={"valeur":"R","couleur":"T"}
     liCartes=[{"valeur":9,"couleur":"C"},{"valeur":10, "couleur":"K"},{"valeur":9,"couleur":"T"}]
     
-    fnc.afficher_reussite(liCartes)
-    print(fnc.carte_to_chaine(carte1))
+    #fnc.afficher_reussite(liCartes)
+    #print(fnc.carte_to_chaine(carte1))
     
     #jeu=fnc.init_pioche_fichier("../ressources/data_init.txt")
     #fnc.afficher_reussite(jeu)
@@ -37,3 +38,4 @@ if __name__ == "__main__":
     fnc.afficher_reussite(liCartes2)
     """
     #test.test()
+    print(test.tab)
