@@ -54,40 +54,44 @@ def init_pioche_alea(nb_cartes = 32):
             liCartes+=[dict(carte)]   
     random.shuffle(liCartes)
     return liCartes
+#==========REGLES============
 def alliance(carte1,carte2):
-    memesvaleurs = False
-    for valeur in carte1:
-        if (valeur in carte2) and memesvaleurs == False:
-            memesvaleurs = True
-    return memesvaleurs
-def saut_si_possible(liste_tas,num_tas = 0):
-    carte = liste_tas
-    place = num_tas
-    saut = False
-    for valeur in carte[place-1]:
-        if saut == False and valeur in carte[place-3] and carte[place-3][valeur] == carte[place-1][valeur]:
-            saut = True
-            carte[place-3]=carte[place-1]
-            del(carte[place-1])
-    return saut
+    alliance=False
+    if carte1["valeur"]==carte2["valeur"] or carte1["couleur"]==carte2["couleur"]:
+        alliance=True
+    return alliance
+def saut_si_possible(liste_tas,num_tas):
+    a=alliance(liste_tas[num_tas-2],liste_tas[num_tas])
+    if a:
+        liste_tas.pop(num_tas-2)
+        return True
+    else:
+        return False
 
-
-
-    
-        
-    
 if __name__ == "__main__":
     print("Bonjour")
-    carte={"valeur":3,"couleur":"C"}
-    liCartes=[{"valeur":3,"couleur":"C"},{"valeur":10, "couleur":"K"},{"valeur":9,"couleur":"T"}]
+    carte1={"valeur":"A","couleur":"C"}
+    carte2={"valeur":"R","couleur":"T"}
+    liCartes=[{"valeur":3,"couleur":"C"},{"valeur":10, "couleur":"K"},{"valeur":3,"couleur":"K"}]
     
     #afficher_reussite(liCartes)
     #print(carte_to_chaine(carte))
+    
     #jeu=init_pioche_fichier("data_init.txt")
     #afficher_reussite(jeu)
     #ecrire_fichier_reussite("test.txt",jeu)
     #jeu=init_pioche_fichier("test.txt")
     #afficher_reussite(jeu)
     
-    jeu2 = init_pioche_alea()
-    afficher_reussite(jeu2)
+    #jeu2 = init_pioche_alea()
+    #afficher_reussite(jeu2)
+
+    a=alliance(carte1,carte2)
+    if a:
+        print("il y a une alliance")
+    else:
+        print("y'a pas d'alliance")
+
+    print(saut_si_possible(liCartes,2))
+    print(liCartes)
+
