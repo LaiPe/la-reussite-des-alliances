@@ -10,11 +10,11 @@ if __name__ == "__main__":
     #fonctions.afficher_reussite(liCartes)
     #print(fonctions.carte_to_chaine(carte1))
     
-    #jeu=fonctions.init_pioche_fichier("../ressources/data_init.txt")
-    #fonctions.afficher_reussite(jeu)
-    #fonctions.ecrire_fichier_reussite("../ressources/test.txt",jeu)
-    #jeu=fonctions.init_pioche_fichier("../ressources/test.txt")
-    #fonctions.afficher_reussite(jeu)
+    jeu=fonctions.init_pioche_fichier("../ressources/data_init.txt")
+    fonctions.afficher_reussite(jeu)
+    fonctions.ecrire_fichier_reussite("../ressources/test.txt",jeu)
+    jeu=fonctions.init_pioche_fichier("../ressources/test.txt")
+    fonctions.afficher_reussite(jeu)
     
     #jeu2 = fonctions.init_pioche_alea()
     #fonctions.afficher_reussite(jeu2)
@@ -38,4 +38,4 @@ if __name__ == "__main__":
     fonctions.afficher_reussite(liCartes2)
     """
     #test.test()
-    print(test.tab)
+

@@ -7,11 +7,14 @@ def tabVar():
     print(main.tab+"liCartes:",liCartes)
     print(main.tab+"liCartes2:",liCartes2)
     print(main.tab+"liCartes3:",liCartes3)
+    print(main.tab+"liFichier:",liFichier)
     print(main.tab+"car:",car)
     print(main.tab+"entier:",entier)
 
+def affich_liFichier():
+    for i in range(len(liFichier)):
+        print(main.tab,i+1,".",liFichier[i],sep="")
 def choixVar(type):
-    tabVar()
     print("Quelle variable choisissez-vous ?")
     if type=="c":
         print(
@@ -46,6 +49,31 @@ def choixVar(type):
                 return "lc3"
             else:
                 print("Veuillez enter un carractère valide.")
+    else:
+        print("Erreur: argument inconnu,  'type' dans choixVar(type) inconnu")
+ 
+def choixFichier():
+    global liFichier
+    conti=True
+    while conti:
+        existFich=input("Votre fichier existe-il déjà ? (o pour oui, n pour non):")
+        if existFich=="o":
+            affich_liFichier()
+            sousConti=True
+            while sousConti:
+                chFich=int(input("Lequel ?:"))
+                if chFich in range(1,len(liFichier)+1):
+                    return liFichier[chFich-1]
+                else:
+                    print("Veuillez enter un carractère valide.")
+        if existFich=="n":
+            nomFich=input("Donnez lui un nom (n'oubliez pas de noter l'extension):")
+            f=open("ressources/"+nomFich,"w")
+            f.close
+            liFichier+=[nomFich]
+            return nomFich
+        else:
+            print("Veuillez enter un carractère valide.")
 
 if __name__=="__main__":
     fonctions.texte_encadre("DEBUG_MODE",True)
@@ -60,6 +88,7 @@ if __name__=="__main__":
     liCartes=[{"valeur":9,"couleur":"C"},{"valeur":10, "couleur":"K"},{"valeur":9,"couleur":"T"}]
     liCartes2=[]
     liCartes3=[]
+    liFichier=["data_int.txt","test.txt"]
     car="random"
     entier=3
 
@@ -141,10 +170,17 @@ if __name__=="__main__":
                 while sousConti:
                     choix=input("Choix?:")
                     if choix=="a":
-                        nomFich=input("Nom du fichier ? (n'oubliez pas l'extension):")
-                        liFich=fonctions.init_pioche_alea("../ressources/"+nomFich)
-                        liChoix=choixVar("lc")
-                        liChoix=liFich
+                        chVar=choixVar("lc")
+                        if chVar=="lc1":
+                            liCartes=fonctions.init_pioche_fichier("../ressources/data_init.txt")
+                            #liCartes=fonctions.init_pioche_fichier(("../ressources/"+choixFichier()))
+                        elif chVar=="lc2":
+                            liCartes2=fonctions.init_pioche_fichier("../ressources/"+choixFichier())
+                        elif chVar=="lc3":
+                            liCartes3=fonctions.init_pioche_fichier("../ressources/"+choixFichier())
+                        else:
+                            print("Erreur: variable inconnue, code retour choixVar() inconnu")
+                        input("(Appuyer sur entrer pour revenir au menu)")
                         sousConti=False
                     elif choix=="b":
                         choixVar("lc")
