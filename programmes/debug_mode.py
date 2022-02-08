@@ -8,7 +8,7 @@ def tabVar():
     print(main.tab+"liCartes2:",liCartes2)
     print(main.tab+"liCartes3:",liCartes3)
     print(main.tab+"car:",car)
-    print(main.tab+"int:",int)
+    print(main.tab+"entier:",entier)
 
 def choixVar(type):
     tabVar()
@@ -31,7 +31,7 @@ def choixVar(type):
     elif type=="rc":
         return car
     elif type=="ri":
-        return int
+        return entier
     elif type=="lc":
         print(
             main.tab+"1.liCartes",
@@ -61,7 +61,7 @@ def modifVar():
         main.tab+"4.liCartes2",
         main.tab+"5.liCartes3",
         main.tab+"6.car",
-        main.tab+"7.int",
+        main.tab+"7.entier",
         sep="\n"
     )
     choix=input("Choix?:")
@@ -228,7 +228,7 @@ if __name__=="__main__":
     liCartes2=[]
     liCartes3=[]
     car="random"
-    int=3
+    entier=3
 
     conti=True
     while conti:
