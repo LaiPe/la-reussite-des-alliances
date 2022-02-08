@@ -1,7 +1,7 @@
 import main
-import fnc
+import nfnc
 def tabVar():
-    fnc.texte_encadre("TABLEAU DES VARIABLES")
+    nfnc.texte_encadre("TABLEAU DES VARIABLES")
     print(main.tab+"carte1:",carte1)
     print(main.tab+"carte2:",carte2)
     print(main.tab+"liCartes:",liCartes)
@@ -53,7 +53,7 @@ def choixVar(type):
 
 def modifVar():
     tabVar()
-    fnc.texte_encadre("CHOIX DE LA VARIABLE")
+    nfnc.texte_encadre("CHOIX DE LA VARIABLE")
     print(
         main.tab+"1.carte1",
         main.tab+"2.carte2",
@@ -121,7 +121,7 @@ def modifVar():
             carte["couleur"]=f
             liCartes+=[carte]
 def menuDeb():
-    fnc.texte_encadre("MENU DE DEBOGAGE")
+    nfnc.texte_encadre("MENU DE DEBOGAGE")
     print(
         main.tab+"1.Fonctions d'affichage",
         main.tab+"2.Fonctions de lecture/ecriture",
@@ -147,15 +147,15 @@ def menuDeb():
             while sousConti:
                 choix=input("Choix?:")
                 if choix=="a":
-                    print(fnc.carte_to_chaine(choixVar("c")))
+                    print(nfnc.carte_to_chaine(choixVar("c")))
                     input("(Appuyer sur entrer pour revenir au menu)")
                     sousConti=False
                 elif choix=="b":
-                    fnc.afficher_reussite(choixVar("lc"))
+                    nfnc.afficher_reussite(choixVar("lc"))
                     input("(Appuyer sur entrer pour revenir au menu)")
                     sousConti=False
                 elif choix=="c":
-                    fnc.texte_encadre(choixVar("rc"))
+                    nfnc.texte_encadre(choixVar("rc"))
                     input("(Appuyer sur entrer pour revenir au menu)")
                     sousConti=False
                 elif choix=="r":
