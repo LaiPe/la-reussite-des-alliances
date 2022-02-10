@@ -199,7 +199,18 @@ if __name__=="__main__":
                         print("Veuillez enter un carractère valide.") 
                 conti=False
             elif choix=="3":
-                print("oui")
+                chVar=choixVar("lc")
+                print("Création d'un jeu à 32 ou 52 cartes ?")
+                chNbCartes=input("(ecrivez 32 pour le jeu à 32, n'importe quelle autre nombre pour le jeu à 52)")
+                if chVar=="lc1":
+                    liCartes=fonctions.init_pioche_alea(chNbCartes)
+                elif chVar=="lc2":
+                    liCartes2=fonctions.init_pioche_alea(chNbCartes)
+                elif chVar=="lc3":
+                    liCartes3=fonctions.init_pioche_alea(chNbCartes)
+                else:
+                    print("Erreur: variable inconnue, code retour choixVar() inconnu")
+                input("(Appuyer sur entrer pour revenir au menu)")
                 conti=False
             elif choix=="4":
                 print(
