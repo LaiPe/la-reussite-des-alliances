@@ -184,11 +184,11 @@ if __name__=="__main__":
                     elif choix=="b":
                         chVar=choixVar("lc")
                         if chVar=="lc1":
-                            liCartes=fonctions.ecrire_fichier_reussite("../ressources/"+choixFichier(),liCartes)
+                            fonctions.ecrire_fichier_reussite("../ressources/"+choixFichier(),liCartes)
                         elif chVar=="lc2":
-                            liCartes2=fonctions.ecrire_fichier_reussite("../ressources/"+choixFichier(),liCartes2)
+                            fonctions.ecrire_fichier_reussite("../ressources/"+choixFichier(),liCartes2)
                         elif chVar=="lc3":
-                            liCartes3=fonctions.ecrire_fichier_reussite("../ressources/"+choixFichier(),liCartes3)
+                            fonctions.ecrire_fichier_reussite("../ressources/"+choixFichier(),liCartes3)
                         else:
                             print("Erreur: variable inconnue, code retour choixVar() inconnu")
                         input("(Appuyer sur entrer pour revenir au menu)")
@@ -201,7 +201,7 @@ if __name__=="__main__":
             elif choix=="3":
                 chVar=choixVar("lc")
                 print("Création d'un jeu à 32 ou 52 cartes ?")
-                chNbCartes=input("(ecrivez 32 pour le jeu à 32, n'importe quelle autre nombre pour le jeu à 52)")
+                chNbCartes=int(input("(ecrivez 32 pour le jeu à 32, n'importe quelle autre nombre pour le jeu à 52)"))
                 if chVar=="lc1":
                     liCartes=fonctions.init_pioche_alea(chNbCartes)
                 elif chVar=="lc2":

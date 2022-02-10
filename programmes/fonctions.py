@@ -54,7 +54,7 @@ def ecrire_fichier_reussite(nomFichier,liCartes):
             f.write(str(carte["valeur"])+"-"+carte["couleur"]+" ")
     f.close()
 #==========CREATION DE PIOCHE==========
-def init_pioche_alea(nb_cartes = 32):
+def init_pioche_alea(nb_cartes=32):
     liCartes=[]
     carte={}
     couleurs=['C','P','K','T']
