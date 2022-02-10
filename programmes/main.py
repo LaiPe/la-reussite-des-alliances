@@ -11,12 +11,14 @@ if __name__ == "__main__":
     #print(fonctions.carte_to_chaine(carte1))
     
     jeu=fonctions.init_pioche_fichier("../ressources/data_init.txt")
+    print(jeu)
     fonctions.afficher_reussite(jeu)
     fonctions.ecrire_fichier_reussite("../ressources/test.txt",jeu)
     jeu=fonctions.init_pioche_fichier("../ressources/test.txt")
     fonctions.afficher_reussite(jeu)
     
     #jeu2 = fonctions.init_pioche_alea()
+    #print(jeu2)
     #fonctions.afficher_reussite(jeu2)
     
     #a=fonctions.alliance(carte1,carte2)

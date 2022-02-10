@@ -37,7 +37,10 @@ def init_pioche_fichier(nomFichier):
     liCartes=[]
     for e in li:
         carte=e.split("-")
-        dico["valeur"]=carte[0]
+        if carte[0] in ["A","V","D","R"]:
+            dico["valeur"]=carte[0]
+        else:
+            dico["valeur"]=int(carte[0])
         dico["couleur"]=carte[1]
         liCartes+=[dict(dico)]
     f.close()
@@ -45,15 +48,18 @@ def init_pioche_fichier(nomFichier):
 def ecrire_fichier_reussite(nomFichier,liCartes):
     f=open(nomFichier,"w")
     for carte in liCartes:
-        f.write(carte["valeur"]+"-"+carte["couleur"]+" ")
+        if carte["valeur"] in ["A","V","D","R"]:
+            f.write(carte["valeur"]+"-"+carte["couleur"]+" ")
+        else:
+            f.write(str(carte["valeur"])+"-"+carte["couleur"]+" ")
     f.close()
 #==========CREATION DE PIOCHE==========
 def init_pioche_alea(nb_cartes = 32):
     liCartes=[]
     carte={}
     couleurs=['C','P','K','T']
-    valeurs32=['7','8','9','10','A','V','D','R']
-    valeurs=['2','3','4','5','6','7','8','9','10','A','V','D','R']
+    valeurs32=[7,8,9,10,'A','V','D','R']
+    valeurs=[2,3,4,5,6,7,8,9,10,'A','V','D','R']
     if nb_cartes==32:
         valeurs=valeurs32
     for couleur in couleurs:

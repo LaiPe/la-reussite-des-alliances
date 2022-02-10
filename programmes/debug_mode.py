@@ -68,7 +68,7 @@ def choixFichier():
                     print("Veuillez enter un carractère valide.")
         if existFich=="n":
             nomFich=input("Donnez lui un nom (n'oubliez pas de noter l'extension):")
-            f=open("ressources/"+nomFich,"w")
+            f=open("../ressources/"+nomFich,"w")
             f.close
             liFichier+=[nomFich]
             return nomFich
@@ -88,7 +88,7 @@ if __name__=="__main__":
     liCartes=[{"valeur":9,"couleur":"C"},{"valeur":10, "couleur":"K"},{"valeur":9,"couleur":"T"}]
     liCartes2=[]
     liCartes3=[]
-    liFichier=["data_int.txt","test.txt"]
+    liFichier=["data_init.txt","test.txt"]
     car="random"
     entier=3
 
@@ -172,8 +172,7 @@ if __name__=="__main__":
                     if choix=="a":
                         chVar=choixVar("lc")
                         if chVar=="lc1":
-                            liCartes=fonctions.init_pioche_fichier("../ressources/data_init.txt")
-                            #liCartes=fonctions.init_pioche_fichier(("../ressources/"+choixFichier()))
+                            liCartes=fonctions.init_pioche_fichier("../ressources/"+choixFichier())
                         elif chVar=="lc2":
                             liCartes2=fonctions.init_pioche_fichier("../ressources/"+choixFichier())
                         elif chVar=="lc3":
@@ -183,7 +182,17 @@ if __name__=="__main__":
                         input("(Appuyer sur entrer pour revenir au menu)")
                         sousConti=False
                     elif choix=="b":
-                        choixVar("lc")
+                        chVar=choixVar("lc")
+                        if chVar=="lc1":
+                            liCartes=fonctions.ecrire_fichier_reussite("../ressources/"+choixFichier(),liCartes)
+                        elif chVar=="lc2":
+                            liCartes2=fonctions.ecrire_fichier_reussite("../ressources/"+choixFichier(),liCartes2)
+                        elif chVar=="lc3":
+                            liCartes3=fonctions.ecrire_fichier_reussite("../ressources/"+choixFichier(),liCartes3)
+                        else:
+                            print("Erreur: variable inconnue, code retour choixVar() inconnu")
+                        input("(Appuyer sur entrer pour revenir au menu)")
+                        sousConti=False
                     elif choix=="r":
                         sousConti=False
                     else:
