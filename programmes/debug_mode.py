@@ -90,7 +90,7 @@ if __name__=="__main__":
     liCartes3=[]
     liFichier=["data_init.txt","test.txt"]
     car="random"
-    entier=3
+    entier=2
 
     conti_prog=True
     while conti_prog:
@@ -164,6 +164,7 @@ if __name__=="__main__":
                 print(
                     main.tab+"a.init_pioche_fichier",
                     main.tab+"b.ecrire_fichier_reussite",
+                    main.tab+"r.Retour",
                     sep="\n"
                 )
                 sousConti=True
@@ -217,20 +218,61 @@ if __name__=="__main__":
                     main.tab+"a.alliance",
                     main.tab+"b.saut_si_possible",
                     main.tab+"c.piocher",
+                    main.tab+"r.Retour",
                     sep="\n"
                 )
                 sousConti=True
                 while sousConti:
                     choix=input("Choix?:")
                     if choix=="a":
-                        choixVar("c")#carte1
-                        choixVar("c")#carte2
+                        print("Test d'alliance entre carte1 et carte2:")
+                        if fonctions.alliance(carte1,carte2):
+                            print("Alliance possible entre 'carte1' et 'carte2'.")
+                        else:
+                            print("Alliance impossible entre 'carte1' et 'carte2'.")
+                        sousConti=False
+                        input("(Appuyer sur entrer pour revenir au menu)")
                     elif choix=="b":
-                        choixVar("lc")#liCartes
-                        choixVar("ri")#int
+                        chVar=choixVar("lc")
+                        if chVar=="lc1":
+                            li=liCartes 
+                        elif chVar=="lc2":
+                            li=liCartes2
+                        elif chVar=="lc3":
+                            li=liCartes3
+                        else:
+                            print("Erreur: variable inconnue, code retour choixVar() inconnu")
+                        entier=int(input("Choisissez l'index (attention à ne pas faire de sortie d'index):"))
+                        if fonctions.saut_si_possible(li,entier):
+                            print("Saut possible et effectué")
+                        else:
+                            print("Saut impossible")
+                        sousConti=False
+                        input("(Appuyer sur entrer pour revenir au menu)")
                     elif choix=="c":
-                        choixVar("lc")#liCartes2
-                        choixVar("lc")#liCartes3(pioche)
+                        print("Choisissez la pioche:")
+                        chPioche=choixVar("lc")
+                        if chPioche=="lc1":
+                            pioche=liCartes 
+                        elif chPioche=="lc2":
+                            pioche=liCartes2
+                        elif chPioche=="lc3":
+                            pioche=liCartes3
+                        else:
+                            print("Erreur: variable inconnue, code retour choixVar() inconnu")
+                        print("Choisissez la liste dans laquelle la carte piochée ira:")
+                        chVar=choixVar("lc")
+                        if chVar=="lc1":
+                            li=liCartes 
+                        elif chVar=="lc2":
+                            li=liCartes2
+                        elif chVar=="lc3":
+                            li=liCartes3
+                        else:
+                            print("Erreur: variable inconnue, code retour choixVar() inconnu")
+                        fonctions.piocher(li,pioche)
+                        sousConti=False
+                        input("(Appuyer sur entrer pour revenir au menu)")
                     elif choix=="r":
                         sousConti=False
                     else:
