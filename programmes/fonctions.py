@@ -76,6 +76,8 @@ def alliance(carte1,carte2):
         alliance=True
     return alliance
 def saut_si_possible(liste_tas,num_tas):
+    if (len(liste_tas)<3) or (num_tas>(len(liste_tas)-1)):
+        return False
     a=alliance(liste_tas[num_tas-2],liste_tas[num_tas])
     if a:
         liste_tas.pop(num_tas-2)
@@ -105,3 +107,4 @@ def une_etape_reussite(liste_tas,pioche,affiche=False):
                 afficher_reussite(liste_tas)
             if saut:
                 i=2
+    return None

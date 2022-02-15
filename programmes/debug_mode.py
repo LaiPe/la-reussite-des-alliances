@@ -279,7 +279,31 @@ if __name__=="__main__":
                         print("Veuillez enter un carractère valide.") 
                 conti=False
             elif choix=="5":
-                print("oui")
+                print("Choisissez la pioche:")
+                chPioche=choixVar("lc")
+                if chPioche=="lc1":
+                    pioche=liCartes 
+                elif chPioche=="lc2":
+                    pioche=liCartes2
+                elif chPioche=="lc3":
+                    pioche=liCartes3
+                else:
+                    print("Erreur: variable inconnue, code retour choixVar() inconnu")
+                print("Choisissez la liste représentant le jeu:")
+                chVar=choixVar("lc")
+                if chVar=="lc1":
+                    li=liCartes 
+                elif chVar=="lc2":
+                    li=liCartes2
+                elif chVar=="lc3":
+                    li=liCartes3
+                else:
+                    print("Erreur: variable inconnue, code retour choixVar() inconnu")
+                chAffich=input("Afficher? (o pour oui):")
+                affich=False
+                if chAffich=="o":
+                    affich=True
+                fonctions.une_etape_reussite(li,pioche,affich)
                 conti=False
             elif choix=="m":
                 conti=False
