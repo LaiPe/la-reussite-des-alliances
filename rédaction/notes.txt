@@ -1,0 +1,6 @@
+Pour debug_mode:
+	.J'aurais pu utiliser la fontionalité python "match-case" (similaire à celle utilisé en C).
+		Sauf qu'elle est sortie en 3.10, elle est très récente, je n'ai donc pas voulu l'utiliser pour éviter les problèmes de versions.
+ 	.Surcharge du main: rappels inutiles aux variables.
+		Il aurait fallu mettre les variables dans une liste ou un dico.
+	.Faire des fonctions de gestion des fichier si possible afin que les nom de fichiers soit enregistés dans un autre fichier (pq pas un csv).
