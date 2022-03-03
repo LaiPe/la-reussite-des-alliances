@@ -6,16 +6,18 @@ if __name__ == "__main__":
     carte1={"valeur":"A","couleur":"C"}
     carte2={"valeur":"R","couleur":"T"}
     liCartes=[{"valeur":9,"couleur":"C"},{"valeur":10, "couleur":"K"},{"valeur":9,"couleur":"T"}]
+    liCartes2=[{"valeur":7,"couleur":"K"},{"valeur":"R","couleur":"C"},{"valeur":"A","couleur":"C"},{"valeur":10,"couleur":"K"},{"valeur":9,"couleur":"P"}]
+    liCartes3=[{"valeur":9,"couleur":"K"}]
     
     #fonctions.afficher_reussite(liCartes)
     #print(fonctions.carte_to_chaine(carte1))
     
-    jeu=fonctions.init_pioche_fichier("../ressources/data_init.txt")
-    print(jeu)
-    fonctions.afficher_reussite(jeu)
-    fonctions.ecrire_fichier_reussite("../ressources/test.txt",jeu)
-    jeu=fonctions.init_pioche_fichier("../ressources/test.txt")
-    fonctions.afficher_reussite(jeu)
+    #jeu=fonctions.init_pioche_fichier("../ressources/data_init.txt")
+    #print(jeu)
+    #fonctions.afficher_reussite(jeu)
+    #fonctions.ecrire_fichier_reussite("../ressources/test.txt",jeu)
+    #jeu=fonctions.init_pioche_fichier("../ressources/test.txt")
+    #fonctions.afficher_reussite(jeu)
     
     #jeu2 = fonctions.init_pioche_alea()
     #print(jeu2)
@@ -41,3 +43,6 @@ if __name__ == "__main__":
     """
     #test.test()
 
+    fonctions.reussite_mode_manuel(fonctions.init_pioche_alea())
+
+    #fonctions.afficher_reussite_num(liCartes2)

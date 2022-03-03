@@ -1,10 +1,12 @@
 import random
+import main
+
 #=========AFFICHAGE=============
 def carte_to_chaine(carte):
     dico=dict(carte)
     if not(carte["valeur"] in ["A","V","D","R"]):
         dico["valeur"]=str(carte["valeur"])
-    if dico["valeur"]!="10":
+    if dico["valeur"]!=10:
         dico["valeur"]=" "+dico["valeur"]
        
     if dico["couleur"]=="C":
@@ -17,7 +19,31 @@ def carte_to_chaine(carte):
         return dico["valeur"]+chr(9827)
 def afficher_reussite(liCartes):
     for carte in liCartes:
-        print((carte_to_chaine(carte)),end=" ")
+        print(carte_to_chaine(carte),end=" ")
+    print("\n")
+def afficher_reussite_num(liCartes):
+    i=0
+    li_saut=[]
+    for carte in liCartes:
+        print(carte_to_chaine(carte),end=" ")
+        if carte["valeur"]==10:
+            li_saut+=[True]
+        else:
+            li_saut+=[False]
+    print()
+    for saut in li_saut:
+        if saut:
+            print(" ","^"*3,sep="",end=" ")
+        else:
+            print(" ","^"*2,sep="",end=" ")
+    print()
+    cpt=1
+    for saut in li_saut:
+        if saut:
+            print(" "*3,cpt,sep="",end=" ")
+        else:
+            print(" "*2,cpt,sep="",end=" ")
+        cpt+=1
     print("\n")
 def texte_encadre(texte,titre=False):
     if titre:
@@ -108,3 +134,61 @@ def une_etape_reussite(liste_tas,pioche,affiche=False):
             if saut:
                 i=2
     return None
+#=================PARTIE==========================
+def reussite_mode_auto(pioche,affiche=False):
+    liste_tas=[]
+    i=0
+    l=len(pioche)
+    piocheM=list(pioche)
+
+    while i<l:
+        une_etape_reussite(liste_tas,piocheM,affiche)
+        i+=1
+    return liste_tas
+def reussite_mode_manuel(pioche,nb_tas_max=2):
+    piocheM=list(pioche)
+    l=len(pioche)
+    i=0
+    ragequit=False
+    liste_tas=[]
+    while i<l:
+        print(
+            main.tab+"a.Piocher",
+            main.tab+"b.Faire un saut",
+            main.tab+"f.Fin de partie",
+            sep="\n"
+                )
+        choix=input("Choix?:")
+        if choix=="a":
+            piocher(liste_tas,piocheM)
+            afficher_reussite(liste_tas)
+            i+=1
+        elif choix=="b":
+            afficher_reussite_num(liste_tas)
+            print(
+                "Choisissez un tas pour réaliser le saut. Indiquez le nombre du tas supérieur.",
+                "Par exemple, si vous voulez réaliser un saut entre le premier et le troisième tas, entrer le chiffre 3.",
+                sep="\n"
+            )
+            chTas=int(input("Choix?:"))-1
+            if saut_si_possible(liste_tas,chTas):
+                print("Saut effectué")
+            else:
+                print("Saut impossible")
+        elif choix=="f":
+            sauv_i=i
+            i=l
+            ragequit=True
+    print("Fin de la partie !")
+    if ragequit:
+        while sauv_i<l:
+            piocher(liste_tas,piocheM)
+            sauv_i+=1
+    print("Voici votre jeu:")
+    afficher_reussite(liste_tas)
+    print("Votre pioche était:")
+    afficher_reussite(pioche)
+    if len(liste_tas)<=nb_tas_max:
+        print("Félicitations, vous avez gagné !")
+    else:
+        print("Malheureusement, vous avez perdu...")

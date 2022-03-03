@@ -86,8 +86,8 @@ if __name__=="__main__":
     carte1={"valeur":"A","couleur":"C"}
     carte2={"valeur":"R","couleur":"T"}
     liCartes=[{"valeur":9,"couleur":"C"},{"valeur":10, "couleur":"K"},{"valeur":9,"couleur":"T"}]
-    liCartes2=[]
-    liCartes3=[]
+    liCartes2=[{"valeur":7,"couleur":"K"},{"valeur":"R","couleur":"C"},{"valeur":"A","couleur":"C"},{"valeur":10,"couleur":"K"},{"valeur":9,"couleur":"P"}]
+    liCartes3=[{"valeur":9,"couleur":"K"}]
     liFichier=["data_init.txt","test.txt"]
     car="random"
     entier=2
@@ -308,6 +308,7 @@ if __name__=="__main__":
             elif choix=="m":
                 conti=False
             elif choix=="q":
+                conti=False
                 conti_prog=False
             else:
                 print("Veuillez enter un carractère valide.")
