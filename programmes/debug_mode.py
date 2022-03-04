@@ -102,6 +102,7 @@ if __name__=="__main__":
             main.tab+"3.Création de pioche",
             main.tab+"4.Fonctions de règles",
             main.tab+"5.Fonction étape",
+            main.tab+"6.Fonctions de parties",
             main.tab+"q.Fermer debug_mode",
             sep="\n"
             )
@@ -305,6 +306,100 @@ if __name__=="__main__":
                     affich=True
                 fonctions.une_etape_reussite(li,pioche,affich)
                 conti=False
+            elif choix=="6":
+                print(
+                    main.tab+"a.reussite_mode_auto",
+                    main.tab+"b.reussite_mode_manuel",
+                    main.tab+"c.lance_reussite",
+                    main.tab+"r.Retour",
+                    sep="\n"
+                )
+                sousConti=True
+                while sousConti:
+                    choix=input("Choix?:")
+                    if choix=="a":
+                        print("Choisissez la pioche:")
+                        chPioche=choixVar("lc")
+                        if chPioche=="lc1":
+                            pioche=liCartes 
+                        elif chPioche=="lc2":
+                            pioche=liCartes2
+                        elif chPioche=="lc3":
+                            pioche=liCartes3
+                        else:
+                            print("Erreur: variable inconnue, code retour choixVar() inconnu")
+                        chAffich=input("Afficher? (o pour oui):")
+                        affich=False
+                        if chAffich=="o":
+                            affich=True
+                        flash=fonctions.reussite_mode_auto(pioche,affich)
+                        chSauv=input("Voulez-vous sauvegarder la réussite ? (o pour oui):")
+                        if chSauv=="o":
+                            print("Choisissez la variable de sauvegarde:")
+                            chVar=choixVar("lc")
+                            if chVar=="lc1":
+                                liCartes=flash 
+                            elif chVar=="lc2":
+                                liCartes2=flash
+                            elif chVar=="lc3":
+                                liCartes3=flash
+                            else:
+                                print("Erreur: variable inconnue, code retour choixVar() inconnu")
+                        sousConti=False
+                        conti=False
+                    elif choix=="b":
+                        print("Choisissez la pioche:")
+                        chPioche=choixVar("lc")
+                        if chPioche=="lc1":
+                            pioche=liCartes 
+                        elif chPioche=="lc2":
+                            pioche=liCartes2
+                        elif chPioche=="lc3":
+                            pioche=liCartes3
+                        else:
+                            print("Erreur: variable inconnue, code retour choixVar() inconnu")
+                        chNum=int(input("Chiffre palier pour victoire?:"))
+                        flash=fonctions.reussite_mode_manuel(pioche,chNum)
+                        chSauv=input("Voulez-vous sauvegarder la réussite ? (o pour oui):")
+                        if chSauv=="o":
+                            print("Choisissez la variable de sauvegarde:")
+                            chVar=choixVar("lc")
+                            if chVar=="lc1":
+                                liCartes=flash 
+                            elif chVar=="lc2":
+                                liCartes2=flash
+                            elif chVar=="lc3":
+                                liCartes3=flash
+                            else:
+                                print("Erreur: variable inconnue, code retour choixVar() inconnu")
+                        sousConti=False
+                        conti=False
+                    elif choix=="c":
+                        chChar=input("mode manuel ou automatique ? (m pour manuel, a pour auto):")
+                        if chChar=="m":
+                            chChar="manuel"
+                        else: #a
+                            chChar="auto"
+                        flash=fonctions.lance_reussite(chChar)
+                        chSauv=input("Voulez-vous sauvegarder la réussite ? (o pour oui):")
+                        if chSauv=="o":
+                            print("Choisissez la variable de sauvegarde:")
+                            chVar=choixVar("lc")
+                            if chVar=="lc1":
+                                liCartes=flash 
+                            elif chVar=="lc2":
+                                liCartes2=flash
+                            elif chVar=="lc3":
+                                liCartes3=flash
+                            else:
+                                print("Erreur: variable inconnue, code retour choixVar() inconnu")
+                        sousConti=False
+                        conti=False
+                    elif choix=="r":
+                        sousConti=False
+                        conti=False
+                    else:
+                        print("Veuillez enter un carractère valide.") 
             elif choix=="m":
                 conti=False
             elif choix=="q":
