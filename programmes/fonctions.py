@@ -149,9 +149,9 @@ def reussite_mode_manuel(pioche,nb_tas_max=2):
     piocheM=list(pioche)
     l=len(pioche)
     i=0
-    ragequit=False
+    conti=True
     liste_tas=[]
-    while i<l:
+    while conti and i<l :
         print(
             main.tab+"a.Piocher",
             main.tab+"b.Faire un saut",
@@ -176,14 +176,12 @@ def reussite_mode_manuel(pioche,nb_tas_max=2):
             else:
                 print("Saut impossible")
         elif choix=="f":
-            sauv_i=i
-            i=l
-            ragequit=True
+            conti=False
     print("Fin de la partie !")
-    if ragequit:
-        while sauv_i<l:
-            piocher(liste_tas,piocheM)
-            sauv_i+=1
+    while i<l:
+        piocher(liste_tas,piocheM)
+        afficher_reussite(liste_tas)
+        i+=1
     print("Voici votre jeu:")
     afficher_reussite(liste_tas)
     print("Votre pioche était:")
@@ -192,3 +190,9 @@ def reussite_mode_manuel(pioche,nb_tas_max=2):
         print("Félicitations, vous avez gagné !")
     else:
         print("Malheureusement, vous avez perdu...")
+    return liste_tas
+def lance_reussite(mode,nb_cartes=32,affiche=False,nb_tas_max=2):
+    if mode=="manuel":
+        return reussite_mode_manuel(init_pioche_alea(nb_cartes),nb_tas_max)
+    else: #auto
+        return reussite_mode_auto(init_pioche_alea(nb_cartes),affiche)

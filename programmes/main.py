@@ -43,6 +43,6 @@ if __name__ == "__main__":
     """
     #test.test()
 
-    fonctions.reussite_mode_manuel(fonctions.init_pioche_alea())
-
+    #fonctions.reussite_mode_manuel(fonctions.init_pioche_alea())
     #fonctions.afficher_reussite_num(liCartes2)
+    fonctions.lance_reussite("auto",affiche=True)
