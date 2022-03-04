@@ -116,12 +116,10 @@ def piocher(liste_tas,pioche):
 def une_etape_reussite(liste_tas,pioche,affiche=False):
     piocher(liste_tas,pioche)
     if affiche:
-        print("Pioche:",end=" ")
         afficher_reussite(liste_tas)
 
     saut=saut_si_possible(liste_tas,len(liste_tas)-1)
     if affiche and saut:
-        print("Saut de pioche:",end=" ")
         afficher_reussite(liste_tas)
     if saut:
         i=2
@@ -129,7 +127,6 @@ def une_etape_reussite(liste_tas,pioche,affiche=False):
             saut=saut_si_possible(liste_tas,len(liste_tas)-1)
             i+=1
             if affiche and saut:
-                print("Saut:",end=" ")
                 afficher_reussite(liste_tas)
             if saut:
                 i=2
