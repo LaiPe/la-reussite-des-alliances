@@ -149,6 +149,7 @@ def reussite_mode_manuel(pioche,nb_tas_max=2):
     conti=True
     liste_tas=[]
     while conti and i<l :
+        texte_encadre("La Réussite des Alliances")
         print(
             main.tab+"a.Piocher",
             main.tab+"b.Faire un saut",
