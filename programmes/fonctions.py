@@ -194,3 +194,40 @@ def lance_reussite(mode,nb_cartes=32,affiche=False,nb_tas_max=2):
         return reussite_mode_manuel(init_pioche_alea(nb_cartes),nb_tas_max)
     else: #auto
         return reussite_mode_auto(init_pioche_alea(nb_cartes),affiche)
+#====================EXTENSIONS====================
+def verifier_pioche(liCartes,nb_cartes=32):
+    liCartesVerif=init_pioche_alea(nb_cartes)
+    result=True
+    for carteV in liCartesVerif:
+        if not(carteV in liCartes):
+            result=False
+            break
+    if len(liCartes)!=nb_cartes:
+        result=False
+    return result
+
+def res_multi_simulation(nb_sim,nb_cartes=32):
+    result=[]
+    for i in range(nb_sim):
+        pioche=init_pioche_alea(nb_cartes)
+        liCartes=reussite_mode_auto(pioche)
+        result+=[len(liCartes)]
+    return result
+def statistiques_nb_tas(nb_sim,nb_cartes=32):
+    appel = res_multi_simulation(nb_sim,nb_cartes)
+    if not(len(appel)>0):
+        print("Pas de valeur dans la liste")
+        return None
+    moyenne = 0
+    maxi = None
+    mini = None
+    for i in range(len(appel)):
+        moyenne += appel[i]
+        if maxi == None or appel[i] > maxi:
+            maxi = appel[i]
+        if mini == None or appel[i] < mini:
+            mini = appel[i]
+    moyenne = moyenne/nb_sim
+    print("La moyenne est :",moyenne)
+    print("le minimum est :",mini)
+    print("le maximum est :",maxi)

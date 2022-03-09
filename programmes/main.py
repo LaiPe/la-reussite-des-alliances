@@ -45,4 +45,16 @@ if __name__ == "__main__":
 
     #fonctions.reussite_mode_manuel(fonctions.init_pioche_alea())
     #fonctions.afficher_reussite_num(liCartes2)
-    fonctions.lance_reussite("auto",affiche=True)
+    #fonctions.lance_reussite("auto",affiche=True)
+
+    """liCartes2=fonctions.init_pioche_alea()
+    liCartes3=fonctions.init_pioche_alea()#+[{"valeur":9,"couleur":"K"}]#jeu truqué
+    #liCartes3[3]=liCartes3[4]
+    if fonctions.verifier_pioche(liCartes3):
+        print("pas truqué")
+    else:
+        print("truqué")"""
+
+    #print(fonctions.res_multi_simulation(3))
+    fonctions.statistiques_nb_tas(3)
+
