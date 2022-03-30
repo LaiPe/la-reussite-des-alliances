@@ -56,5 +56,6 @@ if __name__ == "__main__":
         print("truqué")"""
 
     #print(fonctions.res_multi_simulation(3))
-    fonctions.statistiques_nb_tas(3)
-
+    #fonctions.statistiques_nb_tas(3)
+    #print(fonctions.proba(52))
+    fonctions.affiche_proba()

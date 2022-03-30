@@ -1,6 +1,6 @@
 import random
 import main
-
+import pippip.main
 #=========AFFICHAGE=============
 def carte_to_chaine(carte):
     dico=dict(carte)
@@ -231,3 +231,23 @@ def statistiques_nb_tas(nb_sim,nb_cartes=32):
     print("La moyenne est :",moyenne)
     print("le minimum est :",mini)
     print("le maximum est :",maxi)
+
+def proba(nb_cartes=32):
+    i=2
+    prctage=0
+    result=[]
+    while i<=nb_cartes:
+        li=res_multi_simulation(100,nb_cartes)
+        for e in li:
+            if e<=i:
+                prctage+=1
+        result+=[prctage]
+        i+=1
+        prctage=0
+    return result
+
+def affiche_proba(nb_cartes=32):
+ 
+    x=np.arange(0,5,0.1);
+    y=np.sin(x)
+    plt.plot(x,y)
