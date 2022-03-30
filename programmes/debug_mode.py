@@ -30,7 +30,7 @@ def choixVar(type):
             elif choix=="2":
                 return "c2"
             else:
-                print("Veuillez enter un carractère valide.") 
+                print("Veuillez entrer un carractère valide.") 
     elif type=="lc":
         print(
             main.tab+"1.liCartes",
@@ -48,7 +48,7 @@ def choixVar(type):
             elif choix=="3":
                 return "lc3"
             else:
-                print("Veuillez enter un carractère valide.")
+                print("Veuillez entrer un carractère valide.")
     else:
         print("Erreur: argument inconnu,  'type' dans choixVar(type) inconnu")
  
@@ -65,7 +65,7 @@ def choixFichier():
                 if chFich in range(1,len(liFichier)+1):
                     return liFichier[chFich-1]
                 else:
-                    print("Veuillez enter un carractère valide.")
+                    print("Veuillez entrer un carractère valide.")
         if existFich=="n":
             nomFich=input("Donnez lui un nom (n'oubliez pas de noter l'extension):")
             f=open("../ressources/"+nomFich,"w")
@@ -73,7 +73,7 @@ def choixFichier():
             liFichier+=[nomFich]
             return nomFich
         else:
-            print("Veuillez enter un carractère valide.")
+            print("Veuillez entrer un carractère valide.")
 
 if __name__=="__main__":
     fonctions.texte_encadre("DEBUG_MODE",True)
@@ -103,6 +103,7 @@ if __name__=="__main__":
             main.tab+"4.Fonctions de règles",
             main.tab+"5.Fonction étape",
             main.tab+"6.Fonctions de parties",
+            main.tab+"e.Extensions",
             main.tab+"q.Fermer debug_mode",
             sep="\n"
             )
@@ -159,7 +160,7 @@ if __name__=="__main__":
                     elif choix=="r":
                         sousConti=False
                     else:
-                        print("Veuillez enter un carractère valide.")    
+                        print("Veuillez entrer un carractère valide.")    
                 conti=False
             elif choix=="2":
                 print(
@@ -198,7 +199,7 @@ if __name__=="__main__":
                     elif choix=="r":
                         sousConti=False
                     else:
-                        print("Veuillez enter un carractère valide.") 
+                        print("Veuillez entrer un carractère valide.") 
                 conti=False
             elif choix=="3":
                 chVar=choixVar("lc")
@@ -277,7 +278,7 @@ if __name__=="__main__":
                     elif choix=="r":
                         sousConti=False
                     else:
-                        print("Veuillez enter un carractère valide.") 
+                        print("Veuillez entrer un carractère valide.") 
                 conti=False
             elif choix=="5":
                 print("Choisissez la pioche:")
@@ -399,11 +400,40 @@ if __name__=="__main__":
                         sousConti=False
                         conti=False
                     else:
-                        print("Veuillez enter un carractère valide.") 
-            elif choix=="m":
-                conti=False
+                        print("Veuillez entrer un carractère valide.")
+            elif choix == "e":
+                sousConti = True
+                while sousConti:
+                    print(
+                        main.tab+"a.verifier_pioche",
+                        main.tab+"b.res_multi_simulation",
+                        main.tab+"c.statistiques_nb_tas",
+                        main.tab+"d.proba",
+                        main.tab+"e.affiche_proba",
+                        main.tab+"r.retour",
+                        sep="\n"
+                    )
+                    choix = input("Choix?:")
+                    if choix == "a":
+                        print("choix a")
+                    elif choix == "b":
+                        print("choix b")
+                    elif choix == "c":
+                        print("choix c")
+                    elif choix == "d":
+                        print("choix d")
+                    elif choix == "e":
+                        print("choix e")
+                    elif choix == "r":
+                        sousConti = False
+                        conti = False
+                    else:
+                        print("Veuillez entrer un carractère valide.")
+                    
+                    
             elif choix=="q":
                 conti=False
                 conti_prog=False
+
             else:
-                print("Veuillez enter un carractère valide.")
+                print("Veuillez entrer un carractère valide.")
