@@ -57,5 +57,7 @@ if __name__ == "__main__":
 
     #print(fonctions.res_multi_simulation(3))
     #fonctions.statistiques_nb_tas(3)
-    #print(fonctions.proba(52))
-    fonctions.affiche_proba()
+    #liste=fonctions.proba()
+    #print(liste,len(liste))
+
+    fonctions.affiche_proba(52)

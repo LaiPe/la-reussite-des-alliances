@@ -1,6 +1,7 @@
 import random
 import main
-import pippip.main
+import numpy as np
+import matplotlib.pyplot as plt
 #=========AFFICHAGE=============
 def carte_to_chaine(carte):
     dico=dict(carte)
@@ -245,9 +246,12 @@ def proba(nb_cartes=32):
         i+=1
         prctage=0
     return result
-
 def affiche_proba(nb_cartes=32):
- 
-    x=np.arange(0,5,0.1);
-    y=np.sin(x)
+    x=[]
+    y=proba(nb_cartes)
+    for e in range(2,nb_cartes+1):
+        x+=[str(e)]
     plt.plot(x,y)
+    plt.xlabel("Nombres de cartes limite pour la victoire")
+    plt.ylabel("Pourcentage de réussite")
+    plt.show()
