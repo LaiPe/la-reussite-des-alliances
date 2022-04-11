@@ -60,4 +60,6 @@ if __name__ == "__main__":
     #liste=fonctions.proba()
     #print(liste,len(liste))
 
-    fonctions.affiche_proba(52)
+    #fonctions.affiche_proba(52)
+
+    fonctions.une_etape_reussite([{'couleur': 'T', 'valeur': 'R'}, {'couleur': 'C', 'valeur': 'D'}, {'couleur': 'P', 'valeur': 8}, {'couleur': 'K', 'valeur': 8}, {'couleur': 'T', 'valeur': 'D'}, {'couleur': 'T', 'valeur': 9}, {'couleur': 'P', 'valeur': 'R'}, {'couleur': 'C', 'valeur': 'R'}, {'couleur': 'T', 'valeur': 7}, {'couleur': 'T', 'valeur': 'V'}, {'couleur': 'C', 'valeur': 10}, {'couleur': 'P', 'valeur': 7}, {'couleur': 'P', 'valeur': 'D'}, {'couleur': 'T', 'valeur': 10}, {'couleur': 'T', 'valeur': 'A'}], [{'couleur': 'P', 'valeur': 10}, {'couleur': 'K', 'valeur': 10}, {'couleur': 'K', 'valeur': 7}], True)
