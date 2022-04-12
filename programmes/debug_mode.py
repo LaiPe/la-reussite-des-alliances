@@ -417,7 +417,7 @@ if __name__=="__main__":
                     if choix == "a":
                         chVar=choixVar("lc")
                         if chVar=="lc1":
-                            if fonctions.verifier_pioche(liCartes,nb_cartes=3):
+                            if fonctions.verifier_pioche(liCartes):
                                 print("La jeu de carte est bon.")
                             else :
                                 print("Le jeu de carte n'est pas bon\n")
@@ -432,9 +432,10 @@ if __name__=="__main__":
                             else :
                                 print("Le jeu de carte n'est pas bon")
                         else:
-                            print("Variable inconnue.")
+                            print("Erreur: variable inconnue, code retour choixVar() inconnu")
                     elif choix == "b":
-                        print("choix b")
+                        nb_sim = int(input("Combien de simulation voulez vous ?\n"))
+                        print(fonctions.res_multi_simulation(nb_sim))
                     elif choix == "c":
                         print("choix c")
                     elif choix == "d":
