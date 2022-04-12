@@ -415,7 +415,24 @@ if __name__=="__main__":
                     )
                     choix = input("Choix?:")
                     if choix == "a":
-                        print("choix a")
+                        chVar=choixVar("lc")
+                        if chVar=="lc1":
+                            if fonctions.verifier_pioche(liCartes,nb_cartes=3):
+                                print("La jeu de carte est bon.")
+                            else :
+                                print("Le jeu de carte n'est pas bon\n")
+                        elif chVar=="lc2":
+                            if fonctions.verifier_pioche(liCartes2):
+                                print("La jeu de carte est bon.")
+                            else :
+                                print("Le jeu de carte n'est pas bon")
+                        elif chVar=="lc3":
+                            if fonctions.verifier_pioche(liCartes3):
+                                print("La jeu de carte est bon.")
+                            else :
+                                print("Le jeu de carte n'est pas bon")
+                        else:
+                            print("Variable inconnue.")
                     elif choix == "b":
                         print("choix b")
                     elif choix == "c":
