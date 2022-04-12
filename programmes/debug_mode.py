@@ -441,9 +441,8 @@ if __name__=="__main__":
                         print(fonctions.statistiques_nb_tas(nb_sim))
                     elif choix == "d":
                         print(fonctions.proba())
-                        print(fonctions.affiche_proba())
                     elif choix == "e":
-                        print("choix e")
+                        print(fonctions.affiche_proba())
                     elif choix == "r":
                         sousConti = False
                         conti = False
