@@ -437,9 +437,11 @@ if __name__=="__main__":
                         nb_sim = int(input("Combien de simulation voulez vous ?\n"))
                         print(fonctions.res_multi_simulation(nb_sim))
                     elif choix == "c":
-                        print("choix c")
+                        nb_sim = int(input("Combien de simulation voulez vous ?\n"))
+                        print(fonctions.statistiques_nb_tas(nb_sim))
                     elif choix == "d":
-                        print("choix d")
+                        print(fonctions.proba())
+                        print(fonctions.affiche_proba())
                     elif choix == "e":
                         print("choix e")
                     elif choix == "r":
