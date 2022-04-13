@@ -33,16 +33,16 @@ def afficher_reussite_num(liCartes):
     print()
     for saut in li_saut:
         if saut:
-            print(" ","^"*3,sep="",end=" ")
+            print("^"*3,sep="",end=" ")
         else:
             print(" ","^"*2,sep="",end=" ")
     print()
     cpt=1
     for saut in li_saut:
-        if saut:
-            print(" "*3,cpt,sep="",end=" ")
-        else:
+        if cpt<10:
             print(" "*2,cpt,sep="",end=" ")
+        else:
+            print(" ",cpt,sep="",end=" ")
         cpt+=1
     print("\n")
 def texte_encadre(texte,titre=False):
@@ -166,8 +166,8 @@ def reussite_mode_manuel(pioche,nb_tas_max=2):
         elif choix=="b":
             afficher_reussite_num(liste_tas)
             print(
-                "Choisissez un tas pour réaliser le saut. Indiquez le nombre du tas supérieur.",
-                "Par exemple, si vous voulez réaliser un saut entre le premier et le troisième tas, entrer le chiffre 3.",
+                "Choisissez un tas pour réaliser le saut. Indiquez le nombre du tas du milieu.",
+                "Par exemple, si vous voulez réaliser un saut entre le premier et le troisième tas, entrer le chiffre 2.",
                 sep="\n"
             )
             chTas=int(input("Choix?:"))-1
