@@ -1,6 +1,5 @@
 import random
 import main
-import numpy as np
 import matplotlib.pyplot as plt
 #=========AFFICHAGE=============
 def carte_to_chaine(carte):
