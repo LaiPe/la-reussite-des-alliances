@@ -114,7 +114,8 @@ if __name__=="__main__":
                 print(
                     main.tab+"a.carte_to_chaine",
                     main.tab+"b.afficher_reussite",
-                    main.tab+"c.texte_encadre",
+                    main.tab+"c.afficher_reussite_num",
+                    main.tab+"d.texte_encadre",
                     main.tab+"r.Retour",
                     sep="\n"
                 )
@@ -143,7 +144,20 @@ if __name__=="__main__":
                             print("Erreur: variable inconnue, code retour choixVar() inconnu")
                         input("(Appuyer sur entrer pour revenir au menu)")
                         sousConti=False
-                    elif choix=="c":
+                    elif choix == "c":
+                        chVar = choixVar("lc")
+                        if chVar=="lc1":
+                            fonctions.afficher_reussite_num(liCartes)
+                        elif chVar=="lc2":
+                            fonctions.afficher_reussite_num(liCartes2)
+                        elif chVar=="lc3":
+                            fonctions.afficher_reussite_num(liCartes3)
+                        else:
+                            print("Erreur: variable inconnue, code retour choixVar() inconnu")
+                        input("(Appuyer sur entrer pour revenir au menu)")
+                        sousConti=False
+
+                    elif choix=="d":
                         conti=True
                         while conti:
                             choix=input("Le texte est-il un titre ? (o pour oui, n pour non)")
