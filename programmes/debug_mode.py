@@ -87,7 +87,7 @@ if __name__=="__main__":
     carte2={"valeur":"R","couleur":"T"}
     liCartes=[{"valeur":9,"couleur":"C"},{"valeur":10, "couleur":"K"},{"valeur":9,"couleur":"T"}]
     liCartes2=[]
-    liCartes3=[{"valeur":9,"couleur":"K"}]
+    liCartes3=[{'valeur': 6, 'couleur': 'K'}, {'valeur': 6, 'couleur': 'T'}, {'valeur': 6, 'couleur': 'T'}, {'valeur': 10, 'couleur': 'T'}, {'valeur': 'A', 'couleur': 'P'}, {'valeur': 4, 'couleur': 'C'}, {'valeur': 5, 'couleur': 'P'}, {'valeur': 'D', 'couleur': 'K'}, {'valeur': 6, 'couleur': 'C'}, {'valeur': 5, 'couleur': 'C'}, {'valeur': 9, 'couleur': 'P'}, {'valeur': 9, 'couleur': 'T'}, {'valeur': 'A', 'couleur': 'K'}, {'valeur': 10, 'couleur': 'P'}, {'valeur': 8, 'couleur': 'T'}, {'valeur': 4, 'couleur': 'P'}, {'valeur': 'V', 'couleur': 'T'}, {'valeur': 2, 'couleur': 'K'}, {'valeur': 3, 'couleur': 'K'}, {'valeur': 'R', 'couleur': 'K'}, {'valeur': 2, 'couleur': 'C'}, {'valeur': 3, 'couleur': 'T'}, {'valeur': 2, 'couleur': 'P'}, {'valeur': 'R', 'couleur': 'T'}, {'valeur': 'A', 'couleur': 'T'}, {'valeur': 'V', 'couleur': 'K'}, {'valeur': 'D', 'couleur': 'T'}, {'valeur': 7, 'couleur': 'P'}, {'valeur': 6, 'couleur': 'P'}, {'valeur': 7, 'couleur': 'K'}, {'valeur': 7, 'couleur': 'T'}, {'valeur': 3, 'couleur': 'C'}, {'valeur': 'R', 'couleur': 'P'}, {'valeur': 10, 'couleur': 'K'}, {'valeur': 9, 'couleur': 'K'}, {'valeur': 9, 'couleur': 'C'}, {'valeur': 'A', 'couleur': 'C'}, {'valeur': 'V', 'couleur': 'P'}, {'valeur': 4, 'couleur': 'T'}, {'valeur': 'V', 'couleur': 'C'}, {'valeur': 4, 'couleur': 'K'}, {'valeur': 5, 'couleur': 'K'}, {'valeur': 'R', 'couleur': 'C'}, {'valeur': 10, 'couleur': 'C'}, {'valeur': 'D', 'couleur': 'P'}, {'valeur': 8, 'couleur': 'C'}, {'valeur': 8, 'couleur': 'K'}, {'valeur': 2, 'couleur': 'T'}, {'valeur': 'D', 'couleur': 'C'}, {'valeur': 7, 'couleur': 'C'}, {'valeur': 8, 'couleur': 'P'}, {'valeur': 3, 'couleur': 'P'}]
     liFichier=["data_init.txt","test.txt"]
     car="random"
     entier=2
@@ -416,43 +416,60 @@ if __name__=="__main__":
                     choix = input("Choix?:")
                     if choix == "a":
                         chVar=choixVar("lc")
+                        print("Jeu à 32 cartes ou 52 cartes ?")
+                        nb_cartes=int(input("(ecrivez 32 pour le jeu à 32, n'importe quelle autre nombre pour le jeu à 52)"))
+                        if nb_cartes!=32:
+                            nb_cartes=52
                         if chVar=="lc1":
-                            if fonctions.verifier_pioche(liCartes):
-                                print("La jeu de carte est bon.")
+                            if fonctions.verifier_pioche(liCartes,nb_cartes):
+                                print("Le jeu de carte est bon.")
                             else :
-                                print("Le jeu de carte n'est pas bon\n")
+                                print("Le jeu de carte n'est pas bon")
                         elif chVar=="lc2":
-                            if fonctions.verifier_pioche(liCartes2):
-                                print("La jeu de carte est bon.")
+                            if fonctions.verifier_pioche(liCartes2,nb_cartes):
+                                print("Le jeu de carte est bon.")
                             else :
                                 print("Le jeu de carte n'est pas bon")
                         elif chVar=="lc3":
-                            if fonctions.verifier_pioche(liCartes3):
-                                print("La jeu de carte est bon.")
+                            if fonctions.verifier_pioche(liCartes3,nb_cartes):
+                                print("Le jeu de carte est bon.")
                             else :
                                 print("Le jeu de carte n'est pas bon")
                         else:
                             print("Erreur: variable inconnue, code retour choixVar() inconnu")
                     elif choix == "b":
-                        nb_sim = int(input("Combien de simulation voulez vous ?\n"))
-                        print(fonctions.res_multi_simulation(nb_sim))
+                        print("Jeu à 32 cartes ou 52 cartes ?")
+                        nb_cartes=int(input("(ecrivez 32 pour le jeu à 32, n'importe quelle autre nombre pour le jeu à 52)"))
+                        if nb_cartes!=32:
+                            nb_cartes=52
+                        nb_sim = int(input("Combien de simulation voulez vous ?:"))
+                        print(fonctions.res_multi_simulation(nb_sim,nb_cartes))
                     elif choix == "c":
-                        nb_sim = int(input("Combien de simulation voulez vous ?\n"))
-                        print(fonctions.statistiques_nb_tas(nb_sim))
+                        print("Jeu à 32 cartes ou 52 cartes ?")
+                        nb_cartes=int(input("(ecrivez 32 pour le jeu à 32, n'importe quelle autre nombre pour le jeu à 52)"))
+                        if nb_cartes!=32:
+                            nb_cartes=52
+                        nb_sim = int(input("Combien de simulation voulez vous ?:"))
+                        fonctions.statistiques_nb_tas(nb_sim,nb_cartes)
                     elif choix == "d":
-                        print(fonctions.proba())
+                        print("Jeu à 32 cartes ou 52 cartes ?")
+                        nb_cartes=int(input("(ecrivez 32 pour le jeu à 32, n'importe quelle autre nombre pour le jeu à 52)"))
+                        if nb_cartes!=32:
+                            nb_cartes=52
+                        print(fonctions.proba(nb_cartes))
                     elif choix == "e":
-                        print(fonctions.affiche_proba())
+                        print("Jeu à 32 cartes ou 52 cartes ?")
+                        nb_cartes=int(input("(ecrivez 32 pour le jeu à 32, n'importe quelle autre nombre pour le jeu à 52)"))
+                        if nb_cartes!=32:
+                            nb_cartes=52
+                        fonctions.affiche_proba(nb_cartes)
                     elif choix == "r":
                         sousConti = False
                         conti = False
                     else:
                         print("Veuillez entrer un carractère valide.")
-                    
-                    
             elif choix=="q":
                 conti=False
                 conti_prog=False
-
             else:
                 print("Veuillez entrer un carractère valide.")
