@@ -320,6 +320,7 @@ if __name__=="__main__":
                 if chAffich=="o":
                     affich=True
                 fonctions.une_etape_reussite(li,pioche,affich)
+                input("(Appuyer sur entrer pour revenir au menu)")
                 conti=False
             elif choix=="6":
                 print(
@@ -360,6 +361,7 @@ if __name__=="__main__":
                                 liCartes3=flash
                             else:
                                 print("Erreur: variable inconnue, code retour choixVar() inconnu")
+                        input("(Appuyer sur entrer pour revenir au menu)")
                         sousConti=False
                         conti=False
                     elif choix=="b":
@@ -387,6 +389,7 @@ if __name__=="__main__":
                                 liCartes3=flash
                             else:
                                 print("Erreur: variable inconnue, code retour choixVar() inconnu")
+                        input("(Appuyer sur entrer pour revenir au menu)")
                         sousConti=False
                         conti=False
                     elif choix=="c":
@@ -408,6 +411,7 @@ if __name__=="__main__":
                                 liCartes3=flash
                             else:
                                 print("Erreur: variable inconnue, code retour choixVar() inconnu")
+                        input("(Appuyer sur entrer pour revenir au menu)")
                         sousConti=False
                         conti=False
                     elif choix=="r":
@@ -451,6 +455,9 @@ if __name__=="__main__":
                                 print("Le jeu de carte n'est pas bon")
                         else:
                             print("Erreur: variable inconnue, code retour choixVar() inconnu")
+                        sousConti = False
+                        conti = False
+                        input("(Appuyer sur entrer pour revenir au menu)")
                     elif choix == "b":
                         print("Jeu à 32 cartes ou 52 cartes ?")
                         nb_cartes=int(input("(ecrivez 32 pour le jeu à 32, n'importe quelle autre nombre pour le jeu à 52)"))
@@ -458,6 +465,9 @@ if __name__=="__main__":
                             nb_cartes=52
                         nb_sim = int(input("Combien de simulation voulez vous ?:"))
                         print(fonctions.res_multi_simulation(nb_sim,nb_cartes))
+                        sousConti = False
+                        conti = False
+                        input("(Appuyer sur entrer pour revenir au menu)")
                     elif choix == "c":
                         print("Jeu à 32 cartes ou 52 cartes ?")
                         nb_cartes=int(input("(ecrivez 32 pour le jeu à 32, n'importe quelle autre nombre pour le jeu à 52)"))
@@ -465,18 +475,27 @@ if __name__=="__main__":
                             nb_cartes=52
                         nb_sim = int(input("Combien de simulation voulez vous ?:"))
                         fonctions.statistiques_nb_tas(nb_sim,nb_cartes)
+                        sousConti = False
+                        conti = False
+                        input("(Appuyer sur entrer pour revenir au menu)")
                     elif choix == "d":
                         print("Jeu à 32 cartes ou 52 cartes ?")
                         nb_cartes=int(input("(ecrivez 32 pour le jeu à 32, n'importe quelle autre nombre pour le jeu à 52)"))
                         if nb_cartes!=32:
                             nb_cartes=52
                         print(fonctions.proba(nb_cartes))
+                        sousConti = False
+                        conti = False
+                        input("(Appuyer sur entrer pour revenir au menu)")
                     elif choix == "e":
                         print("Jeu à 32 cartes ou 52 cartes ?")
                         nb_cartes=int(input("(ecrivez 32 pour le jeu à 32, n'importe quelle autre nombre pour le jeu à 52)"))
                         if nb_cartes!=32:
                             nb_cartes=52
                         fonctions.affiche_proba(nb_cartes)
+                        sousConti = False
+                        conti = False
+                        input("(Appuyer sur entrer pour revenir au menu)")
                     elif choix == "r":
                         sousConti = False
                         conti = False
