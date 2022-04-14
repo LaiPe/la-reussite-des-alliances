@@ -1,6 +1,7 @@
 *.aux
 *.log
 *.gz
+*.out
 *.pdf
 __pycache__/
 .vscode/
