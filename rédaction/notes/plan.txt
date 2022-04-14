@@ -1,18 +1,18 @@
 I) La reussite des alliances: structuration du jeu
-	a) Rappel des règles du jeu
-	b) Création des fonctions (partie guidée)
-	c) Fonctions originales
+	a) Rappel des règles du jeu (//GAB)
+	b) Création des fonctions (partie guidée) (//LEO)
+	c) Fonctions originales (//LEO)
 II) Les Extensions: ajouts de fonctionnalités.
-	a) Verification de la pioche (fnc verifier_pioche)
-	b) Statistiques (fnc res_multi_simulation et statistiques_nb_tas)
-	c) Probabilités (fnc proba et affiche_proba)
+	a) Verification de la pioche (fnc verifier_pioche) (//LEO)
+	b) Statistiques (fnc res_multi_simulation et statistiques_nb_tas) (//GAB)
+	c) Probabilités (fnc proba et affiche_proba) (//LEO)
 III) Le debug_mode.
-	a) Naissance de la nécessité de pouvoir tester les fonctions
-	b) Structure du programme
-	c) Limites et Erreurs
-IV) Interface utilisateur: proposer un produit fini. (???)
+	a) Naissance de la nécessité de pouvoir tester les fonctions (//GAB)
+	b) Structure du programme (//LEO)
+	c) Limites et Erreurs (//LEO)
+IV) Interface utilisateur: proposer un produit fini. (???) (//LEO)
 	
 V)Annexes:
- 	a) Structure de répertoire
-	c) Code Source
-	d) Sources (???)
+ 	a) Structure de répertoire (//GAB)
+	c) Code Source (//GAB)
+	d) Sources (???) (//GAB)
