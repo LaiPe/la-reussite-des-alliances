@@ -1,5 +1,6 @@
 import random
 import main
+import shutil
 import matplotlib.pyplot as plt
 #=========AFFICHAGE=============
 def carte_to_chaine(carte):
@@ -21,29 +22,37 @@ def afficher_reussite(liCartes):
         print(carte_to_chaine(carte),end=" ")
     print("\n")
 def afficher_reussite_num(liCartes):
+    columns, rows = shutil.get_terminal_size()
     i=0
-    li_saut=[]
-    for carte in liCartes:
-        print(carte_to_chaine(carte),end=" ")
-        if carte["valeur"]==10:
-            li_saut+=[True]
-        else:
-            li_saut+=[False]
-    print()
-    for saut in li_saut:
-        if saut:
-            print("^"*3,sep="",end=" ")
-        else:
-            print(" ","^"*2,sep="",end=" ")
-    print()
+    y=0
+    li_dix=[]
     cpt=1
-    for saut in li_saut:
-        if cpt<10:
-            print(" "*2,cpt,sep="",end=" ")
-        else:
-            print(" ",cpt,sep="",end=" ")
-        cpt+=1
-    print("\n")
+    while y<len(liCartes):
+        i=0
+        li_dix=[]
+        while (i+1)*4<=columns and y<len(liCartes): # 4=les 3 caractères de la carte + l'espace de fin du print
+            carte=liCartes[y]
+            print(carte_to_chaine(carte),end=" ")
+            if carte["valeur"]==10:
+                li_dix+=[True]
+            else:
+                li_dix+=[False]
+            y+=1
+            i+=1
+        print()
+        for dix in li_dix:
+            if dix:
+                print("^"*3,sep="",end=" ")
+            else:
+                print(" ","^"*2,sep="",end=" ")
+        print()
+        for dix in li_dix:
+            if cpt<10:
+                print(" "*2,cpt,sep="",end=" ")
+            else:
+                print(" ",cpt,sep="",end=" ")
+            cpt+=1
+        print("\n")
 def texte_encadre(texte,titre=False):
     if titre:
         texte=" "+texte+" "
