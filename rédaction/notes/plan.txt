@@ -1,7 +1,6 @@
 I) La reussite des alliances: structuration du jeu
 	a) Rappel des règles du jeu (//GAB)
 	b) Création des fonctions (partie guidée) (//LEO)
-	c) Fonctions originales (//LEO)
 II) Les Extensions: ajouts de fonctionnalités.
 	a) Verification de la pioche (fnc verifier_pioche) (//LEO)
 	b) Statistiques (fnc res_multi_simulation et statistiques_nb_tas) (//GAB)

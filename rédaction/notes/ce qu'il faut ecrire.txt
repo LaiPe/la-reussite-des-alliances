@@ -6,3 +6,9 @@ Fonction reussite_mode_manuel 4.5.2 page 7 "Pensez à indiquer les détails de v
 Partie extensions 5 page 8 "Vous devrez, dans votre rapport, expliquez quelles extensions vous avez réaliser, comment s’en servir, et
 brièvement comment vous avez procédé. De plus, vous ajouterez dans le programme principal du code très bien commenté permettant
 d’expliquer et d’illustrer (avec des exemples à décommenter) au mieux ces nouvelles fonctionnalités.
+
+FONCTIONS ORIGINALES:
+
+- afficher_reussite_num (l.24)
+- texte_encadre (l.56)
+- piocher (l.121)
