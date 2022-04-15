@@ -105,10 +105,7 @@ def init_pioche_alea(nb_cartes=32):
     return liCartes
 #==========REGLES============
 def alliance(carte1,carte2):
-    alliance=False
-    if carte1["valeur"]==carte2["valeur"] or carte1["couleur"]==carte2["couleur"]:
-        alliance=True
-    return alliance
+    return carte1["valeur"]==carte2["valeur"] or carte1["couleur"]==carte2["couleur"]
 def saut_si_possible(liste_tas,num_tas):
     if (len(liste_tas)<3) or (num_tas>(len(liste_tas)-2)):
         return False
