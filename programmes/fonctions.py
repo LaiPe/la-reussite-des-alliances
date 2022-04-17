@@ -204,14 +204,12 @@ def lance_reussite(mode,nb_cartes=32,affiche=False,nb_tas_max=2):
 #====================EXTENSIONS====================
 def verifier_pioche(liCartes,nb_cartes=32):
     liCartesVerif=init_pioche_alea(nb_cartes)
-    result=True
     for carteV in liCartesVerif:
         if not(carteV in liCartes):
-            result=False
-            break
+            return False
     if len(liCartes)!=nb_cartes:
-        result=False
-    return result
+        return False
+    return True
 
 def res_multi_simulation(nb_sim,nb_cartes=32):
     result=[]
