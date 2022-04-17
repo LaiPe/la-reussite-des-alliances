@@ -24,10 +24,10 @@ réaliser un affichage de la réussite plus poussé permettant de relier chaque 
 sauter. Pour cela, nous avons réaliser la fonction "afficher_reussite_num". Elle prends pour argument la liste de cartes à afficher, ne revoie rien et a
 pour effet de bord l'affichage détaillé de la réussite. Cette fonction consiste en 3 boucles affichant respectivement les cartes de la réussite, les
 accents circonflexes permetants de souligner les cartes, et les nombres désignants les cartes. A noter que bien que semblant être des index, ces nombres
-n'en sont pas tout à fait car: soit une liste li, i l'index d'un élément de cette liste et y les nombres utilisés dans la fonction , alors:
+n'en sont pas tout à fait car: soit une liste li, u l'index d'un élément de cette liste et v un des nombres utilisés dans la fonction , alors:
 	
-	i (compris) [0;(len(li)-1)] (équivalent) [0;len(li)[
-	y (compris) [1;len(li)]
+	u (compris) [0;(len(li)-1)] (équivalent) [0;len(li)[
+	v (compris) [1;len(li)]
 		
 	Lors de la création de cette fonction, nous avons constater des bugs survenant lors de l'affichage de grandes listes de cartes comme par exemple
 une pioche entière d'un jeu de 52 cartes. A raison de 4 caractères imprimés par carte (les 3 caractères de la carte + l'espace de fin du print),
@@ -38,7 +38,19 @@ celui-ci:
 			========================================== Capture d'écran du bug =========================================
 			(légende: bug d'affichage relatif à la fonction "afficher_reussite_num" telle qu'écrite au commit 7281444c)*	              
 
-Nous avons résolu ce bug en blablabla
+	Nous avons résolu ce problème en imbriquant les trois boucles d'affichage dans une plus grande boucle, et en changeant la condition de la première
+boucle. Maintenant, la première boucle conditionne les deux suivantes puisqu'elles sont des boucles "for" tournant sur une liste (li_dix) ayant un nombre 
+d'éléments équivalent au nombre de passage dans la première boucle. Cette boucle s'arrête soit lorsqu'il n'y a plus de cartes dans la liste, soit si
+l'affichage dépasse la taille du terminal. Le compteur "y" est incrémenté à chaque passage dans la boucle, c'est à dire à chaque impression de carte. Il
+perment donc de savoir où nous en sommes dans la lecture/impression de la réussite et par conséquent, poser une condition de sortie de boucle lorsque qu'on
+arrive au bout de la liste de cartes. Le compteur "i" qui est incrémenté lui aussi à chaque impréssion mais ré-initialisé à chaque passage dans la grande 
+boucle (ce qui reviens à une ré-initialisation à la sortie de la "petite" boucle). Donc, multiplié par 4, il permet de compter le nombre de caractères 
+imprimés à chaque passage de grande boucle. Il faut maintenant connaître la largeur du terminal pour pouvoir la comparer à "i". Pour obtenir la taille du 
+terminal, nous avons utilisé le module intégré à python: "shutil". Avec la fonction "get_terminal_size", on peut obtenir le nombre de caractères que peut 
+contenir le terminal en longueur. Ainsi, nous pouvons construire la deuxième condition de sortie de boucle en spécifiant que la boncle est valide tant que
+i (times) 4 est inférieur ou égal à la largeur du terminal. Après modifications, la fonction est donc comme suit:
+
+				===================== Code de la fonction "afficher_reussite_num" (l.24) =====================
 
 
 
@@ -47,4 +59,4 @@ Nous avons résolu ce bug en blablabla
 
 
 
-*mettre dans les annexes le code de la fonction "afficher_reussite_num" à ce commit
+*mettre dans les annexes le code de la fonction "afficher_reussite_num" @7281444c
