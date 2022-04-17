@@ -28,9 +28,9 @@ def afficher_reussite_num(liCartes):
     li_dix=[]
     cpt=1
     while y<len(liCartes):
-        i=0
+        i=1
         li_dix=[]
-        while (i+1)*4<=columns and y<len(liCartes): # 4=les 3 caractères de la carte + l'espace de fin du print
+        while i*4<=columns and y<len(liCartes): # 4=les 3 caractères de la carte + l'espace de fin du print
             carte=liCartes[y]
             print(carte_to_chaine(carte),end=" ")
             if carte["valeur"]==10:
