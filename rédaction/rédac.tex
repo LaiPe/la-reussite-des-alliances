@@ -12,7 +12,24 @@
 \usepackage{listings}
 \usepackage[pdftex]{hyperref}
 \usepackage{amssymb}
+\usepackage{tabto}
 \usepackage{pst-node}
+\usepackage{listings}
+\lstset{
+  literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\EUR}}1 {£}{{\pounds}}1
+}
 
 
 \begin{document}
@@ -21,10 +38,44 @@
 \section{La réussite des alliances: structuration du jeu}
 \subsection{Rappel des règles du jeu}
 Nous allons commencer l'explication de notre projet en rappelant rapidement les règles de la réussite des alliances :\\
-Pour jouer à ce jeux on commence par prendre un paquet de carte puis on le mélange pour créer une pioche, ensuite on pioche les cartes une par une en les posant de gauche a droite faces visibles une fois que trois cartes ont été posées nous pouvons commencer à jouer. On procédera ainsi, on suppose que la carte la plus a gauche est la numéro une la carte à sa droite la numéro deux celle a sa droite numéro trois et ainsi de suite si la carte numéro trois a une  similarité (même couleur ou même valeur) avec la carte numéro une il y a alors alliance de cartes, on peut alors faire un saut dans ce cas la la carte qui est située entre nos deux cartes passe sur le tas de celle qui l'a précède. Si aucun saut n'est possible il faudra continuer à piocher les cartes jusqu'à ce qu'un ou plusieurs saut soit possible le jeu s'arrête lorsqu'il n'est plus possible de piocher une carte et qu'il n'est pas possible de faire de saut non plus. On compte alors le nombre de tas restant et selon le nombre de tas requis pour gagner on sait si oui ou non on a réussi.
-
+Pour jouer à ce jeux on commence par prendre un paquet de carte puis on le mélange pour créer une pioche, ensuite on pioche les cartes une par une en les posant de gauche a droite faces visibles une fois que trois cartes ont été posées nous pouvons commencer à jouer. On procédera ainsi, on suppose que la carte la plus a gauche est la numéro une la carte à sa droite la numéro deux celle a sa droite numéro trois et ainsi de suite si la carte numéro trois a une  similarité (même couleur ou même valeur) avec la carte numéro une il y a alors alliance de cartes, on peut alors faire un saut dans ce cas la la carte qui est située entre nos deux cartes passe sur le tas de celle qui l'a précède. Si aucun saut n'est possible il faudra continuer à piocher les cartes jusqu'à ce qu'un ou plusieurs saut soit possible le jeu s'arrête lorsqu'il n'est plus possible de piocher une carte et qu'il n'est pas possible de faire de saut non plus. On compte alors le nombre de tas restant et selon le nombre de tas requis pour gagner on sait si oui ou non on a réussi.\\\\\\\\\\\\
 
 \subsection{Création des fonctions (partie guidée)}
+Pour représenter informatiquement le jeu de la réussite des alliances, nous avions à notre disposition une partie guidée intégrée au sujet.\\
+Ce "cahier des charges" détaillé nous a fourni un certain confort quant à l'architecture du programme en lui même. En effet, comme les entrées, 
+sorties et effets de bords de nos fonctions nous étaient déjà indiqué, nous n'avions pas à réflechir à comment nos fonctions allaient intéragir entre elles. Les appels à des fonctions entérieures, s'il en avait, nous étaient eux aussi indiqués ou tout du moins suggérés. Cette souplesse de travail nous
+a permis de nous concentrer sur l'algorithmie de nos fonctions et comment optimiser ces dernières.\\
+\tabto{1cm}Néanmoins, le sujet nous permettait également de prendre certaines libertés. Par exemple, il nous était suggéré de réaliser des fonctions
+auxiliaires pour programmer la fonction "une$\_$etape$\_$reussite". C'est ce que nous avons fait avec la fonction "piocher" qui compartimente l'action de 
+piocher une carte. Elle prends en argument deux listes, une qui représente la liste des tas de la réussite, l'autre qui représente la pioche. Elle a 
+pour effet de bord de déplacer la première carte de la pioche (c'est à dire d'indice 0) au dernier emplacement de la liste des tas. Pour cela, nous 
+avons utilisé la fonction "pop" qui a elle même pour effet de bord de supprimer un élément d'une liste à un index précis et qui retourne cet élément.
+Nous avons donc redirigé la sortie de la fonction "pop" comme ceci:\\
+\begin{lstlisting}
+	def piocher(liste_tas,pioche):
+    		liste_tas+=[pioche.pop(0)]
+\end{lstlisting}
+
+Nous n'avons cependant pas jugé nécéssaire de faire d'autres compartimentations pour fluidifier cette fonction.\\\\
+	\tabto{1cm}La fonction "reussite$\_$mode$\_$manuel" nous a permis à nouveau de pouvoir prendre des libertés cette fois-ci quant à l'affichage des éléments et
+plus globalement l'interface utilisateur. Pour rappel, cette fonction a pour but de laisser l'utilisateur jouer une partie. Ceci néséssite une interface
+pour que l'utilisateur puisse choisir ce qu'il veut faire. Ainsi, afin de présenter au mieux ses options de jeu à l'utilisateur, nous avons réaliser un
+menu contenant un choix pour piocher, un choix pour réaliser un saut et un choix pour mettre fin à la partie. En plus de ce menu, nous avons décider de
+réaliser un affichage de la réussite plus poussé permettant de relier chaque carte à un nombre et ainsi faciliter la sélection de la carte à faire
+sauter. Pour cela, nous avons réaliser la fonction "afficher$\_$reussite$\_$num". Elle prends pour argument la liste de cartes à afficher, ne revoie rien et a
+pour effet de bord l'affichage détaillé de la réussite. Cette fonction consiste en 3 boucles affichant respectivement les cartes de la réussite, les
+accents circonflexes permetants de souligner les cartes, et les nombres désignants les cartes. A noter que bien que semblant être des index, ces nombres
+n'en sont pas tout à fait car: soit une liste li, u l'index d'un élément de cette liste et v un des nombres utilisés dans la fonction , alors:\\
+\begin{lstlisting}
+	u (compris) [0;(len(li)-1)] (équivalent) [0;len(li)[
+	v (compris) [1;len(li)]
+\end{lstlisting}
+
+Lors de la création de cette fonction, nous avons constater des bugs survenant lors de l'affichage de grandes listes de cartes comme par exemple
+une pioche entière d'un jeu de 52 cartes. A raison de 4 caractères imprimés par carte (les 3 caractères de la carte + l'espace de fin du print),
+l'affichage entier d'un jeu de 52 cartes correspond à l'impression de 4x52=208 caractères. Cela peut être un problème si l'utilisateur possède un petit
+écran et par conséquent un petit terminal. Les trois lignes de 208 caractères peuvent "déborder" chacune leur tour, provoquant des bugs similaires à 
+celui-ci:
 \section{Les Extensions: ajouts de fonctionnalités.}
 \subsection{Vérification de la pioche}
 \subsection{Statistiques - (fonction res$\_$multi$\_$simulation et statistiques$\_$nb$\_$tas)}
