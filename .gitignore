@@ -3,5 +3,6 @@
 *.gz
 *.out
 *.pdf
+*.toc
 __pycache__/
 .vscode/
