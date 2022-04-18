@@ -52,11 +52,21 @@ i (times) 4 est inférieur ou égal à la largeur du terminal. Après modificati
 
 				===================== Code de la fonction "afficher_reussite_num" (l.24) =====================
 
-
-
-
-
-
-
-
 *mettre dans les annexes le code de la fonction "afficher_reussite_num" @7281444c
+
+II) Les Extensions: ajouts de fonctionnalités.
+a) Verification de la pioche
+
+	Parmis les idées d'extensions que propose le sujet, nous avons choisi la fonction permettant de verifier que la pioche de cartes ne soit pas truquée.
+Nommée "vérifier_pioche", elle prends en arguments la liste que l'on souhaite vérifier ainsi que le nombre de cartes qu'elle contient - ou tout du moins 
+qu'elle est censée contenir ! Elle n'a pas d'effets de bord et renvoie un booléen pour statuer de la conformité de la pioche: True si la pioche est conforme
+et False si la pioche est truquée. Notre algorithme se base sur la comparaison de la liste passée en argument avec une liste conforme. Une pioche peut être 
+truquée de différentes manières:- on peut ajouter les cartes que l'on souhaite directement dans la liste, auquel cas la taille de la liste doit être trop grande.
+				- on peut sinon placer les cartes que l'on souhaite à l'index d'une autre carte. On remplace donc une carte par une autre, ce qui
+				reviens à réécrire les cartes pour qu'elles nous arrangent. Il faudra donc veiller à ce qu'il n'y est pas de double. Pour cela,
+				et comme nous savons que la taille de la liste sera contôlé ensuite, il nous suffit juste de veiller à ce que toutes les cartes
+				présentes dans une pioche conventionnelle le soit aussi dans la pioche que l'on contôle. Ainsi, s'il y a des doubles, cette
+				dernière sera forcement d'une taille non conforme.
+	Nous avons donc fait appel à notre fonction "init_pioche_alea" crée lors de la partie guidée qui permet de générer une pioche de 32 ou 52 cartes mélangées
+aléatoirement. Cette pioche nous sert donc de comparaison. Nous passons tout d'abord en revue la pioche suspecte en veillant à ce que chaque carte de la pioche
+conforme 
