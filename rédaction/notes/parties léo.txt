@@ -69,4 +69,8 @@ truquée de différentes manières:- on peut ajouter les cartes que l'on souhait
 				dernière sera forcement d'une taille non conforme.
 	Nous avons donc fait appel à notre fonction "init_pioche_alea" crée lors de la partie guidée qui permet de générer une pioche de 32 ou 52 cartes mélangées
 aléatoirement. Cette pioche nous sert donc de comparaison. Nous passons tout d'abord en revue la pioche suspecte en veillant à ce que chaque carte de la pioche
-conforme 
+conforme soit dans la pioche suspecte. Si ce n'est pas le cas, la fonction renvoie False. La fonction procède ensuite à une vérification de la longueur de la
+pioche suspecte. Pareil, si la pioche a plus de cartes qu'elle ne devrait en avoir, la fonction renvoie False. Si la pioche possède toutes les cartes de la pioche
+conforme tout en ayant le bon nombre de cartes, alors la fonction renvoie True.
+
+c) Probabilités
