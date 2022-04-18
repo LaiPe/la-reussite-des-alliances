@@ -104,7 +104,7 @@ Nous avons donc redirigé la sortie de la fonction "pop" comme ceci:\\
 	def piocher(liste_tas,pioche):
     		liste_tas+=[pioche.pop(0)]
 \end{lstlisting}
-\caption{fonction : ligne 118\\}
+\caption{fonction : ligne 118\\} 
 
 Nous n'avons cependant pas jugé nécéssaire de faire d'autres compartimentations pour fluidifier cette fonction.\\\\
 	\tabto{1cm}La fonction "$reussite\_mode\_manuel$" nous a permis à nouveau de pouvoir prendre des libertés cette fois-ci quant à l'affichage des éléments et
@@ -121,7 +121,44 @@ n'en sont pas tout à fait car: soit une liste $li$, $u$ l'index d'un élément 
 	   v (compris) [1;len(li)]$
 
 
-Lors de la création de cette fonction, nous avons constater des bugs survenant lors de l'affichage de grandes listes de cartes comme par exemple une pioche entière d'un jeu de 52 cartes. A raison de 4 caractères imprimés par carte (les 3 caractères de la carte + l'espace de fin du print), l'affichage entier d'un jeu de 52 cartes correspond à l'impression de $4\times52=208$ caractères. Cela peut être un problème si l'utilisateur possède un petit écran et par conséquent un petit terminal. Les trois lignes de 208 caractères peuvent "déborder" chacune leur tour, provoquant des bugs similaires à  celui-ci:
+Lors de la création de cette fonction, nous avons constater des bugs survenant lors de l'affichage de grandes listes de cartes comme par exemple une pioche entière d'un jeu de 52 cartes. A raison de 4 caractères imprimés par carte (les 3 caractères de la carte + l'espace de fin du print), l'affichage entier d'un jeu de 52 cartes correspond à l'impression de $4\times52=208$ caractères. Cela peut être un problème si l'utilisateur possède un petit écran et par conséquent un petit terminal. Les trois lignes de 208 caractères peuvent "déborder" chacune leur tour, provoquant des bugs similaires à  celui-ci:\\\\
+Nous avons résolu ce problème en imbriquant les trois boucles d'affichage dans une plus grande boucle, et en changeant la condition de la première boucle. Maintenant, la première boucle conditionne les deux suivantes puisqu'elles sont des boucles "for" tournant sur une liste ($li\_dix$) ayant un nombre  d'éléments équivalent au nombre de passage dans la première boucle. Cette boucle s'arrête soit lorsqu'il n'y a plus de cartes dans la liste, soit si l'affichage dépasse la taille du terminal. Le compteur "y" est incrémenté à chaque passage dans la boucle, c'est à dire à chaque impression de carte. Il permet donc de savoir où nous en sommes dans la lecture/impression de la réussite et par conséquent, poser une condition de sortie de boucle lorsque qu'on arrive au bout de la liste de cartes. Le compteur "i" qui est incrémenté lui aussi à chaque impression mais réinitialisé à chaque passage dans la grande  boucle (ce qui reviens à une réinitialisation à la sortie de la "petite" boucle). Donc, multiplié par 4, il permet de compter le nombre de caractères imprimés à chaque passage de grande boucle. Il faut maintenant connaître la largeur du terminal pour pouvoir la comparer à "i". Pour obtenir la taille du terminal, nous avons utilisé le module intégré à python: "shutil". Avec la fonction "$get\_terminal\_size$", on peut obtenir le nombre de caractères que peut  contenir le terminal en longueur. Ainsi, nous pouvons construire la deuxième condition de sortie de boucle en spécifiant que la boucle est valide tant que i (times) 4 est inférieur ou égal à la largeur du terminal. Après modifications, la fonction est donc comme suit :
+
+\begin{lstlisting}
+def afficher_reussite_num(liCartes):
+    columns, rows = shutil.get_terminal_size()
+    i=0
+    y=0
+    li_dix=[]
+    cpt=1
+    while y<len(liCartes):
+        i=1
+        li_dix=[]
+        while i*4<=columns and y<len(liCartes): 
+            carte=liCartes[y]
+            print(carte_to_chaine(carte),end=" ")
+            if carte["valeur"]==10:
+                li_dix+=[True]
+            else:
+                li_dix+=[False]
+            y+=1
+            i+=1
+        print()
+        for dix in li_dix:
+            if dix:
+                print("^"*3,sep="",end=" ")
+            else:
+                print(" ","^"*2,sep="",end=" ")
+        print()
+        for dix in li_dix:
+            if cpt<10:
+                print(" "*2,cpt,sep="",end=" ")
+            else:
+                print(" ",cpt,sep="",end=" ")
+            cpt+=1
+        print("\n")
+\end{lstlisting}
+\caption{fonction: ligne 24}
 
 \section{Les Extensions: ajouts de fonctionnalités.}
 \subsection{Vérification de la pioche}
