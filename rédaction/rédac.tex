@@ -86,43 +86,46 @@
 \tableofcontents
 \section{La réussite des alliances: structuration du jeu}
 \subsection{Rappel des règles du jeu}
-Quelque rappel des règles:\\
-Prenez un paquet de cartes (32 ou 52) mélangez le pour créer une pioche, ensuite tirez les cartes une par une en les posant de gauche a droite faces visibles. Une fois que trois cartes ont été posées vous pouvez commencer à jouer. On procédera ainsi, on suppose que la carte la plus a gauche est la numéro une la carte à sa droite la numéro deux celle a sa droite numéro trois et ainsi de suite. Si la carte numéro trois a une similarité (même couleur ou même valeur) avec la carte numéro une il y a alors alliance de cartes, vous pouvez alors faire un saut dans ce cas la la carte qui est située entre nos deux cartes passe sur le tas de celle qui l'a précède. Si aucun saut n'est possible il faudra continuer à piocher les cartes jusqu'à ce qu'un ou plusieurs saut soit possible le jeu s'arrête lorsqu'il n'est plus possible de piocher une carte et qu'il n'est pas possible de faire de saut non plus. On compte alors le nombre de tas restant et selon le nombre de tas requis pour gagner vous savez si oui ou non vous avez réussi.\\\\\\\\\\\\
+Nous allons commencer l'explication de notre projet en rappelant rapidement les règles de la réussite des alliances :
+
+Prenez un paquet de cartes (32 ou 52) mélangez le pour créer une pioche, ensuite tirez les cartes une par une en les posant de gauche a droite faces visibles. Une fois que trois cartes ont été posées vous pouvez commencer à jouer. On procédera ainsi, on suppose que la carte la plus a gauche est la numéro une la carte à sa droite la numéro deux celle a sa droite numéro trois et ainsi de suite. Si la carte numéro trois a une similarité (même couleur ou même valeur) avec la carte numéro une il y a alors alliance de cartes, vous pouvez alors faire un saut dans ce cas la la carte qui est située entre nos deux cartes passe sur le tas de celle qui l'a précède. Si aucun saut n'est possible il faudra continuer à piocher les cartes jusqu'à ce qu'un ou plusieurs saut soit possible le jeu s'arrête lorsqu'il n'est plus possible de piocher une carte et qu'il n'est pas possible de faire de saut non plus. On compte alors le nombre de tas restant et selon le nombre de tas requis pour gagner vous savez si oui ou non vous avez réussi.
 
 \subsection{Création des fonctions (partie guidée)}
-Pour représenter informatiquement le jeu de la réussite des alliances, nous avions à notre disposition une partie guidée intégrée au sujet.\\
+Pour représenter informatiquement le jeu de la réussite des alliances, nous avions à notre disposition une partie guidée intégrée au sujet.
 Ce "cahier des charges" détaillé nous a fourni un certain confort quant à l'architecture du programme en lui même. En effet, comme les entrées, 
-sorties et effets de bords de nos fonctions nous étaient déjà indiqué, nous n'avions pas à réflechir à comment nos fonctions allaient intéragir entre elles. Les appels à des fonctions entérieures, s'il en avait, nous étaient eux aussi indiqués ou tout du moins suggérés. Cette souplesse de travail nous
-a permis de nous concentrer sur l'algorithmie de nos fonctions et comment optimiser ces dernières.\\
-\tabto{1cm}Néanmoins, le sujet nous permettait également de prendre certaines libertés. Par exemple, il nous était suggéré de réaliser des fonctions
-auxiliaires pour programmer la fonction "$une\_etape\_reussite$". C'est ce que nous avons fait avec la fonction "piocher" qui compartimente l'action de 
+sorties et effets de bords de nos fonctions nous étaient déjà indiqué, nous n'avions pas à réfléchir à comment nos fonctions allaient interagir entre elles. Les appels à des fonctions antérieures, s'il en avait, nous étaient eux aussi indiqués ou tout du moins suggérés. Cette souplesse de travail nous
+a permis de nous concentrer sur l'algorithmique de nos fonctions et comment optimiser ces dernières.\\
+
+Néanmoins, le sujet nous permettait également de prendre certaines libertés. Par exemple, il nous était suggéré de réaliser des fonctions
+auxiliaires pour programmer la fonction "$une\_etape\_reussite$". C'est ce que nous avons fait avec la fonction "$piocher$" qui compartimente l'action de 
 piocher une carte. Elle prends en argument deux listes, une qui représente la liste des tas de la réussite, l'autre qui représente la pioche. Elle a 
 pour effet de bord de déplacer la première carte de la pioche (c'est à dire d'indice 0) au dernier emplacement de la liste des tas. Pour cela, nous 
-avons utilisé la fonction "pop" qui a elle même pour effet de bord de supprimer un élément d'une liste à un index précis et qui retourne cet élément.
-Nous avons donc redirigé la sortie de la fonction "pop" comme ceci:\\
+avons utilisé la fonction "$pop$" qui a elle même pour effet de bord de supprimer un élément d'une liste à un index précis et qui retourne cet élément.
+Nous avons donc redirigé la sortie de la fonction "$pop$" comme ceci:\\
 \begin{lstlisting}
 	def piocher(liste_tas,pioche):
     		liste_tas+=[pioche.pop(0)]
 \end{lstlisting}
 \caption{fonction : ligne 118\\} 
 
-Nous n'avons cependant pas jugé nécéssaire de faire d'autres compartimentations pour fluidifier cette fonction.\\\\
-	\tabto{1cm}La fonction "$reussite\_mode\_manuel$" nous a permis à nouveau de pouvoir prendre des libertés cette fois-ci quant à l'affichage des éléments et
-plus globalement l'interface utilisateur. Pour rappel, cette fonction a pour but de laisser l'utilisateur jouer une partie. Ceci néséssite une interface
+Nous n'avons cependant pas jugé nécéssaire de faire d'autres compartimentations pour fluidifier cette fonction.\\
+
+La fonction "$reussite\_mode\_manuel$" nous a permis à nouveau de pouvoir prendre des libertés cette fois-ci quant à l'affichage des éléments et
+plus globalement l'interface utilisateur. Pour rappel, cette fonction a pour but de laisser l'utilisateur jouer une partie. Ceci nécessite une interface
 pour que l'utilisateur puisse choisir ce qu'il veut faire. Ainsi, afin de présenter au mieux ses options de jeu à l'utilisateur, nous avons réaliser un
 menu contenant un choix pour piocher, un choix pour réaliser un saut et un choix pour mettre fin à la partie. En plus de ce menu, nous avons décider de
 réaliser un affichage de la réussite plus poussé permettant de relier chaque carte à un nombre et ainsi faciliter la sélection de la carte à faire
-sauter. Pour cela, nous avons réaliser la fonction "$affiches\_reussite\_num$". Elle prends pour argument la liste de cartes à afficher, ne revoie rien et a
-pour effet de bord l'affichage détaillé de la réussite. Cette fonction consiste en 3 boucles affichant respectivement les cartes de la réussite, les
-accents circonflexes permetants de souligner les cartes, et les nombres désignants les cartes. A noter que bien que semblant être des index, ces nombres
+sauter. Pour cela, nous avons réaliser la fonction "$afficher\_reussite\_num$". Elle prends pour argument la liste de cartes à afficher, ne revoie rien et a pour effet de bord l'affichage détaillé de la réussite. Cette fonction consiste en 3 boucles affichant respectivement les cartes de la réussite, les
+accents circonflexes permettant de souligner les cartes, et les nombres désignant les cartes. A noter que bien que semblant être des index, ces nombres
 n'en sont pas tout à fait car: soit une liste $li$, $u$ l'index d'un élément de cette liste et $v$ un des nombres utilisés dans la fonction , alors:
 \begin{align*}
 	&u \in [0;(len(li)-1)] \iff [0;len(li)[\\
 	&v \in [1;len(li)]
 \end{align*}
-Lors de la création de cette fonction, nous avons constater des bugs survenant lors de l'affichage de grandes listes de cartes comme par exemple une pioche entière d'un jeu de 52 cartes. A raison de 4 caractères imprimés par carte (les 3 caractères de la carte + l'espace de fin du print), l'affichage entier d'un jeu de 52 cartes correspond à l'impression de $4\times52=208$ caractères. Cela peut être un problème si l'utilisateur possède un petit écran et par conséquent un petit terminal. Les trois lignes de 208 caractères peuvent "déborder" chacune leur tour, provoquant des bugs similaires à  celui-ci:\\\\
-Nous avons résolu ce problème en imbriquant les trois boucles d'affichage dans une plus grande boucle, et en changeant la condition de la première boucle. Maintenant, la première boucle conditionne les deux suivantes puisqu'elles sont des boucles "for" tournant sur une liste ($li\_dix$) ayant un nombre  d'éléments équivalent au nombre de passage dans la première boucle. Cette boucle s'arrête soit lorsqu'il n'y a plus de cartes dans la liste, soit si l'affichage dépasse la taille du terminal. Le compteur "y" est incrémenté à chaque passage dans la boucle, c'est à dire à chaque impression de carte. Il permet donc de savoir où nous en sommes dans la lecture/impression de la réussite et par conséquent, poser une condition de sortie de boucle lorsque qu'on arrive au bout de la liste de cartes. Le compteur "i" qui est incrémenté lui aussi à chaque impression mais réinitialisé à chaque passage dans la grande  boucle (ce qui reviens à une réinitialisation à la sortie de la "petite" boucle). Donc, multiplié par 4, il permet de compter le nombre de caractères imprimés à chaque passage de grande boucle. Il faut maintenant connaître la largeur du terminal pour pouvoir la comparer à "i". Pour obtenir la taille du terminal, nous avons utilisé le module intégré à python: "shutil". Avec la fonction "$get\_terminal\_size$", on peut obtenir le nombre de caractères que peut  contenir le terminal en longueur. Ainsi, nous pouvons construire la deuxième condition de sortie de boucle en spécifiant que la boucle est valide tant que i (times) 4 est inférieur ou égal à la largeur du terminal. Après modifications, la fonction est donc comme suit :
 
+Lors de la création de cette fonction, nous avons constater des bugs survenant lors de l'affichage de grandes listes de cartes comme par exemple une pioche entière d'un jeu de 52 cartes. A raison de 4 caractères imprimés par carte (les 3 caractères de la carte $+$ l'espace de fin du print), l'affichage entier d'un jeu de 52 cartes correspond à l'impression de $4\times52=208$ caractères. Cela peut être un problème si l'utilisateur possède un petit écran et par conséquent un petit terminal. Les trois lignes de 208 caractères peuvent "déborder" chacune leur tour, provoquant des bugs similaires à  celui-ci:\\
+
+Nous avons résolu ce problème en imbriquant les trois boucles d'affichage dans une plus grande boucle, et en changeant la condition de la première boucle. Maintenant, la première boucle conditionne les deux suivantes puisqu'elles sont des boucles "$for$" tournant sur une liste ($li\_dix$) ayant un nombre  d'éléments équivalent au nombre de passage dans la première boucle. Cette boucle s'arrête soit lorsqu'il n'y a plus de cartes dans la liste, soit si l'affichage dépasse la taille du terminal. Le compteur "$y$" est incrémenté à chaque passage dans la boucle, c'est à dire à chaque impression de carte. Il permet donc de savoir où nous en sommes dans la lecture/impression de la réussite et par conséquent, poser une condition de sortie de boucle lorsque qu'on arrive au bout de la liste de cartes. Le compteur "$i$" qui est incrémenté lui aussi à chaque impression mais réinitialisé à chaque passage dans la grande  boucle (ce qui reviens à une ré-initialisation à la sortie de la "petite" boucle). Donc, multiplié par 4, il permet de compter le nombre de caractères imprimés à chaque passage de grande boucle. Il faut maintenant connaître la largeur du terminal pour pouvoir la comparer à "$i$". Pour obtenir la taille du terminal, nous avons utilisé le module intégré à python: "$shutil$". Avec la fonction "$get\_terminal\_size$", on peut obtenir le nombre de caractères que peut  contenir le terminal en longueur. Ainsi, nous pouvons construire la deuxième condition de sortie de boucle en spécifiant que la boucle est valide tant que $i \times 4$ est inférieur ou égal à la largeur du terminal. Après modifications, la fonction est donc comme suit :
 \begin{lstlisting}
 def afficher_reussite_num(liCartes):
     columns, rows = shutil.get_terminal_size()
