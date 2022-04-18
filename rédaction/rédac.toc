@@ -1,14 +1,14 @@
 \babel@toc {french}{}\relax 
 \contentsline {section}{\numberline {1}La réussite des alliances: structuration du jeu}{1}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Rappel des règles du jeu}{1}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Création des fonctions (partie guidée)}{1}{subsection.1.2}%
-\contentsline {section}{\numberline {2}Les Extensions: ajouts de fonctionnalités.}{1}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Vérification de la pioche}{1}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Statistiques - (fonction res$\_$multi$\_$simulation et statistiques$\_$nb$\_$tas)}{1}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Probabilités - (fonction proba et affiche$\_$proba)}{1}{subsection.2.3}%
-\contentsline {section}{\numberline {3}Le debug$\_$mode}{1}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Naissance de la nécessité de pouvoir tester les fonctions}{1}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Structure du programme}{1}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Limites et Erreurs}{1}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Interface utilisateur: proposer un produit fini.}{1}{section.4}%
-\contentsline {section}{\numberline {5}Annexes}{1}{section.5}%
+\contentsline {subsection}{\numberline {1.2}Création des fonctions (partie guidée)}{2}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Les Extensions: ajouts de fonctionnalités.}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Vérification de la pioche}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Statistiques - (fonction res$\_$multi$\_$simulation et statistiques$\_$nb$\_$tas)}{2}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Probabilités - (fonction proba et affiche$\_$proba)}{2}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Le debug$\_$mode}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Naissance de la nécessité de pouvoir tester les fonctions}{2}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Structure du programme}{2}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Limites et Erreurs}{2}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Interface utilisateur: proposer un produit fini.}{2}{section.4}%
+\contentsline {section}{\numberline {5}Annexes}{2}{section.5}%
