@@ -104,6 +104,7 @@ Nous avons donc redirigé la sortie de la fonction "$pop$" comme ceci:\\
 \begin{lstlisting}
 	def piocher(liste_tas,pioche):
     		liste_tas+=[pioche.pop(0)]
+
 \end{lstlisting}
 \caption{fonction : ligne 118\\} 
 
@@ -172,9 +173,19 @@ Parmi les idées d'extensions que propose le sujet, nous avons choisi la fonctio
 \item on peut sinon placer les cartes que l'on souhaite à l'index d'une autre carte. On remplace donc une carte par une autre, ce qui reviens à réécrire les cartes pour qu'elles nous arrangent. Il faudra donc veiller à ce qu'il n'y est pas de double. Pour cela, et comme nous savons que la taille de la liste sera contrôlé ensuite, il nous suffit juste de veiller à ce que toutes les cartes présentes dans une pioche conventionnelle le soit aussi dans la pioche que l'on contrôle. Ainsi, s'il y a des doubles, cette dernière sera forcement d'une taille non conforme.\\
 \end{itemize}
 
-Nous avons donc fait appel à notre fonction "$init\_pioche\_alea$" crée lors de la partie guidée qui permet de générer une pioche de 32 ou 52 cartes mélangées aléatoirement. Cette pioche nous sert donc de comparaison. Nous passons tout d'abord en revue la pioche suspecte en veillant à ce que chaque carte de la pioche conforme soit dans la pioche suspecte. Si ce n'est pas le cas, la fonction renvoie False. La fonction procède ensuite à une vérification de la longueur de la pioche suspecte. Pareil, si la pioche a plus de cartes qu'elle ne devrait en avoir, la fonction renvoie False. Si la pioche possède toutes les cartes de la pioche conforme tout en ayant le bon nombre de cartes, alors la fonction renvoie True.\\
+Nous avons donc fait appel à notre fonction "$init\_pioche\_alea$" crée lors de la partie guidée qui permet de générer une pioche de 32 ou 52 cartes mélangées aléatoirement\label{piochealea}. Cette pioche nous sert donc de comparaison. Nous passons tout d'abord en revue la pioche suspecte en veillant à ce que chaque carte de la pioche conforme soit dans la pioche suspecte. Si ce n'est pas le cas, la fonction renvoie False. La fonction procède ensuite à une vérification de la longueur de la pioche suspecte. Pareil, si la pioche a plus de cartes qu'elle ne devrait en avoir, la fonction renvoie False. Si la pioche possède toutes les cartes de la pioche conforme tout en ayant le bon nombre de cartes, alors la fonction renvoie True.\\
 
 \subsection{Statistiques}
+Nous avons aussi choisi deux fonctions liées aux statistiques : \\La première étant nommée "$res\_multi\_simulation$" qui va comme son nom l'indique nous servir à faire de multiples simulations de parties en même temps. Elle prend en argument le nombre de simulation que nous voulons faire ainsi que le nombre de carte que notre jeu contient. Voilà comment cette fonction procède, elle crée d'abord une boucle qui va faire appel à deux fonctions de la partie guidée, "$init\_pioche\_alea$" qui comme décrite précédemment génère une pioche de 32 ou 52 cartes mélangées aléatoirement ainsi que "$reussite\_mode\_auto$" qui permet de jouer une partie de réussite des alliances automatiquement. Ces deux fonctions nous permettent de faire des simulations différentes à chaque boucle. Après avoir fait chaque simulation de partie elle rajoute le résultat dans une liste qui est finalement renvoyée à la fin de la fonction. Cette liste qui est renvoyée correspond donc aux nombres de tas restants pour chaque simulation.
+\\
+La seconde fonction se nomme "$statistiques\_nb\_tas$" elle va nous servir à connaitre certaines statistiques. Elle prend en argument le nombre de simulation que nous souhaitons faire ainsi que le nombre de carte contenu dans le jeu (32 ou 52). \\ 
+Cette fonction a pour but de faire un nombre défini de simulation puis de trouver ou calculer la moyenne, le maximum ainsi que le minimum de tas obtenus. Pour faire cela elle va d'abord faire appel a la fonction "$res\_multi\_simulation$" vu précédemment qui va servir à donner une liste depuis laquelle nous allons pouvoir calculer les statistiques dont nous avons besoins pour cela nous allons créer une boucle qui va nous servir à trois choses:
+\begin{itemize}
+\item premièrement grâce à cette boucle nous allons pouvoir additionner toutes les valeurs d'une liste dans une seul variable.
+\item nous allons aussi pouvoir trouver le maximum et le minimum en comparant les valeurs entre elles.
+\end{itemize}
+Une fois sorti de cette boucle nous pouvons alors diviser notre variable moyenne par la longueur de la liste pour trouver la moyenne. Cette fonction nous affiche donc la moyenne, le maximum et le minimum de tas pour un nombre prédéfinis de simulations.
+
 \subsection{Probabilités}
 \section{Le debug$\_$mode}
 \subsection{Naissance de la nécessité de pouvoir tester les fonctions}
