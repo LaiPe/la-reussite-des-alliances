@@ -90,7 +90,7 @@
 \section{La réussite des alliances: structuration du jeu}
 \subsection{Rappel des règles du jeu}
 Quelque rappel des règles:\\
-Prenez un paquet de cartes (32 ou 52) mélangez le pour créer une pioche, ensuite tirez les cartes une par une en les posant de gauche a droite faces visibles. Une fois que trois cartes ont été posées vous pouvez commencer à jouer. On procédera ainsi, on suppose que la carte la plus a gauche est la numéro une la carte à sa droite la numéro deux celle a sa droite numéro trois et ainsi de suite. Si la carte numéro trois a une similarité (même couleur ou même valeur) avec la carte numéro une il y a alors alliance de cartes, vous pouvez alors faire un saut dans ce cas la la carte qui est située entre nos deux cartes passe sur le tas de celle qui l'a précède. Si aucun saut n'est possible il faudra continuer à piocher les cartes jusqu'à ce qu'un ou plusieurs saut soit possible le jeu s'arrête lorsqu'il n'est plus possible de piocher une carte et qu'il n'est pas possible de faire de saut non plus. On compte alors le nombre de tas restant et selon le nombre de tas requis pour gagner vous savez si oui ou non vous avez réussi.\\\\
+Prenez un paquet de cartes (32 ou 52) mélangez le pour créer une pioche, ensuite tirez les cartes une par une en les posant de gauche a droite faces visibles. Une fois que trois cartes ont été posées vous pouvez commencer à jouer. On procédera ainsi, on suppose que la carte la plus a gauche est la numéro une la carte à sa droite la numéro deux celle a sa droite numéro trois et ainsi de suite. Si la carte numéro trois a une similarité (même couleur ou même valeur) avec la carte numéro une il y a alors alliance de cartes, vous pouvez alors faire un saut dans ce cas la la carte qui est située entre nos deux cartes passe sur le tas de celle qui l'a précède. Si aucun saut n'est possible il faudra continuer à piocher les cartes jusqu'à ce qu'un ou plusieurs saut soit possible le jeu s'arrête lorsqu'il n'est plus possible de piocher une carte et qu'il n'est pas possible de faire de saut non plus. On compte alors le nombre de tas restant et selon le nombre de tas requis pour gagner vous savez si oui ou non vous avez réussi.
 
 \subsection{Création des fonctions (partie guidée)}
 Pour représenter informatiquement le jeu de la réussite des alliances, nous avions à notre disposition une partie guidée intégrée au sujet.
@@ -121,7 +121,9 @@ plus globalement l'interface utilisateur. Pour rappel, cette fonction a pour but
 pour que l'utilisateur puisse choisir ce qu'il veut faire. Ainsi, afin de présenter au mieux ses options de jeu à l'utilisateur, nous avons réaliser un
 menu contenant un choix pour piocher, un choix pour réaliser un saut et un choix pour mettre fin à la partie. En plus de ce menu, nous avons décider de
 réaliser un affichage de la réussite plus poussé permettant de relier chaque carte à un nombre et ainsi faciliter la sélection de la carte à faire
-sauter. Pour cela, nous avons réaliser la fonction "$afficher\_reussite\_num$". Elle prends pour argument la liste de cartes à afficher, ne revoie rien et a pour effet de bord l'affichage détaillé de la réussite. Cette fonction consiste en 3 boucles affichant respectivement les cartes de la réussite, les
+sauter. 
+
+Pour cela, nous avons réaliser la fonction "$afficher\_reussite\_num$". Elle prends pour argument la liste de cartes à afficher, ne revoie rien et a pour effet de bord l'affichage détaillé de la réussite. Cette fonction consiste en 3 boucles affichant respectivement les cartes de la réussite, les
 accents circonflexes permettant de souligner les cartes, et les nombres désignant les cartes. A noter que bien que semblant être des index, ces nombres
 n'en sont pas tout à fait car: soit une liste $li$, $u$ l'index d'un élément de cette liste et $v$ un des nombres utilisés dans la fonction , alors:
 \begin{align*}
@@ -132,7 +134,11 @@ n'en sont pas tout à fait car: soit une liste $li$, $u$ l'index d'un élément 
 Lors de la création de cette fonction, nous avons constater des bugs survenant lors de l'affichage de grandes listes de cartes comme par exemple une pioche entière d'un jeu de 52 cartes. A raison de 4 caractères imprimés par carte (les 3 caractères de la carte $+$ l'espace de fin du print), l'affichage entier d'un jeu de 52 cartes correspond à l'impression de $4\times52=208$ caractères. Cela peut être un problème si l'utilisateur possède un petit écran et par conséquent un petit terminal. Les trois lignes de 208 caractères peuvent "déborder" chacune leur tour, provoquant des bugs similaires à  celui-ci:\\\\
 \includegraphics[scale=0.5]{img/bug_afficher_reussite_num.PNG}
 
-Nous avons résolu ce problème en imbriquant les trois boucles d'affichage dans une plus grande boucle, et en changeant la condition de la première boucle. Maintenant, la première boucle conditionne les deux suivantes puisqu'elles sont des boucles "$for$" tournant sur une liste ($li\_dix$) ayant un nombre  d'éléments équivalent au nombre de passage dans la première boucle. Cette boucle s'arrête soit lorsqu'il n'y a plus de cartes dans la liste, soit si l'affichage dépasse la taille du terminal. Le compteur "$y$" est incrémenté à chaque passage dans la boucle, c'est à dire à chaque impression de carte. Il permet donc de savoir où nous en sommes dans la lecture/impression de la réussite et par conséquent, poser une condition de sortie de boucle lorsque qu'on arrive au bout de la liste de cartes. Le compteur "$i$" qui est incrémenté lui aussi à chaque impression mais réinitialisé à chaque passage dans la grande  boucle (ce qui reviens à une ré-initialisation à la sortie de la "petite" boucle). Donc, multiplié par 4, il permet de compter le nombre de caractères imprimés à chaque passage de grande boucle. Il faut maintenant connaître la largeur du terminal pour pouvoir la comparer à "$i$". Pour obtenir la taille du terminal, nous avons utilisé le module intégré à python: "$shutil$". Avec la fonction "$get\_terminal\_size$", on peut obtenir le nombre de caractères que peut  contenir le terminal en longueur. Ainsi, nous pouvons construire la deuxième condition de sortie de boucle en spécifiant que la boucle est valide tant que $i \times 4$ est inférieur ou égal à la largeur du terminal. Après modifications, la fonction est donc comme suit :
+Nous avons résolu ce problème en imbriquant les trois boucles d'affichage dans une plus grande boucle, et en changeant la condition de la première boucle. Maintenant, la première boucle conditionne les deux suivantes puisqu'elles sont des boucles "$for$" tournant sur une liste ($li\_dix$) ayant un nombre  d'éléments équivalent au nombre de passage dans la première boucle. Cette boucle s'arrête soit lorsqu'il n'y a plus de cartes dans la liste, soit si l'affichage dépasse la taille du terminal. 
+
+Le compteur "$y$" est incrémenté à chaque passage dans la boucle, c'est à dire à chaque impression de carte. Il permet donc de savoir où nous en sommes dans la lecture/impression de la réussite et par conséquent, poser une condition de sortie de boucle lorsque qu'on arrive au bout de la liste de cartes. Le compteur "$i$" qui est incrémenté lui aussi à chaque impression mais réinitialisé à chaque passage dans la grande  boucle (ce qui reviens à une ré-initialisation à la sortie de la "petite" boucle). 
+
+Donc, multiplié par 4, il permet de compter le nombre de caractères imprimés à chaque passage de grande boucle. Il faut maintenant connaître la largeur du terminal pour pouvoir la comparer à "$i$". Pour obtenir la taille du terminal, nous avons utilisé le module intégré à python: "$shutil$". Avec la fonction "$get\_terminal\_size$", on peut obtenir le nombre de caractères que peut  contenir le terminal en longueur. Ainsi, nous pouvons construire la deuxième condition de sortie de boucle en spécifiant que la boucle est valide tant que $i \times 4$ est inférieur ou égal à la largeur du terminal. Après modifications, la fonction est donc comme suit :
 \begin{lstlisting}
 def afficher_reussite_num(liCartes):
     columns, rows = shutil.get_terminal_size()
@@ -175,22 +181,19 @@ def afficher_reussite_num(liCartes):
 \subsection{Vérification de la pioche}
 Parmi les idées d'extensions que propose le sujet, nous avons choisi la fonction permettant de vérifier que la pioche de cartes ne soit pas truquée. Nommée "$vérifier\_pioche$", elle prends en arguments la liste que l'on souhaite vérifier ainsi que le nombre de cartes qu'elle contient - ou tout du moins qu'elle est censée contenir ! Elle n'a pas d'effets de bord et renvoie un booléen pour statuer de la conformité de la pioche: True si la pioche est conforme et False si la pioche est truquée. Notre algorithme se base sur la comparaison de la liste passée en argument avec une liste conforme. Une pioche peut être truquée de différentes manières:
 \begin{itemize}
-\item on peut ajouter les cartes que l'on souhaite directement dans la liste, auquel cas la taille de la liste doit être trop grande.\\
-\item on peut sinon placer les cartes que l'on souhaite à l'index d'une autre carte. On remplace donc une carte par une autre, ce qui reviens à réécrire les cartes pour qu'elles nous arrangent. Il faudra donc veiller à ce qu'il n'y est pas de double. Pour cela, et comme nous savons que la taille de la liste sera contrôlé ensuite, il nous suffit juste de veiller à ce que toutes les cartes présentes dans une pioche conventionnelle le soit aussi dans la pioche que l'on contrôle. Ainsi, s'il y a des doubles, cette dernière sera forcement d'une taille non conforme.\\
+\item on peut ajouter les cartes que l'on souhaite directement dans la liste, auquel cas la taille de la liste doit être trop grande.
+\item on peut sinon placer les cartes que l'on souhaite à l'index d'une autre carte. On remplace donc une carte par une autre, ce qui reviens à réécrire les cartes pour qu'elles nous arrangent. Il faudra donc veiller à ce qu'il n'y est pas de double. Pour cela, et comme nous savons que la taille de la liste sera contrôlé ensuite, il nous suffit juste de veiller à ce que toutes les cartes présentes dans une pioche conventionnelle le soit aussi dans la pioche que l'on contrôle. Ainsi, s'il y a des doubles, cette dernière sera forcement d'une taille non conforme.
 \end{itemize}
 
 Nous avons donc fait appel à notre fonction "$init\_pioche\_alea$" crée lors de la partie guidée qui permet de générer une pioche de 32 ou 52 cartes mélangées aléatoirement\label{piochealea}. Cette pioche nous sert donc de comparaison. Nous passons tout d'abord en revue la pioche suspecte en veillant à ce que chaque carte de la pioche conforme soit dans la pioche suspecte. Si ce n'est pas le cas, la fonction renvoie False. La fonction procède ensuite à une vérification de la longueur de la pioche suspecte. Pareil, si la pioche a plus de cartes qu'elle ne devrait en avoir, la fonction renvoie False. Si la pioche possède toutes les cartes de la pioche conforme tout en ayant le bon nombre de cartes, alors la fonction renvoie True.\\
 
 \subsection{Statistiques}
-Nous avons aussi choisi deux fonctions liées aux statistiques : \\La première étant nommée "$res\_multi\_simulation$" qui va comme son nom l'indique nous servir à faire de multiples simulations de parties en même temps. Elle prend en argument le nombre de simulation que nous voulons faire ainsi que le nombre de carte que notre jeu contient. Voilà comment cette fonction procède, elle crée d'abord une boucle qui va faire appel à deux fonctions de la partie guidée, "$init\_pioche\_alea$" qui comme décrite précédemment génère une pioche de 32 ou 52 cartes mélangées aléatoirement ainsi que "$reussite\_mode\_auto$" qui permet de jouer une partie de réussite des alliances automatiquement. Ces deux fonctions nous permettent de faire des simulations différentes à chaque boucle. Après avoir fait chaque simulation de partie elle rajoute le résultat dans une liste qui est finalement renvoyée à la fin de la fonction. Cette liste qui est renvoyée correspond donc aux nombres de tas restants pour chaque simulation.
-\\
-La seconde fonction se nomme "$statistiques\_nb\_tas$" elle va nous servir à connaitre certaines statistiques. Elle prend en argument le nombre de simulation que nous souhaitons faire ainsi que le nombre de carte contenu dans le jeu (32 ou 52). \\ 
-Cette fonction a pour but de faire un nombre défini de simulation puis de trouver ou calculer la moyenne, le maximum ainsi que le minimum de tas obtenus. Pour faire cela elle va d'abord faire appel a la fonction "$res\_multi\_simulation$" vu précédemment qui va servir à donner une liste depuis laquelle nous allons pouvoir calculer les statistiques dont nous avons besoins pour cela nous allons créer une boucle qui va nous servir à trois choses:
-premièrement grâce à cette boucle nous allons pouvoir additionner toutes les valeurs d'une liste dans une seul variable.
-Nous allons aussi pouvoir trouver le maximum et le minimum en comparant les valeurs entre elles.
+Nous avons aussi choisi deux fonctions liées aux statistiques : \\
+La première étant nommée "$res\_multi\_simulation$" qui va comme son nom l'indique nous servir à faire de multiples simulations de parties en même temps. Elle prend en argument le nombre de simulation que nous voulons faire ainsi que le nombre de carte que notre jeu contient. Voilà comment cette fonction procède, elle crée d'abord une boucle qui va faire appel à deux fonctions de la partie guidée, "$init\_pioche\_alea$" qui comme décrite précédemment génère une pioche de 32 ou 52 cartes mélangées aléatoirement ainsi que "$reussite\_mode\_auto$" qui permet de jouer une partie de réussite des alliances automatiquement. Ces deux fonctions nous permettent de faire des simulations différentes à chaque boucle. Après avoir fait chaque simulation de partie elle rajoute le résultat dans une liste qui est finalement renvoyée à la fin de la fonction. Cette liste qui est renvoyée correspond donc aux nombres de tas restants pour chaque simulation.\\
 
-Une fois sorti de cette boucle nous pouvons alors diviser notre variable moyenne par la longueur de la liste pour trouver la moyenne. Cette fonction nous affiche donc la moyenne, le maximum et le minimum de tas pour un nombre prédéfinis de simulations.\\
-Grâce à cette fonction nous avons pu voir que pour dix milles simulations il y a 21.133 tas en moyenne 2 au minimum et 47 au maximum.
+La seconde fonction se nomme "$statistiques\_nb\_tas$" elle va nous servir à connaitre certaines statistiques. Elle prend en argument le nombre de simulation que nous souhaitons faire ainsi que le nombre de carte contenu dans le jeu (32 ou 52). Cette fonction a pour but de faire un nombre défini de simulation puis de trouver ou calculer la moyenne, le maximum ainsi que le minimum de tas obtenus. Pour faire cela elle va d'abord faire appel a la fonction "$res\_multi\_simulation$" vu précédemment qui va servir à donner une liste depuis laquelle nous allons pouvoir calculer les statistiques dont nous avons besoins pour cela nous allons créer une boucle qui va nous servir à trois choses: premièrement grâce à cette boucle nous allons pouvoir additionner toutes les valeurs d'une liste dans une seul variable. Nous allons aussi pouvoir trouver le maximum et le minimum en comparant les valeurs entre elles.
+
+Une fois sorti de cette boucle nous pouvons alors diviser notre variable moyenne par la longueur de la liste pour trouver la moyenne. Cette fonction nous affiche donc la moyenne, le maximum et le minimum de tas pour un nombre prédéfinis de simulations. Grâce à cette fonction nous avons pu voir que pour dix milles simulations il y a 21.133 tas en moyenne 2 au minimum et 47 au maximum.
 
 
 \subsection{Probabilités}
@@ -202,24 +205,22 @@ Grâce à cette fonction nous avons pu voir que pour dix milles simulations il y
 \section{Annexes}
 \subsection{Structure du répertoire}
 \begin{forest}
-  [La-reussite-des-alliances
-    [programmes
-     [debug-mode
+  [la-reussite-des-alliances/
+    [programmes/
+     [debug-mode.py
      ]
-     [fonctions
+     [fonctions.py
      ]
-     [main
+     [main.py
      ] 
     ]
-    [rédaction
-      [notes
-      ]
-      [img
+    [rédaction/
+      [img/
       ]
       [redac.tex
       ]
     ]
-    [ressources
+    [ressources/
      [$alea\_test.txt$]
      [$alea\_init.txt$]
     ]
