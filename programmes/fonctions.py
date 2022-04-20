@@ -220,7 +220,7 @@ def res_multi_simulation(nb_sim,nb_cartes=32):
     return result
 def statistiques_nb_tas(nb_sim,nb_cartes=32):
     appel = res_multi_simulation(nb_sim,nb_cartes)
-    if not(len(appel)>0):
+    if nb_sim<=0:
         print("Pas de valeur dans la liste")
         return None
     moyenne = 0
