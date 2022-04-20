@@ -197,6 +197,34 @@ Une fois sorti de cette boucle nous pouvons alors diviser notre variable moyenne
 
 
 \subsection{Probabilités}
+\begin{tabular}{|p{3cm}|l|c|r|}
+  \hline
+  nombre de palier pour victoire & 2 & i & c\\
+  \hline
+  valeur de la liste & li[0] & li[y] & li[$c-2$] \\
+  \hline
+\end{tabular}
+\\Donc :
+\begin{align*}
+i \in [2;c]\\\AlignFootnote{Better check this.}
+y \in [0;c-2]
+\end{align*}
+Nous disposons maintenant de pourcentages décrivant les probabilités de réussite des alliances en fonction d'un certain nombre de tas restant à la fin 
+de la partie. Nous avons créé une seconde fonction nommée "$affiche\_proba$" afin de représenter graphiquement les probabilités de victoire. Comme la fonction "$proba$",
+"$affiche\_proba$" a pour seul argument un entier indiquant le nombre de cartes présentes dans le jeu. Cependant, elle ne renvoie rien et a pour effet de bord l'affichage
+du graphique. Nous avons fait appel dans un premier temps à notre fonction "$proba$" afin de remplir notre axe des ordonnées. Les valeurs en abscisses sont générées par une boucle
+"for". Nous pouvons exprimer x et y, respectivement pour les abscisses et les ordonnées comme ceci, avec c le nombre de cartes du jeu :
+\begin{align*}
+x \in [2;c] \\
+y \in [0;100]
+\end{align*}
+Pour l'affichage, nous avons fait appel au module python "$matplotlib.pyplot$" donnant accès à de nombreuses fonctions d'affichage graphique. Pour notre part, nous avons
+dans un premier temps utilisé la fonction "$plot$" permettant de créer le graphique en lui passant en argument les listes représentant les différents axes du graphique.
+Pour rendre le graphique plus compréhensible, nous avons également utilisé les fonctions "$xlabel$" et "$ylabel$" permettant de donner un titre aux abscisses et aux
+ordonnées. Pour finir, afin d'afficher le graphique, nous avons utilisé la fonction "$show$".
+
+
+
 \section{Le debug$\_$mode}
 \subsection{Naissance de la nécessité de pouvoir tester les fonctions}
 \subsection{Structure du programme}
