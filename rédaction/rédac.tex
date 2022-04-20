@@ -18,6 +18,21 @@
 \usepackage{listings}
 \usepackage[linguistics]{forest}
 
+\makeatletter
+\let\original@footnotemark\footnotemark
+\newcommand{\align@footnotemark}{%
+  \ifmeasuring@
+    \chardef\@tempfn=\value{footnote}%
+    \original@footnotemark
+    \setcounter{footnote}{\@tempfn}%
+  \else
+    \iffirstchoice@
+      \original@footnotemark
+    \fi
+  \fi}
+\pretocmd{\start@align}{\let\footnotemark\align@footnotemark}{}{}
+\makeatother
+
 \lstset{
   aboveskip=3mm,
   belowskip=-2mm,
@@ -206,9 +221,13 @@ Une fois sorti de cette boucle nous pouvons alors diviser notre variable moyenne
 \end{tabular}
 \\Donc :
 \begin{align*}
-i \in [2;c]\\\AlignFootnote{Better check this.}
+i \in [2;c]\\
 y \in [0;c-2]
 \end{align*}
+\addtocounter{footnote}{1}
+\footnotetext{c est représenté par l'argument optionnel "$nb\_cartes$" dans le code de "$proba$".} 
+\addtocounter{footnote}{1}
+\footnotetext{y n'est pas présent dans le code mais est algorithmiquement sous-entendu par la boucle "$for$".}
 Nous disposons maintenant de pourcentages décrivant les probabilités de réussite des alliances en fonction d'un certain nombre de tas restant à la fin 
 de la partie. Nous avons créé une seconde fonction nommée "$affiche\_proba$" afin de représenter graphiquement les probabilités de victoire. Comme la fonction "$proba$",
 "$affiche\_proba$" a pour seul argument un entier indiquant le nombre de cartes présentes dans le jeu. Cependant, elle ne renvoie rien et a pour effet de bord l'affichage
