@@ -74,3 +74,40 @@ pioche suspecte. Pareil, si la pioche a plus de cartes qu'elle ne devrait en avo
 conforme tout en ayant le bon nombre de cartes, alors la fonction renvoie True.
 
 c) Probabilités
+
+	Pour finaliser nos exensions, nous avons décider de completer notre partie "Statistiques" avec une partie "Probabilités". Nous avons réaliser dans un 
+premier temps la fonction "proba" qui nous permet de calculer les pourcentages de réussite en fonction du nombre de tas de cartes maximum pour gagner. Cette fonction
+ne prends comme argument optionnel que le nombre de cartes présentes dans le jeu (32 ou 52), n'a pas d'effets de bord et retourne une liste contenant les pourcentages 
+de réussite triés par ordre croissant du nombre palier de réussite. L'appel à la fonction précédement présentée "res_multi_simulation" constitue la base de notre
+algorithme. Pour rappel, elle permet d'obtenir une liste d'entiers corespondants aux nombres de tas restant respectivement à la fin de chaque réussite simmulé.
+Donc, si nous réalisons cent simulations, nous pouvons compter combien respectent le palier de réussite et donc établir un pourcentage de victoire avec tel palier 
+de réussite.
+	Ainsi, une boucle "for" se charge de vérifier si chaque valeur de la liste est inférieure ou égale au nombre palier. Si oui, une variable "prctage" 
+correspondante au pourcentage est incrémentée. Au bout des cent passages de boucle, la valeur de cette variable est ajoutée à la liste de retour puis est remise à 
+zéro. Cette remise à zéro permet l'itération des étapes décrites dans une grande boucle "while" ayant pour condition de sortie qu'un compteur soit supérieur au nombre 
+de cartes du jeu. Ce compteur se nomme "i" et représente le nombre palier pour la réussite. Ainsi, en l'incrémentant à la fin de chaque passage dans sa boucle on peut
+établir le pourcentage de réussite pour les différentes valeurs de palier. Nous pouvons représenter notre fonction comme suit:
+	Soit i le compteur du même nom, y le compteur permettant de parcourir la liste retouné par "res_multi_simulation"*, li la liste que retourne "proba", et c
+le nombre de cartes du jeu** (32 ou 52), alors:
+
+				===========================================envoyé sur discord==============================================
+
+	Nous disposons maintenant de pourcentages décrivant les probabilités de réussite des alliances en fonction d'un certain nombre de tas restant à la fin 
+de la partie. Nous avons crée une seconde fonction nommée "affiche_proba" afin de représenter graphiquement les probabilités de victoire. Comme la fonction "proba",
+"affiche_proba" a pour seul argument un entier indicant le nombre de cartes présentes dans le jeu. Cependant, elle ne renvoie rien et a pour effet de bord l'affichage
+du graphique. Nous avons fait appel dans un premier temps à notre fonction "proba" afin de remplir notre axe des ordonnées. Les valeurs en abcisses sont générer par une boucle
+"for". Nous pouvons exprimer x et y, respectivement pour les abcisses et les ordonnées comme ceci, avec c le nombre de cartes du jeu:
+
+	x (appartient) [2;c] 
+	y (appartient) [0;100]
+
+Pour l'affichage, nous avons fait appel au module python "matplotlib.pyplot" donnant accès à de nombreuses fonctions d'affichage graphique. Pour notre part, nous avons
+dans un premier temps utilisé la fonction "plot" permetant de créer le graphique en lui passant en agrument les listes représentant les différents axes du graphique.
+Pour rendre le graphique plus compréhensible, nous avons également utilisé les fonctions "xlabel" et "ylabel" permettant de donner un titre aux abcisses et aux
+ordonées. Pour finir, afin d'afficher le graphique, nous avons utilisé la fonction "show".
+
+* y n'est pas présent dans le code mais est algorithmiquement sous-entendu par la boucle "for".
+**c est représenté par l'argument optionnel "nb_cartes" dans le code de "proba".
+
+
+	
