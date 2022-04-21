@@ -212,7 +212,7 @@ de cartes du jeu. Ce compteur se nomme "i" et représente le nombre palier pour 
 Soit i le compteur du même nom, y le compteur permettant de parcourir la liste retourné par "$res\_multi\_simulation$"\footnote{c est représenté par l'argument optionnel "$nb\_cartes$" dans le code de "$proba$".}, li la liste que retourne "proba", et c
 le nombre de cartes du jeu\footnote{y n'est pas présent dans le code mais est algorithmiquement sous-entendu par la boucle "$for$".} (32 ou 52), alors:
 
-
+\begin{center}
 \begin{tabular}{|p{3cm}|l|c|r|}
   \hline
   nombre de palier pour victoire & 2 & i & c\\
@@ -220,7 +220,8 @@ le nombre de cartes du jeu\footnote{y n'est pas présent dans le code mais est a
   valeur de la liste & li[0] & li[y] & li[$c-2$] \\
   \hline
 \end{tabular}
-\\Donc :
+\end{center}
+Donc :
 \begin{align*}
 i \in [2;c]\\
 y \in [0;c-2]
