@@ -18,20 +18,6 @@
 \usepackage{listings}
 \usepackage[linguistics]{forest}
 
-\makeatletter
-\let\original@footnotemark\footnotemark
-\newcommand{\align@footnotemark}{%
-  \ifmeasuring@
-    \chardef\@tempfn=\value{footnote}%
-    \original@footnotemark
-    \setcounter{footnote}{\@tempfn}%
-  \else
-    \iffirstchoice@
-      \original@footnotemark
-    \fi
-  \fi}
-\pretocmd{\start@align}{\let\footnotemark\align@footnotemark}{}{}
-\makeatother
 
 \lstset{
   aboveskip=3mm,
@@ -200,7 +186,7 @@ Parmi les idées d'extensions que propose le sujet, nous avons choisi la fonctio
 \item on peut sinon placer les cartes que l'on souhaite à l'index d'une autre carte. On remplace donc une carte par une autre, ce qui reviens à réécrire les cartes pour qu'elles nous arrangent. Il faudra donc veiller à ce qu'il n'y est pas de double. Pour cela, et comme nous savons que la taille de la liste sera contrôlé ensuite, il nous suffit juste de veiller à ce que toutes les cartes présentes dans une pioche conventionnelle le soit aussi dans la pioche que l'on contrôle. Ainsi, s'il y a des doubles, cette dernière sera forcement d'une taille non conforme.
 \end{itemize}
 
-Nous avons donc fait appel à notre fonction "$init\_pioche\_alea$" crée lors de la partie guidée qui permet de générer une pioche de 32 ou 52 cartes mélangées aléatoirement\label{piochealea}. Cette pioche nous sert donc de comparaison. Nous passons tout d'abord en revue la pioche suspecte en veillant à ce que chaque carte de la pioche conforme soit dans la pioche suspecte. Si ce n'est pas le cas, la fonction renvoie False. La fonction procède ensuite à une vérification de la longueur de la pioche suspecte. Pareil, si la pioche a plus de cartes qu'elle ne devrait en avoir, la fonction renvoie False. Si la pioche possède toutes les cartes de la pioche conforme tout en ayant le bon nombre de cartes, alors la fonction renvoie True.\\
+Nous avons donc fait appel à notre fonction "$init\_pioche\_alea$" crée lors de la partie guidée qui permet de générer une pioche de 32 ou 52 cartes mélangées aléatoirement\label{piochealea}. Cette pioche nous sert donc de comparaison. Nous passons tout d'abord en revue la pioche suspecte en veillant à ce que chaque carte de la pioche conforme soit dans la pioche suspecte. Si ce n'est pas le cas, la fonction renvoie False. La fonction procède ensuite à une vérification de la longueur de la pioche suspecte. Pareil, si la pioche a plus de cartes qu'elle ne devrait en avoir, la fonction renvoie False. Si la pioche possède toutes les cartes de la pioche conforme tout en ayant le bon nombre de cartes, alors la fonction renvoie True.
 
 \subsection{Statistiques}
 Nous avons aussi choisi deux fonctions liées aux statistiques : \\
@@ -212,6 +198,21 @@ Une fois sorti de cette boucle nous pouvons alors diviser notre variable moyenne
 
 
 \subsection{Probabilités}
+Pour finaliser nos extensions, nous avons décidé de compléter notre partie "$Statistiques$" avec une partie "$Probabilités$". Nous avons réalisé dans un premier temps la fonction "$proba$" qui nous permet de calculer les pourcentages de réussite en fonction du nombre de tas de cartes maximum pour gagner. Cette fonction
+ne prends comme argument optionnel que le nombre de cartes présentes dans le jeu (32 ou 52), n'a pas d'effets de bord et retourne une liste contenant les pourcentages 
+de réussite triés par ordre croissant du nombre palier de réussite. L'appel à la fonction précédemment présentée "$res\_multi\_simulation$" constitue la base de notre
+algorithme. Pour rappel, elle permet d'obtenir une liste d'entiers correspondants aux nombres de tas restant respectivement à la fin de chaque réussite simulé.
+Donc, si nous réalisons cent simulations, nous pouvons compter combien respectent le palier de réussite et donc établir un pourcentage de victoire avec tel palier 
+de réussite.\\
+Ainsi, une boucle "for" se charge de vérifier si chaque valeur de la liste est inférieure ou égale au nombre palier. Si oui, une variable "$prctage$" 
+correspondante au pourcentage est incrémentée. Au bout des cent passages de boucle, la valeur de cette variable est ajoutée à la liste de retour puis est remise à 
+zéro. Cette remise à zéro permet l'itération des étapes décrites dans une grande boucle "$while$" ayant pour condition de sortie qu'un compteur soit supérieur au nombre 
+de cartes du jeu. Ce compteur se nomme "i" et représente le nombre palier pour la réussite. Ainsi, en l'incrémentant à la fin de chaque passage dans sa boucle on peut
+établir le pourcentage de réussite pour les différentes valeurs de palier. Nous pouvons représenter notre fonction comme suit:
+Soit i le compteur du même nom, y le compteur permettant de parcourir la liste retourné par "$res\_multi\_simulation$"\footnote{c est représenté par l'argument optionnel "$nb\_cartes$" dans le code de "$proba$".}, li la liste que retourne "proba", et c
+le nombre de cartes du jeu\footnote{y n'est pas présent dans le code mais est algorithmiquement sous-entendu par la boucle "$for$".} (32 ou 52), alors:
+
+\begin{center}
 \begin{tabular}{|p{3cm}|l|c|r|}
   \hline
   nombre de palier pour victoire & 2 & i & c\\
@@ -219,15 +220,12 @@ Une fois sorti de cette boucle nous pouvons alors diviser notre variable moyenne
   valeur de la liste & li[0] & li[y] & li[$c-2$] \\
   \hline
 \end{tabular}
-\\Donc :
+\end{center}
+Donc :
 \begin{align*}
 &i \in [2;c]\\
 &y \in [0;c-2]
 \end{align*}
-\addtocounter{footnote}{1}
-\footnotetext{c est représenté par l'argument optionnel "$nb\_cartes$" dans le code de "$proba$".} 
-\addtocounter{footnote}{1}
-\footnotetext{y n'est pas présent dans le code mais est algorithmiquement sous-entendu par la boucle "$for$".}
 Nous disposons maintenant de pourcentages décrivant les probabilités de réussite des alliances en fonction d'un certain nombre de tas restant à la fin 
 de la partie. Nous avons créé une seconde fonction nommée "$affiche\_proba$" afin de représenter graphiquement les probabilités de victoire. Comme la fonction "$proba$",
 "$affiche\_proba$" a pour seul argument un entier indiquant le nombre de cartes présentes dans le jeu. Cependant, elle ne renvoie rien et a pour effet de bord l'affichage
