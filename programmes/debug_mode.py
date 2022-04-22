@@ -11,6 +11,15 @@ def tabVar():
     print(main.tab+"car:",car)
     print(main.tab+"entier:",entier)
 
+def init_liFichier():
+    f=open("../ressources/liFich.csv")
+    txt=f.read()
+    f.close()
+    return txt.split(',')
+def sauv_liFichier(nomfichier):
+    f=open("../ressources/liFich.csv","a")
+    f.write(','+nomfichier)
+    f.close()
 def affich_liFichier():
     for i in range(len(liFichier)):
         print(main.tab,i+1,".",liFichier[i],sep="")
@@ -71,6 +80,7 @@ def choixFichier():
             f=open("../ressources/"+nomFich,"w")
             f.close
             liFichier+=[nomFich]
+            sauv_liFichier(nomFich)
             return nomFich
         else:
             print("Veuillez entrer un carractère valide.")
@@ -88,7 +98,7 @@ if __name__=="__main__":
     liCartes=[{"valeur":9,"couleur":"C"},{"valeur":10, "couleur":"K"},{"valeur":9,"couleur":"T"}]
     liCartes2=[]
     liCartes3=[{'valeur': 6, 'couleur': 'K'}, {'valeur': 6, 'couleur': 'T'}, {'valeur': 6, 'couleur': 'T'}, {'valeur': 10, 'couleur': 'T'}, {'valeur': 'A', 'couleur': 'P'}, {'valeur': 4, 'couleur': 'C'}, {'valeur': 5, 'couleur': 'P'}, {'valeur': 'D', 'couleur': 'K'}, {'valeur': 6, 'couleur': 'C'}, {'valeur': 5, 'couleur': 'C'}, {'valeur': 9, 'couleur': 'P'}, {'valeur': 9, 'couleur': 'T'}, {'valeur': 'A', 'couleur': 'K'}, {'valeur': 10, 'couleur': 'P'}, {'valeur': 8, 'couleur': 'T'}, {'valeur': 4, 'couleur': 'P'}, {'valeur': 'V', 'couleur': 'T'}, {'valeur': 2, 'couleur': 'K'}, {'valeur': 3, 'couleur': 'K'}, {'valeur': 'R', 'couleur': 'K'}, {'valeur': 2, 'couleur': 'C'}, {'valeur': 3, 'couleur': 'T'}, {'valeur': 2, 'couleur': 'P'}, {'valeur': 'R', 'couleur': 'T'}, {'valeur': 'A', 'couleur': 'T'}, {'valeur': 'V', 'couleur': 'K'}, {'valeur': 'D', 'couleur': 'T'}, {'valeur': 7, 'couleur': 'P'}, {'valeur': 6, 'couleur': 'P'}, {'valeur': 7, 'couleur': 'K'}, {'valeur': 7, 'couleur': 'T'}, {'valeur': 3, 'couleur': 'C'}, {'valeur': 'R', 'couleur': 'P'}, {'valeur': 10, 'couleur': 'K'}, {'valeur': 9, 'couleur': 'K'}, {'valeur': 9, 'couleur': 'C'}, {'valeur': 'A', 'couleur': 'C'}, {'valeur': 'V', 'couleur': 'P'}, {'valeur': 4, 'couleur': 'T'}, {'valeur': 'V', 'couleur': 'C'}, {'valeur': 4, 'couleur': 'K'}, {'valeur': 5, 'couleur': 'K'}, {'valeur': 'R', 'couleur': 'C'}, {'valeur': 10, 'couleur': 'C'}, {'valeur': 'D', 'couleur': 'P'}, {'valeur': 8, 'couleur': 'C'}, {'valeur': 8, 'couleur': 'K'}, {'valeur': 2, 'couleur': 'T'}, {'valeur': 'D', 'couleur': 'C'}, {'valeur': 7, 'couleur': 'C'}, {'valeur': 8, 'couleur': 'P'}, {'valeur': 3, 'couleur': 'P'}]
-    liFichier=["data_init.txt","test.txt"]
+    liFichier=init_liFichier()
     car="random"
     entier=2
 
