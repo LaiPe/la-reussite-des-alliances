@@ -287,19 +287,74 @@ Lors du développement de debug$\_$mode, nous avons été confrontées à de mul
 elif choix=="3":
 	chVar=choixVar("lc")
     print("Création d'un jeu à 32 ou 52 cartes ?")
-    chNbCartes=int(input("(ecrivez 32 pour le jeu à 32, n'importe quelle autre nombre pour le jeu à 52)"))
+    chNbCartes=int(input("(ecrivez 32 pour le jeu à 32, n'importe 	quelle autre nombre pour le jeu à 52)"))
     if chVar=="lc1":
     		liCartes=fonctions.init_pioche_alea(chNbCartes)
-    	elif chVar=="lc2":
+    elif chVar=="lc2":
     		liCartes2=fonctions.init_pioche_alea(chNbCartes)
 	elif chVar=="lc3":
 		liCartes3=fonctions.init_pioche_alea(chNbCartes)
-    	else:
-		print("Erreur: variable inconnue, code retour choixVar() inconnu")
-    	input("(Appuyer sur entrer pour revenir au menu)")
+    else:
+		print("Erreur: variable inconnue, code retour choixVar() 		inconnu")
+    input("(Appuyer sur entrer pour revenir au menu)")
 	conti=False
 \end{lstlisting}
+Le code de la ligne 228 à la ligne 237 représente une redondance car seul le nom de la variable recevant la valeur retour change.
 \end{exmp}
+Nous aurions pu pallier cette redondance en regroupant l'ensemble des variables pouvant être sélectionnées par l'utilisateur dans une liste ou un dictionnaire. Cela aurait nous aurait permis d'éviter la redondance de nos instructions car le choix de l'utilisateur aurait pu se porter sur l'indice d'une liste ou la clé d'une entrée de dictionnaire.
+\begin{exmp}
+Reprenons le dernier exemple.
+\begin{lstlisting}
+import random
+
+def init_pioche_alea(nb_cartes=32):
+    liCartes=[]
+    carte={}
+    couleurs=['C','P','K','T']
+    valeurs32=[7,8,9,10,'A','V','D','R']
+    valeurs=[2,3,4,5,6,7,8,9,10,'A','V','D','R']
+    if nb_cartes==32:
+        valeurs=valeurs32
+    for couleur in couleurs:
+        for valeur in valeurs:
+            carte['valeur']=valeur
+            carte['couleur']=couleur
+            liCartes+=[dict(carte)]   
+    random.shuffle(liCartes)
+    return liCartes
+
+nomvar=[
+    "carte1",
+    "carte2",
+    "liCartes",
+    "liCartes2",
+    "liCartes3",
+    "car"
+]
+var=[
+    {"valeur":"A","couleur":"C"},
+    {"valeur":"R","couleur":"T"},
+    [{"valeur":9,"couleur":"C"},{"valeur":10, "couleur":"K"},{"valeur":9,"couleur":"T"}],
+    [],
+    [],
+    "random"
+]
+
+chVar=int(input("Quelle variable? (0,1,2,3,4 ou 5):"))
+print("Création d'un jeu à 32 ou 52 cartes ?")
+chNbCartes=int(input("(ecrivez 32 pour le jeu à 32, n'importe quelle autre nombre pour le jeu à 52)"))
+var[chVar]=init_pioche_alea(chNbCartes)
+input("(Appuyer sur entrer pour revenir au menu)")
+
+print(var[chVar])
+\end{lstlisting}
+Nous avons ici utilisé une paire de liste, "nomvar" pour le nom des variables et "var" pour la valeur des variables. Comme vous pouvez le constater, nous n'avons plus besoin de nous répéter dans les instructions.
+\end{exmp}
+A noter que l'on aurait ainsi pu éviter l'utilisation des variables globales avec les fonctions de gestion de fichiers. Cette méthode meilleure en tout point à celle mise en place dans la version actuelle du programme aurait néanmoins nécessité une réécriture complète du code de debug$\_$mode pour être effective. Pour des raisons de gestion du temps, nous n'avons pas pu nous le permettre.
+\subsubsection{Une gestion partielle des fichiers}
+Un autre symptôme du manque d'architecture dans la réalisation d'un programme est l'ajout successif de fonctionnalités non prévues. Une gestion des fichiers s'est imposé lorsque nous avons essayé d'implémenter les fonctions "$init\_pioche\_fichier$" et "$ecrire\_fichier\_reussite$" dans notre interface utilisateur. Il devait pouvoir sélectionner le fichier désiré pour pouvoir le lire avec "$init\_pioche\_fichier$" mais également en créer de nouveaux pour pouvoir sauvegarder des listes de cartes avec "$ecrire\_fichier\_reussite$". Nous avons donc dans un premier temps créé "liFichier" permettant de pouvoir garder en mémoire le nom des fichiers créés par l'utilisateur. Cependant, cette mémoire était à court-terme car lorsque le programme était fermé, les modifications apportées à "liFichier" n'étaient pas sauvegardées. Nous avons donc dans un second temps créé un système de sauvegarde de la liste dans le fichier "liFich.csv". Malgré cet ajout, la gestion des fichiers reste partielle : l'utilisateur ne peut par exemple pas supprimer de fichiers via le debug$\_$mode. Ces défauts peuvent néanmoins se justifier par le fait que debug$\_$mode ne s'adresse pas à des utilisateurs "grand-public" mais plutôt à des utilisateurs connaissant et ayant accès au code de l'ensemble du projet (des développeurs).
+\subsubsection{Une syntaxe conditionnelle lourde.}
+Enfin, nous avons également pu relever que la syntaxe "if/elif/else" pouvait paraître elle aussi redondante, ou tout du moins lourde. Nous avons cherché des solutions en utilisant d'autres syntaxes conditionnelles comme "match-case". Semblable à la syntaxe "switch-case" en langage C, "match-case" nous aurait permis une syntaxe plus légère pour l'écriture de nos menus et sous-menus. Malheureusement, cette fonctionnalité est sortie avec le patch 3.10 de Python en octobre dernier. Jugeant cette date beaucoup trop proche et afin d'éviter d'éventuels conflits de versions de Python, nous avons renoncer à implémenter cette fonctionnalité.
 \section{Interface utilisateur: proposer un produit fini.}
 \section{Annexes}
 \subsection{Structure du répertoire}\label{arbre}
