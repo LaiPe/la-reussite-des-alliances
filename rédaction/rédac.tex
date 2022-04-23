@@ -19,6 +19,9 @@
 \usepackage[linguistics]{forest}
 \theoremstyle{definition}
 \newtheorem{exmp}{Exemple} 
+\usepackage{tikz-qtree}
+\usepackage{tikz-qtree-compat}
+\usepackage{linguex}
 
 
 \lstset{
@@ -92,21 +95,13 @@
 \tableofcontents
 \section{La réussite des alliances: structuration du jeu}
 \subsection{Rappel des règles du jeu}
-Quelque rappel des règles:\\
+Quelques rappels des règles:\\
 Prenez un paquet de cartes (32 ou 52) mélangez le pour créer une pioche, ensuite tirez les cartes une par une en les posant de gauche a droite faces visibles. Une fois que trois cartes ont été posées vous pouvez commencer à jouer. On procédera ainsi, on suppose que la carte la plus a gauche est la numéro une la carte à sa droite la numéro deux celle a sa droite numéro trois et ainsi de suite. Si la carte numéro trois a une similarité (même couleur ou même valeur) avec la carte numéro une il y a alors alliance de cartes, vous pouvez alors faire un saut dans ce cas la la carte qui est située entre nos deux cartes passe sur le tas de celle qui l'a précède. Si aucun saut n'est possible il faudra continuer à piocher les cartes jusqu'à ce qu'un ou plusieurs saut soit possible le jeu s'arrête lorsqu'il n'est plus possible de piocher une carte et qu'il n'est pas possible de faire de saut non plus. On compte alors le nombre de tas restant et selon le nombre de tas requis pour gagner vous savez si oui ou non vous avez réussi.
 
 \subsection{Création des fonctions (partie guidée)}
-Pour représenter informatiquement le jeu de la réussite des alliances, nous avions à notre disposition une partie guidée intégrée au sujet.
-Ce "cahier des charges" détaillé nous a fourni un certain confort quant à l'architecture du programme en lui même. En effet, comme les entrées, 
-sorties et effets de bords de nos fonctions nous étaient déjà indiqué, nous n'avions pas à réfléchir à comment nos fonctions allaient interagir entre elles. Les appels à des fonctions antérieures, s'il en avait, nous étaient eux aussi indiqués ou tout du moins suggérés. Cette souplesse de travail nous
-a permis de nous concentrer sur l'algorithmique de nos fonctions et comment optimiser ces dernières.\\
+Pour représenter informatiquement le jeu de la réussite des alliances, nous avions à notre disposition une partie guidée intégrée au sujet. Ce "cahier des charges" détaillé nous a fourni un certain confort quant à l'architecture du programme en lui même. En effet, comme les entrées, sorties et effets de bords de nos fonctions nous étaient déjà indiqué, nous n'avions pas à réfléchir à comment nos fonctions allaient interagir entre elles. Les appels à des fonctions antérieures, s'il y en avait, nous étaient eux aussi indiqués ou tout du moins suggérés. Cette souplesse de travail nous a permis de nous concentrer sur l'algorithmique de nos fonctions et comment optimiser ces dernières.\\
 
-Néanmoins, le sujet nous permettait également de prendre certaines libertés. Par exemple, il nous était suggéré de réaliser des fonctions
-auxiliaires pour programmer la fonction "$une\_etape\_reussite$". C'est ce que nous avons fait avec la fonction "$piocher$" qui compartimente l'action de 
-piocher une carte. Elle prends en argument deux listes, une qui représente la liste des tas de la réussite, l'autre qui représente la pioche. Elle a 
-pour effet de bord de déplacer la première carte de la pioche (c'est à dire d'indice 0) au dernier emplacement de la liste des tas. Pour cela, nous 
-avons utilisé la fonction "$pop$" qui a elle même pour effet de bord de supprimer un élément d'une liste à un index précis et qui retourne cet élément.
-Nous avons donc redirigé la sortie de la fonction "$pop$" comme ceci:\\
+Néanmoins, le sujet nous permettait également de prendre certaines libertés. Par exemple, il nous était suggéré de réaliser des fonctions auxiliaires pour programmer la fonction "$une\_etape\_reussite$". C'est ce que nous avons fait avec la fonction "$piocher$" qui compartimente l'action de piocher une carte. Elle prends en argument deux listes, une qui représente la liste des tas de la réussite, l'autre qui représente la pioche. Elle a  pour effet de bord de déplacer la première carte de la pioche (c'est à dire d'indice 0) au dernier emplacement de la liste des tas. Pour cela, nous  avons utilisé la fonction "$pop$" qui a elle même pour effet de bord de supprimer un élément d'une liste à un index précis et qui retourne cet élément. Nous avons donc redirigé la sortie de la fonction "$pop$" comme ceci:\\
 \begin{lstlisting}
 	def piocher(liste_tas,pioche):
     		liste_tas+=[pioche.pop(0)]
@@ -119,16 +114,9 @@ Nous avons donc redirigé la sortie de la fonction "$pop$" comme ceci:\\
 
 Nous n'avons cependant pas jugé nécéssaire de faire d'autres compartimentations pour fluidifier cette fonction.\\
 
-La fonction "$reussite\_mode\_manuel$" nous a permis à nouveau de pouvoir prendre des libertés cette fois-ci quant à l'affichage des éléments et
-plus globalement l'interface utilisateur. Pour rappel, cette fonction a pour but de laisser l'utilisateur jouer une partie. Ceci nécessite une interface
-pour que l'utilisateur puisse choisir ce qu'il veut faire. Ainsi, afin de présenter au mieux ses options de jeu à l'utilisateur, nous avons réaliser un
-menu contenant un choix pour piocher, un choix pour réaliser un saut et un choix pour mettre fin à la partie. En plus de ce menu, nous avons décider de
-réaliser un affichage de la réussite plus poussé permettant de relier chaque carte à un nombre et ainsi faciliter la sélection de la carte à faire
-sauter. 
-
+La fonction "$reussite\_mode\_manuel$" nous a permis à nouveau de pouvoir prendre des libertés cette fois-ci quant à l'affichage des éléments et plus globalement l'interface utilisateur. Pour rappel, cette fonction a pour but de laisser l'utilisateur jouer une partie. Ceci nécessite une interface pour que l'utilisateur puisse choisir ce qu'il veut faire. Ainsi, afin de présenter au mieux ses options de jeu à l'utilisateur, nous avons réaliser un menu contenant un choix pour piocher, un choix pour réaliser un saut et un choix pour mettre fin à la partie. En plus de ce menu, nous avons décider de réaliser un affichage de la réussite plus poussé permettant de relier chaque carte à un nombre et ainsi faciliter la sélection de la carte à faire sauter. 
 Pour cela, nous avons réaliser la fonction "$afficher\_reussite\_num$". Elle prends pour argument la liste de cartes à afficher, ne revoie rien et a pour effet de bord l'affichage détaillé de la réussite. Cette fonction consiste en 3 boucles affichant respectivement les cartes de la réussite, les
-accents circonflexes permettant de souligner les cartes, et les nombres désignant les cartes. A noter que bien que semblant être des index, ces nombres
-n'en sont pas tout à fait car: soit une liste $li$, $u$ l'index d'un élément de cette liste et $v$ un des nombres utilisés dans la fonction , alors:
+accents circonflexes permettant de souligner les cartes, et les nombres désignant les cartes. A noter que bien que semblant être des index, ces nombres n'en sont pas tout à fait car: soit une liste $li$, $u$ l'index d'un élément de cette liste et $v$ un des nombres utilisés dans la fonction , alors:
 \begin{align*}
 	&u \in [0;(len(li)-1)] \iff [0;len(li)[\\
 	&v \in [1;len(li)]
@@ -306,23 +294,6 @@ Nous aurions pu pallier cette redondance en regroupant l'ensemble des variables 
 \begin{exmp}
 Reprenons le dernier exemple.
 \begin{lstlisting}
-import random
-
-def init_pioche_alea(nb_cartes=32):
-    liCartes=[]
-    carte={}
-    couleurs=['C','P','K','T']
-    valeurs32=[7,8,9,10,'A','V','D','R']
-    valeurs=[2,3,4,5,6,7,8,9,10,'A','V','D','R']
-    if nb_cartes==32:
-        valeurs=valeurs32
-    for couleur in couleurs:
-        for valeur in valeurs:
-            carte['valeur']=valeur
-            carte['couleur']=couleur
-            liCartes+=[dict(carte)]   
-    random.shuffle(liCartes)
-    return liCartes
 
 nomvar=[
     "carte1",
@@ -353,34 +324,33 @@ Nous avons ici utilisé une paire de liste, "nomvar" pour le nom des variables e
 \end{exmp}
 A noter que l'on aurait ainsi pu éviter l'utilisation des variables globales avec les fonctions de gestion de fichiers. Cette méthode meilleure en tout point à celle mise en place dans la version actuelle du programme aurait néanmoins nécessité une réécriture complète du code de debug$\_$mode pour être effective. Pour des raisons de gestion du temps, nous n'avons pas pu nous le permettre.
 \subsubsection{Une gestion partielle des fichiers}
-Un autre symptôme du manque d'architecture dans la réalisation d'un programme est l'ajout successif de fonctionnalités non prévues. Une gestion des fichiers s'est imposé lorsque nous avons essayé d'implémenter les fonctions "$init\_pioche\_fichier$" et "$ecrire\_fichier\_reussite$" dans notre interface utilisateur. Il devait pouvoir sélectionner le fichier désiré pour pouvoir le lire avec "$init\_pioche\_fichier$" mais également en créer de nouveaux pour pouvoir sauvegarder des listes de cartes avec "$ecrire\_fichier\_reussite$". Nous avons donc dans un premier temps créé "liFichier" permettant de pouvoir garder en mémoire le nom des fichiers créés par l'utilisateur. Cependant, cette mémoire était à court-terme car lorsque le programme était fermé, les modifications apportées à "liFichier" n'étaient pas sauvegardées. Nous avons donc dans un second temps créé un système de sauvegarde de la liste dans le fichier "liFich.csv". Malgré cet ajout, la gestion des fichiers reste partielle : l'utilisateur ne peut par exemple pas supprimer de fichiers via le debug$\_$mode. Ces défauts peuvent néanmoins se justifier par le fait que debug$\_$mode ne s'adresse pas à des utilisateurs "grand-public" mais plutôt à des utilisateurs connaissant et ayant accès au code de l'ensemble du projet (des développeurs).
+Un autre symptôme du manque d'architecture dans la réalisation d'un programme est l'ajout successif de fonctionnalités non prévues. Une gestion des fichiers s'est imposé lorsque nous avons essayé d'implémenter les fonctions \\"$init\_pioche\_fichier$" et "$ecrire\_fichier\_reussite$" dans notre interface utilisateur. Il devait pouvoir sélectionner le fichier désiré pour pouvoir le lire avec "$init\_pioche\_fichier$" mais également en créer de nouveaux pour pouvoir sauvegarder des listes de cartes avec "$ecrire\_fichier\_reussite$". Nous avons donc dans un premier temps créé "liFichier" permettant de pouvoir garder en mémoire le nom des fichiers créés par l'utilisateur. Cependant, cette mémoire était à court-terme car lorsque le programme était fermé, les modifications apportées à "liFichier" n'étaient pas sauvegardées. Nous avons donc dans un second temps créé un système de sauvegarde de la liste dans le fichier "liFich.csv". Malgré cet ajout, la gestion des fichiers reste partielle : l'utilisateur ne peut par exemple pas supprimer de fichiers via le debug$\_$mode. Ces défauts peuvent néanmoins se justifier par le fait que debug$\_$mode ne s'adresse pas à des utilisateurs "grand-public" mais plutôt à des utilisateurs connaissant et ayant accès au code de l'ensemble du projet (des développeurs).
 \subsubsection{Une syntaxe conditionnelle lourde.}
 Enfin, nous avons également pu relever que la syntaxe "if/elif/else" pouvait paraître elle aussi redondante, ou tout du moins lourde. Nous avons cherché des solutions en utilisant d'autres syntaxes conditionnelles comme "match-case". Semblable à la syntaxe "switch-case" en langage C, "match-case" nous aurait permis une syntaxe plus légère pour l'écriture de nos menus et sous-menus. Malheureusement, cette fonctionnalité est sortie avec le patch 3.10 de Python en octobre dernier. Jugeant cette date beaucoup trop proche et afin d'éviter d'éventuels conflits de versions de Python, nous avons renoncer à implémenter cette fonctionnalité.
 \section{Interface utilisateur: proposer un produit fini.}
 \section{Annexes}
 \subsection{Structure du répertoire}\label{arbre}
-\begin{forest}
-  [la-reussite-des-alliances/
-    [programmes/
-     [debug-mode.py
-     ]
-     [fonctions.py
-     ]
-     [main.py
-     ] 
+
+Cette arbre montre la structure de notre répertoire.\\
+\hspace*{\fill}
+\begin{tikzpicture}[baseline]
+\Tree 
+[.la-reussite-des-alliances/ 
+	[.programmes debug-mode.py fonctions.py main.py 
+    ] 
+	[.rédaction/ img/ redac.tex 
+    ] 
+	[.ressources/ $alea\_test.txt$ $alea\_init.txt$
     ]
-    [rédaction/
-      [img/
-      ]
-      [redac.tex
-      ]
-    ]
-    [ressources/
-     [$alea\_test.txt$]
-     [$alea\_init.txt$]
-    ]
-  ]
-\end{forest}
+]
+     \end{tikzpicture}%
+     \hspace*{\fill}
+\subsection{sources}
+\begin{align*}
+&-xm1math.net\\
+&-https://stackoverflow.com/\\
+&-overleaf.com
+\end{align*}
 
 
 
