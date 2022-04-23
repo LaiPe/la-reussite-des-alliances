@@ -244,7 +244,8 @@ ordonnées. Pour finir, afin d'afficher le graphique, nous avons utilisé la fon
 
 
 \section{Le debug$\_$mode}
-\subsection{Naissance de la nécessité de pouvoir tester les fonctions}
+\subsection{Introduction}
+Nous sommes arrivés à un moment dans le projet ou nous avions du mal à tester nos fonctions et l’interface de notre main ne nous convenais pas. Nous avons alors décidé de créer un espace de test de fonction qui serait plus facile et plus rapide pour tester différentes fonctions avec différentes entrées. Il nous est alors venu à l’esprit de faire un debug$\_$mode qui nous permettrait de tester toutes nos fonctions facilement et rapidement.
 \subsection{Structure du programme}
 Notre débug$\_$mode se présente donc comme un répertoire de l'ensemble de nos fonctions. Il permet d'y faire appel via une interface prenant en charge le choix des arguments (listes, entiers, chaines de caractères). Il prends également en compte un gestion des fichiers de sauvegardes.  Les fonctions sont présentées dans un menu à choix multiples et rangées par rubriques. Par exemple, les fonctions d'affichage sont rangées dans le premier choix du menu: "1.Fonctions d'affichage". Un sous-menu s'affiche alors pour sélectionner la fonction dans sa rubrique. L'utilisateur peut à tout moment revenir au menu principal avec le choix "r.Retour" et quitter le programme avec le choix présent dans le menu principal "q.Fermer debug$\_$mode". Des variables sont également incluses dans le programme. Elles permettent de sauvegarder pendant la durée de l'utilisation du programme des cartes, des listes
 de cartes, etc ... Nous avons implémenté dans notre programme:
