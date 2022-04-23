@@ -168,5 +168,54 @@ de la vaiable "liFichier" par le programme principal. Elle ne possède pas d'arg
 "liFichier". Elle permet la lecture du fichier "liFich.csv" pour collecter tout les nom de fichiers présents dans le dossier "ressources" et les envoyés sous forme
 d'une liste. 
 
+c) Limites et Erreurs
+1) La redondance
+	Lors du développement de debug_mode, nous avons été confrontées à de multiples problèmes. Le premier, et selon nous plus important a été le manque de 
+préparation et d'organisation dans la réalisation de la structure du programme. Nous n'avons pour ainsi dire pas réfléchis à l'architecture du programme, ou comment
+les différentes fonctionnalités de ce programme allaient exister entre elles. Alors que nous avions bien en tête l'objectif principal du programme, c'est à dire
+une interface utilisateur permettant de faciliter l'appel de fonctions pour les tester, nous n'avions pas encore réfléchi à comment réaliser cet objectif. Nous
+avons résolu ce problème au fur et à mesure du développement du programme. En résulte un programme manquant, à notre goût, d'une certaine rigueur dans l'execution
+des tâches qu'il lui est demandé. La redondance dans les instructions est également selon nous un symptome de cette mauvaise préparation. Par exemple, lorsqu'une 
+fonction retourne une valeur, le programme principal répette la même instruction pour tout les choix de variables de l'utilisateur:
+(//EXEMPLE)
 
+					========================== l.228 à l.241 de debug_mode =======================
+
+Le code de la ligne 228 à la ligne 237 représente une redondance car seul le nom de la variable recevant la valeur retour change.
+(//FIN DE L'EXEMPLE)
+
+	Nous aurions pu pallier cette redondance en regroupant l'ensemble des variables pouvant être sélectionnées par l'utilisateur dans une liste ou un dictionnaire
+Cela aurait nous aurait permis d'éviter la redondance de nos instructions car le choix de l'utilisateur aurait pu se porter sur l'indice d'une liste ou la clé d'une
+entrée de dictionnaire.
+(//EXEMPLE)
+Reprenons le dernier exemple:
+
+					========================== la-reussite-des-alliances\rédaction\exemple\solution.py =======================
+
+Nous avons ici utiliser une paire de liste, "nomvar" pour le nom des variables et "var" pour la valeur des variables. Comme vous pouvez le constater, nous n'avons
+plus besoin de nous répeter dans les instructions
+(//FIN DE L'EXEMPLE)
+
+	A noter qu'on aurait ainsi pu éviter l'utilisation des variables globales avec les fonctions de gestion de fichiers. Cette méthode meilleure en tout point à 
+celle mise en place dans la version actuelle du programme aurait néanmoins nécéssité une réécriture complete du code de debug_mode pour être effective. Pour des 
+raisons de gestion du temps, nous n'avons pas pu nous le permettre.
+
+2) Une gestion partielle des fichiers
+	
+	Un autre symptome du manque d'architecture dans la réalisation d'un programme est l'ajout succésif de fonctionnalités non prévues. Une gestion des fichiers
+s'est imposé lorsque nous avons essayer d'implémenter les fonctions "init_pioche_fichier" et "ecrire_fichier_reussite" dans notre interface utilisateur. Il devait
+pouvoir sélectionner le fichier désiré pour pouvoir le lire avec "init_pioche_fichier" mais également en créer de nouveaux pour pouvoir sauvegarder des listes de 
+cartes avec "ecrire_fichier_reussite". Nous avons donc dans un premier temps créé "liFichier" permettant de pouvoir garder en mémoire le nom des fichiers créés par
+l'utilisateur. Cependant, cette mémoire était à court-terme car lorsque le programme était fermé, les modifications apportées à "liFichier" n'étaient pas sauvegardées.
+Nous avons donc dans un second temps créé un système de sauvegarde de la liste dans le fichier "liFich.csv". Malgré cet ajout, la gestion des fichiers reste partielle:
+l'utilisateur ne peut par exemple pas supprimer de fichiers via le debug_mode. Ces défauts peuvent néamoins se justifier par le fait que debug_mode ne s'adresse pas
+à des utilisateurs "grand-public" mais plutôt à des utilisateurs connaissant et ayant accès au code de l'ensemble du projet (des développeurs). 
+
+3) Une syntaxe conditionnelle lourde
+	
+	Enfin, nous avons également pu relever que la syntaxe "if/elif/else" pouvait paraître elle aussi redondante, ou tout du moins lourde. Nous avons chercher des 
+solutions en utilisant d'autres syntaxes conditionnelles comme "match-case". Semblable à la syntaxe "switch-case" en language C, "match-case" nous aurait permis une 
+syntaxe plus légère pour l'écriture de nos menus et sous-menus. Malheuresement, cette fonctionnalité est sortie avec le patch 3.10 de Python en octobre dernier.
+Jugeant cette date beaucoup trop proche et afin d'éviter d'éventuels conflits de versions de Python, nous avons renoncer à implémenter cette fonctionnalité.
+				 
 	
