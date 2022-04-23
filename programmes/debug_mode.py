@@ -12,12 +12,12 @@ def tabVar():
     print(main.tab+"entier:",entier)
 
 def init_liFichier():
-    f=open("../ressources/liFich.csv")
+    f=open("liFich.csv")
     txt=f.read()
     f.close()
     return txt.split(',')
 def sauv_liFichier(nomfichier):
-    f=open("../ressources/liFich.csv","a")
+    f=open("liFich.csv","a")
     f.write(','+nomfichier)
     f.close()
 def affich_liFichier():
