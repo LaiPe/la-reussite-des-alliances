@@ -17,6 +17,8 @@
 \usepackage{pst-node}
 \usepackage{listings}
 \usepackage[linguistics]{forest}
+\theoremstyle{definition}
+\newtheorem{exmp}{Exemple} 
 
 
 \lstset{
@@ -244,10 +246,63 @@ ordonnées. Pour finir, afin d'afficher le graphique, nous avons utilisé la fon
 \section{Le debug$\_$mode}
 \subsection{Naissance de la nécessité de pouvoir tester les fonctions}
 \subsection{Structure du programme}
+Notre débug$\_$mode se présente donc comme un répertoire de l'ensemble de nos fonctions. Il permet d'y faire appel via une interface prenant en charge le choix des arguments (listes, entiers, chaines de caractères). Il prends également en compte un gestion des fichiers de sauvegardes.  Les fonctions sont présentées dans un menu à choix multiples et rangées par rubriques. Par exemple, les fonctions d'affichage sont rangées dans le premier choix du menu: "1.Fonctions d'affichage". Un sous-menu s'affiche alors pour sélectionner la fonction dans sa rubrique. L'utilisateur peut à tout moment revenir au menu principal avec le choix "r.Retour" et quitter le programme avec le choix présent dans le menu principal "q.Fermer debug$\_$mode". Des variables sont également incluses dans le programme. Elles permettent de sauvegarder pendant la durée de l'utilisation du programme des cartes, des listes
+de cartes, etc ... Nous avons implémenté dans notre programme:
+\begin{align*}
+&-4~listes~:~"liCartes", "liCartes2", "liCartes3~et~"liFichier"\\
+&-2~dictionnaires~:~"carte1"~et~"carte2"\\
+&-une~chaîne~de~caractères~:~"car"\\
+&-un~entier~(négligeable)~:~"entier"\\
+\end{align*}
+Les listes servent de listes de cartes, c'est à dire de listes de dictionnaires, sauf liFichier dont la fonction sera détaillée ci-dessous. Les dictionnaires représentent des cartes conforme à celles que le sujet demande. \\
+Ces variables peuvent être utilisées à la guise de l'utilisateur via les différentes fonctions. Le menu principal est accompagné d'un tableau affichant les valeurs des 
+différentes variables. Pour éclaircir notre code, nous avons compartimenté l'affichage de ce tableau dans la fonction "$tabVar$". Elle ne prend par conséquent aucun
+argument ni ne renvoie rien. Cette fonction fait d'abord appel à la fonction "$texte\_encadre$" qui permet d'entourer un texte avec des '=' pour le mettre en valeur. Nous affichons donc le titre du tableau puis les différentes variables avec leurs valeurs. Comme le tableau s'affiche en même temps que le menu, si une variable
+viens à être modifié par une fonction, sa valeur mise à jour sera affiché dans le tableau à la fin de l'appel de la fonction.
+Lorsqu'une fonction est sélectionnée dans le menu, les variables doivent être sélectionnées avant que l'appel à la fonction ne soit fait.\\ La fonction "$choixVar$" permet d'afficher à l'utilisateur les variables pour qu'il puisse en choisir une. Elle prend comme argument une chaine de caractère représentant le type de variable
+que l'utilisateur doit choisir. Ainsi, si l'utilisateur veut réaliser un appel à la fonction "$carte\_to\_chaine$", prenant pour unique argument un dictionnaire, le programme principal de debug$\_$mode fera appel à sa fonction  " $choixVar$ " avec en argument la chaîne de caractère "c" (pour carte). Un menu s'ouvrira pour que l'utilisateur puisse choisir entre "carte1" et "carte2". Un appel à la fonction "$carte\_to\_chaîne$" sera ensuite réalisé dans le programme principal avec pour argument un des deux dictionnaires choisi.
+
+\subsection{Gestion des fichiers}
+Certaines fonctions peuvent cependant prendre comme argument des noms de fichiers, nous avons donc mis en place une gestion dynamique des fichiers présents dans le sous-répertoire "ressources" (voir structure du répertoire \ref{arbre}). La gestion des fichiers de notre programme s'articule autour de la fonction "$choixFichier$". Cette dernière permet à l'utilisateur de choisir un fichier existant présent dans le dossier "ressources", ou bien d'en créer un nouveau si c'est nécessaire. Elle ne prend pas d'argument et retourne le nom du fichier choisi ou crée. Afin que la gestion des fichiers soit dynamique et que par exemple, un fichier crée avec cette fonction puisse par la suite être sélectionné par cette même fonction, nous avons créé une liste "liFichier" qui répertorie l'ensemble des fichiers consultables. La fonction "$choixFichier$" consiste donc à lire ou modifier la liste "liFichier" ou fonction de ce que l'utilisateur choisi. Elle a donc comme effet de bord la modification de la variable "liFichier". Or cette variable est définie dans le programme principal, une fonction peut consulter mais pas modifier une variable issue du programme principal. Pour pallier ce problème, nous avons utilisé le mot-clé "global" qui permet de définir une variable comme globale, c’est-à-dire modifiable partout dans le programme. Plus précisément, nous avons déclaré "liFichier" comme étant globale mais dans la fonction "$choixFichier$". Cela revient donc à ce que "liFichier" soit globale uniquement pour la fonction "$choixFichier$", elle n'est ainsi pas réellement globale et ne peut pas être modifier par les autres fonctions comme la nomination "globale" le voudrait.
+\begin{exmp}
+Soit le programme suivant :
+\begin{lstlisting}
+def modif():
+    global oui
+    oui=5
+def modifBis():
+    oui=1
+oui=1
+modif()
+modifBis()
+print(oui)
+\end{lstlisting}
+Le programme affiche "5", la fonction "$modifBis$" ne modifie pas la variable "oui". Elle n'est donc globale que pour la fonction "$modif$".
+\end{exmp}
 \subsection{Limites et Erreurs}
+\subsubsection{La redondance}
+Lors du développement de debug$\_$mode, nous avons été confrontées à de multiples problèmes. Le premier, et selon nous plus important a été le manque de préparation et d'organisation dans la réalisation de la structure du programme. Nous n'avons pour ainsi dire pas réfléchis à l'architecture du programme, ou comment les différentes fonctionnalités de ce programme allaient exister entre elles. Alors que nous avions bien en tête l'objectif principal du programme, c’est-à-dire une interface utilisateur permettant de faciliter l'appel de fonctions pour les tester, nous n'avions pas encore réfléchi à comment réaliser cet objectif. Nous avons résolu ce problème au fur et à mesure du développement du programme. En résulte un programme manquant, à notre goût, d'une certaine rigueur dans l'exécution des tâches qu'il lui est demandé. La redondance dans les instructions est également selon nous un symptôme de cette mauvaise préparation. Par exemple, lorsqu’une fonction retourne une valeur, le programme principal répète la même instruction pour tous les choix de variables de l’utilisateur :
+\begin{exmp}
+\begin{lstlisting}
+elif choix=="3":
+	chVar=choixVar("lc")
+    print("Création d'un jeu à 32 ou 52 cartes ?")
+    chNbCartes=int(input("(ecrivez 32 pour le jeu à 32, n'importe quelle autre nombre pour le jeu à 52)"))
+    if chVar=="lc1":
+    		liCartes=fonctions.init_pioche_alea(chNbCartes)
+    	elif chVar=="lc2":
+    		liCartes2=fonctions.init_pioche_alea(chNbCartes)
+	elif chVar=="lc3":
+		liCartes3=fonctions.init_pioche_alea(chNbCartes)
+    	else:
+		print("Erreur: variable inconnue, code retour choixVar() inconnu")
+    	input("(Appuyer sur entrer pour revenir au menu)")
+	conti=False
+\end{lstlisting}
+\end{exmp}
 \section{Interface utilisateur: proposer un produit fini.}
 \section{Annexes}
-\subsection{Structure du répertoire}
+\subsection{Structure du répertoire}\label{arbre}
 \begin{forest}
   [la-reussite-des-alliances/
     [programmes/
