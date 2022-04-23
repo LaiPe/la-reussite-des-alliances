@@ -6,12 +6,11 @@ II) Les Extensions: ajouts de fonctionnalités.
 	b) Statistiques (fnc res_multi_simulation et statistiques_nb_tas) (//GAB)
 	c) Probabilités (fnc proba et affiche_proba) (//LEO)
 III) Le debug_mode.
-	a) Naissance de la nécessité de pouvoir tester les fonctions (//GAB)
-	b) Structure du programme (//LEO)
+	?) Naissance de la nécessité de pouvoir tester les fonctions (//GAB)
+	a) Structure du programme (//LEO)
+	b) Gestion des fichiers (//LEO)
 	c) Limites et Erreurs (//LEO)
-IV) Interface utilisateur: proposer un produit fini. (???) (//LEO)
-	
-V)Annexes:
+IV)Annexes:
  	a) Structure de répertoire (//GAB)
 	c) Code Source (//GAB)
 	d) Sources (???) (//GAB)
