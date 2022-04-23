@@ -109,5 +109,64 @@ ordonées. Pour finir, afin d'afficher le graphique, nous avons utilisé la fonc
 * y n'est pas présent dans le code mais est algorithmiquement sous-entendu par la boucle "for".
 **c est représenté par l'argument optionnel "nb_cartes" dans le code de "proba".
 
+III) Le debug_mode
+a) Structure du programme
+	Notre débug_mode se présente donc comme un répertoire de l'ensemble de nos fonctions. Il permet d'y faire appel via une interface prennant en charge le choix
+des arguments (listes, entiers, chaines de caractères). Il prends également en compte un gestion des fichiers de sauvegardes. 
+	Les fonctions sont présentées dans un menu à choix multiples et rangées par rubriques. Par exemple, les fonctions d'affichage sont rangées dans le premier 
+choix du menu: "1.Fonctions d'affichage". Un sous-menu s'affiche alors pour séléctionner la fonction dans sa rubrique. L'utilisateur peut à tout moment revenir au menu
+principal avec le choix "r.Retour" et quitter le programme avec le choix présent dans le menu principal "q.Fermer debug_mode".
+	 Des variables sont également incluses dans le programme. Elles permettent de sauvegarder pendant la durée de l'utilisation du programme des cartes, des listes
+de cartes, etc ... Nous avons implémenté dans notre programme:
+		-4 listes : "liCartes", "liCartes2", "liCartes3" et "liFichier"
+		-2 dictionnaires : "carte1" et "carte2"
+		-une chaîne de caractères : "car"
+		-un entier (négligeable) : "entier"
+Les listes servent de listes de cartes, c'est à dire de listes de dictionnaires, sauf liFichier dont la fonction sera détaillé ci-dessous. Les dictionnaires 
+représentent des cartes conforme à celles que le sujet demmande. 
+Ces variables peuvent être utilisées à la guise de l'utilisateur via les différentes fonctions. Le menu principal est accompagné d'un tableau affichant les valeurs des 
+différentes variables. Pour éclaircir notre code, nous avons compartimenté l'affichage de ce tableau dans la fonction "tabVar". Elle ne prends par conséquent aucun
+agument ni ne renvoie rien. Cette fonction fait d'abord appel à la fonction "texte_encadre" qui permet d'entourer un texte avec des '=' pour le mettre en valeur.
+Nous affichons donc le titre du tableau puis ensuite les differentes variables avec leurs valeurs. Comme le tableau s'affiche en même temps que le menu, si une variable
+viens à être modifié par une fonction, sa valeur mise à jour sera affiché dans le tableau à la fin de l'appel de la fonction.
+	Lorsqu'une fonction est sélectionné dans le menu, les variables doivent être sélectionnées avant que l'appel à la fonction ne soit fait. La fonction "choixVar"
+permet d'afficher à l'utilisateur les variables pour qu'il puisse en choisir une. Elle prends comme argument une chaine de caractère représentant le type de variable
+que l'utilisateur doit choisir. Ainsi, si l'utilisateur veut réaliser un appel à la fonction "carte_to_chaine", prenant pour unique argument un dictionnaire, le
+programme principal de debug_mode fera appel à sa fonction choixVar avec en argument la chaîne de crarctère "c" (pour carte). Un menu s'ouvrira pour que l'utilisateur
+puisse choisir entre "carte1" et "carte2". Un appel à la fonction "carte_to_chaîne" sera ensuite réalisé dans le programme principal avec pour argument un des deux
+dictionnaires choisi.
+
+b) Gestion des fichiers
+	Certaines fonctions peuvent cependant prendre comme argument des noms de fichiers, nous avons donc mis en place une gestion dynamique des fichiers présents
+dans le sous-répertoire "ressources" (cf. arbre) (//UTILISE UNE REF). La gestion des fichiers de notre programme s'articule autour de la fonction "choixFichier".
+Cette dernière permet à l'utilisateur de choisir un fichier existant présent dans le dossier "ressources", ou bien d'en créer un nouveau si c'est nécéssaire. Elle ne
+prends pas d'argument et retourne le nom du fichier choisi ou crée. Afin que la gestion des fichiers soit dynamique et que par exemple, un fichier crée avec cette
+fonction puisse par la suite être sélectionné par cette même fonction, nous avons crée une liste "liFichier" qui répertorie l'ensemble des fichiers consultables.
+La fonction "choixFichier" consiste donc à lire ou modifier la liste "liFichier" ou fonction de ce que l'utilisateur choisi. Elle a donc comme effet de bord la
+modification de la variable "liFichier". Or cette variable est définie dans le programme principal, une fonction peut consulter mais pas modifier une variable
+issue du porgramme principal. Pour pallier ce problème, nous avons utilisé le mot-clé "global" qui permet de définir une variable comme globale, c'est à dire
+modifiable partout dans le programme. Plus précisément, nous avons déclaré "liFichier" comme étant globale mais dans la fonction "choixFichier". Cela reviens donc
+à ce que "liFichier" soit globale uniquement pour la fonction "choixFichier", elle n'est ainsi pas réellement globale et ne peut pas être modifier par les autres
+fonctions comme la nomination "globale" le voudrait.
+
+(//UTILISER UN ENVIRONNEMENT EXEMPLE COMME JE L'AI FAIT POUR LA REDAC LATEX DE JANVIER)
+
+Soit le programme suivant:
+
+						============la-reussite-des-alliances\rédaction\exemple\globale.py==========
+
+Le programme affiche "5", la fonction "modifBis" ne modifie pas la variable "oui". Elle n'est donc globale que pour la fonction "modif".
+(// FIN DE L'EXEMPLE)
+	
+	Notre fonction "choixFichier" fait appel à plusieurs autres fonctions afin de compartimenter des actions spécifiques. La fonction "affich_liFichier" permet
+l'affichage de la liste "liFichier" sous la forme d'un menu numéroté. En effet, cette fonction a été réalisé dans l'optique d'être appelé par "choixFichier" juste 
+avant un input de l'utilisateur pour choisir un fichier existant. Elle n'a donc pas d'arguments ni de valeur de sortie et a pour effet de bord l'affichage. 
+	L'autre fonction appelée par "choixFichier" permet la sauvegarde sur le long-terme de la modification de la liste "liFichier". Cette dernière possède une
+sauvegarde de ses valeurs dans le fichier "liFich.csv". Ainsi, lorsque "liFichier" est modifiée par "choixFichier", la nouvelle version de "liFichier" est écrite
+dans "liFich.csv". Afin que cette sauvegarde soit persistante lors des redémarages du debug_mode, la fonction "init_liFichier" est appelé lors de l'initialisation
+de la vaiable "liFichier" par le programme principal. Elle ne possède pas d'arguments, ne réalise pas d'effets de bords et renvoie une liste correspondante à 
+"liFichier". Elle permet la lecture du fichier "liFich.csv" pour collecter tout les nom de fichiers présents dans le dossier "ressources" et les envoyés sous forme
+d'une liste. 
+
 
 	
