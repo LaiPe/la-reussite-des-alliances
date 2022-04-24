@@ -219,3 +219,19 @@ syntaxe plus légère pour l'écriture de nos menus et sous-menus. Malheuresemen
 Jugeant cette date beaucoup trop proche et afin d'éviter d'éventuels conflits de versions de Python, nous avons renoncer à implémenter cette fonctionnalité.
 				 
 	
+
+
+
+I)b)3) (//là où y'a "blablabla")
+
+	Finalement, nous avons réalisé la fonction "texte_encadre" qui permet d'encadrer un texte pour le mettre en valeur. Nous avons paramétré cette fonction avec
+deux modes d'encadrement: le premier pour le texte "normal" et l'autre pour les titres. Ainsi, cette fonction prends en arguments une chaine de caractère "texte"
+correspondante au texte à afficher et un booléen "titre" optionnel correspondant au mode d'affichage. Il est donc de base sur False, ce qui correspond au mode "normal". 
+Comme pour "afficher_reussite_num" vu précédement (cf.I)b)2)) (//UTILISE UNE REF), cette fonction utilise le module "shutil" et sa fonction "get_terminal_size". 
+Pour rappel, elle permet d'obtenir deux entiers correspondant respectivement à la largeur et à la hauteur du terminal. L'utilisation de cette fonction nous permettra 
+donc d'obtenir la largeur du terminal pour que l'encadrement prenne bien toute la longueur de la ou les lignes qu'il occupera. Après une syntaxe conditionelle verifiant
+la valeur de l'argument "titre", le code de cette fonction correspond à un enchainement de boucles "for" parcourant une range variable. Pour les textes normaux,
+l'affichage se fait sur une ligne tandis que pour les titres, l'affichage se fait sur trois lignes. La range de la boucle "for" varira en fonction de la ligne sur 
+laquelle elle se trouve.
+	
+	
