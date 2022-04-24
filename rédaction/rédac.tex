@@ -96,12 +96,12 @@ Prenez un paquet de cartes (32 ou 52) mélangez le pour créer une pioche, ensui
 
 \subsection{Création des fonctions (partie guidée)}
 Pour représenter informatiquement le jeu de la réussite des alliances, nous avions à notre disposition une partie guidée intégrée au sujet. Ce "cahier des charges" détaillé nous a fourni un certain confort quant à l'architecture du programme en lui même. En effet, comme les entrées, sorties et effets de bords de nos fonctions nous étaient déjà indiqué, nous n'avions pas à réfléchir à comment nos fonctions allaient interagir entre elles. Les appels à des fonctions antérieures, s'il y en avait, nous étaient eux aussi indiqués ou tout du moins suggérés. Cette souplesse de travail nous a permis de nous concentrer sur l'algorithmique de nos fonctions et comment optimiser ces dernières.
+
 \subsubsection{Fonctions "une\_etape\_reussite" et "piocher"}
 Néanmoins, le sujet nous permettait également de prendre certaines libertés. Par exemple, il nous était suggéré de réaliser des fonctions auxiliaires pour programmer la fonction "\textit{une\_etape\_re-\linebreak[4]ussite}". C'est ce que nous avons fait avec la fonction "\textit{piocher}" qui compartimente l'action de piocher une carte. Elle prends en argument deux listes, une qui représente la liste des tas de la réussite, l'autre qui représente la pioche. Elle a  pour effet de bord de déplacer la première carte de la pioche (c'est à dire d'indice 0) au dernier emplacement de la liste des tas. Pour cela, nous  avons utilisé la fonction "\textit{pop}" qui a elle même pour effet de bord de supprimer un élément d'une liste à un index précis et qui retourne cet élément. Nous avons donc redirigé la sortie de la fonction "\textit{pop}" comme ceci:\\
 \begin{lstlisting}
 	def piocher(liste_tas,pioche):
     		liste_tas+=[pioche.pop(0)]
-
 \end{lstlisting}
 \begin{center}
 \textit{fonction "piocher" : ligne 133 de fonctions.py}
@@ -344,6 +344,7 @@ Cette arbre montre la structure de notre répertoire.\\
 \end{tikzpicture}%
 \end{center}
 \hspace*{\fill}
+
 \subsection{Fonction "afficher\_reussite\_num" au commit 728144c}\label{reussite}
 \begin{lstlisting}
 def afficher_reussite_num(liCartes):
