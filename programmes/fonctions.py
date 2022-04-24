@@ -54,14 +54,29 @@ def afficher_reussite_num(liCartes):
             cpt+=1
         print("\n")
 def texte_encadre(texte,titre=False):
+    columns, rows = shutil.get_terminal_size()
+    columns-=len(texte)+2 # le +2 pour un espace de chaque côté du texte
+    columns=columns//2
     if titre:
-        texte=" "+texte+" "
-        print("="*len(texte)*11)
-        print("="*len(texte)*5,texte,"="*len(texte)*5,sep="")
-        print("="*len(texte)*11)
+        for i in range((columns*2)+len(texte)+2):
+            print("=",end="")
+        print()
+        for i in range(columns):
+            print("=",end="")
+        print(" "+texte+" ",end="")
+        for i in range(columns):
+            print("=",end="")
+        print()
+        for i in range((columns*2)+len(texte)+2):
+            print("=",end="")
         print()
     else:
-        print("="*len(texte),texte,"="*len(texte))
+        for i in range(columns):
+            print("=",end="")
+        print(" "+texte+" ",end="")
+        for i in range(columns):
+            print("=",end="")
+        print()
 #=======LECTURE/ECRITURE FICHIERS=======
 def init_pioche_fichier(nomFichier):
     f=open(nomFichier)
