@@ -96,7 +96,6 @@ Prenez un paquet de cartes (32 ou 52) mélangez le pour créer une pioche, ensui
 
 \subsection{Création des fonctions (partie guidée)}
 Pour représenter informatiquement le jeu de la réussite des alliances, nous avions à notre disposition une partie guidée intégrée au sujet. Ce "cahier des charges" détaillé nous a fourni un certain confort quant à l'architecture du programme en lui même. En effet, comme les entrées, sorties et effets de bords de nos fonctions nous étaient déjà indiqué, nous n'avions pas à réfléchir à comment nos fonctions allaient interagir entre elles. Les appels à des fonctions antérieures, s'il y en avait, nous étaient eux aussi indiqués ou tout du moins suggérés. Cette souplesse de travail nous a permis de nous concentrer sur l'algorithmique de nos fonctions et comment optimiser ces dernières.
-
 \subsubsection{Fonctions "une$\_$etape$\_$reussite" et "piocher"}
 Néanmoins, le sujet nous permettait également de prendre certaines libertés. Par exemple, il nous était suggéré de réaliser des fonctions auxiliaires pour programmer la fonction "\textit{une$\_$etape$\_$re-\linebreak[4]ussite}". C'est ce que nous avons fait avec la fonction "\textit{piocher}" qui compartimente l'action de piocher une carte. Elle prends en argument deux listes, une qui représente la liste des tas de la réussite, l'autre qui représente la pioche. Elle a  pour effet de bord de déplacer la première carte de la pioche (c'est à dire d'indice 0) au dernier emplacement de la liste des tas. Pour cela, nous  avons utilisé la fonction "\textit{pop}" qui a elle même pour effet de bord de supprimer un élément d'une liste à un index précis et qui retourne cet élément. Nous avons donc redirigé la sortie de la fonction "\textit{pop}" comme ceci:\\
 Pour représenter informatiquement le jeu de la réussite des alliances, nous avions à notre disposition une partie guidée intégrée au sujet. Ce "cahier des charges" détaillé nous a fourni un certain confort quant à l'architecture du programme en lui-même. En effet, comme les entrées, sorties et effets de bords de nos fonctions nous étaient déjà indiqué, nous n'avions pas à réfléchir à comment nos fonctions allaient interagir entre elles. Les appels à des fonctions antérieures, s'il y en avait, nous étaient eux aussi indiqués ou tout du moins suggérés. Cette souplesse de travail nous a permis de nous concentrer sur l'algorithmique de nos fonctions et comment optimiser ces dernières.\\
@@ -124,9 +123,13 @@ accents circonflexes permettant de souligner les cartes, et les nombres désigna
 Nous n'avons cependant pas jugé nécessaire de faire d'autres compartimentations pour fluidifier cette fonction.\\
 
 Lors de la création de cette fonction, nous avons constaté des bugs survenant lors de l'affichage de grandes listes de cartes comme une pioche entière d'un jeu de 52 cartes. A raison de 4 caractères imprimés par carte (les 3 caractères de la carte $+$ l'espace de fin du print), l'affichage entier d'un jeu de 52 cartes correspond à l'impression de $4\times52=208$ caractères. Cela peut être un problème si l'utilisateur possède un petit écran et par conséquent un petit terminal. Les trois lignes de 208 caractères peuvent "déborder" chacune leur tour, provoquant des bugs similaires à celui-ci: \\\\
+
+\begin{figure}
 \begin{center}
-\includegraphics[scale=0.5]{img/bug_afficher_reussite_num.PNG}
+\includegraphics[scale=0.5]{img/bug_afficher_reussite_num.PNG}\caption{bug d'affichage relatif à la fonction "\textit{afficher$\_$reussite$\_$num}" telle qu'écrite au commit 728144c (cf.\ref{reussite})}
 \end{center}
+\end{figure}
+
 
 Nous avons résolu ce problème en imbriquant les trois boucles d'affichage dans une plus grande boucle, et en changeant la condition de la première boucle. Maintenant, la première boucle conditionne les deux suivantes puisqu'elles sont des boucles "for" tournant sur une liste ($li\_dix$) ayant un nombre d'éléments équivalent au nombre de passage dans la première boucle. Cette boucle s'arrête soit lorsqu'il n'y a plus de cartes dans la liste, soit si l'affichage dépasse la taille du terminal. 
 
@@ -171,7 +174,7 @@ def afficher_reussite_num(liCartes):
 ~~~fonction: ligne 24
 
 \subsubsection{Fonction "texte$\_$encadre"}
-Finalement, nous avons réalisé la fonction "\textit{texte$\_$encadre}" qui permet d'encadrer un texte pour le mettre en valeur. Nous avons paramétré cette fonction avec deux modes d’encadrement : le premier pour le texte "normal" et l'autre pour les titres. Ainsi, cette fonction prend en arguments une chaine de caractère "texte" correspondante au texte à afficher et un booléen "titre" optionnel correspondant au mode d'affichage. Il est donc de base sur False, ce qui correspond au mode "normal". Comme pour "\textit{afficher$\_$reussite$\_$num}" vu précédement  (voir \ref{fctreu}), cette fonction utilise le module "shutil" et sa fonction "\textit{get$\_$terminal$\_$size}". Pour rappel, elle permet d'obtenir deux entiers correspondant respectivement à la largeur et à la hauteur du terminal. L'utilisation de cette fonction nous permettra donc d'obtenir la largeur du terminal pour que l'encadrement prenne bien toute la longueur de la ou les lignes qu'il occupera. Après une syntaxe conditionnelle vérifiant la valeur de l'argument "titre", le code de cette fonction correspond à un enchainement de boucles "for" parcourant une range variable. Pour les textes normaux, l'affichage se fait sur une ligne tandis que pour les titres, l'affichage se fait sur trois lignes. La range de la boucle "for" variera en fonction de la ligne sur laquelle elle se trouve.
+Finalement, nous avons réalisé la fonction "\textit{texte$\_$encadre}" qui permet d'encadrer un texte pour le mettre en valeur. Nous avons paramétré cette fonction avec deux modes d’encadrement : le premier pour le texte "normal" et l'autre pour les titres. Ainsi, cette fonction prend en arguments une chaine de caractère "texte" correspondante au texte à afficher et un booléen "titre" optionnel correspondant au mode d'affichage. Il est donc de base sur False, ce qui correspond au mode "normal". Comme pour "\textit{afficher$\_$reussite$\_$num}" vu précédement  (cf.\ref{fctreu}), cette fonction utilise le module "shutil" et sa fonction "\textit{get$\_$terminal$\_$size}". Pour rappel, elle permet d'obtenir deux entiers correspondant respectivement à la largeur et à la hauteur du terminal. L'utilisation de cette fonction nous permettra donc d'obtenir la largeur du terminal pour que l'encadrement prenne bien toute la longueur de la ou les lignes qu'il occupera. Après une syntaxe conditionnelle vérifiant la valeur de l'argument "titre", le code de cette fonction correspond à un enchainement de boucles "for" parcourant une range variable. Pour les textes normaux, l'affichage se fait sur une ligne tandis que pour les titres, l'affichage se fait sur trois lignes. La range de la boucle "for" variera en fonction de la ligne sur laquelle elle se trouve.
 \section{Les Extensions: ajouts de fonctionnalités.}
 \subsection{Vérification de la pioche}
 Parmi les idées d'extensions que propose le sujet, nous avons choisi la fonction permettant de vérifier que la pioche de cartes ne soit pas truquée. Nommée "\textit{vérifier$\_$pioche}", elle prend en arguments la liste que l'on souhaite vérifier ainsi que le nombre de cartes qu'elle contient - ou tout du moins qu'elle est censée contenir ! Elle n'a pas d'effets de bord et renvoie un booléen pour statuer de la conformité de la pioche : True si la pioche est conforme et False si la pioche est truquée. Notre algorithme se base sur la comparaison de la liste passée en argument avec une liste conforme. Une pioche peut être truquée de différentes manières :
@@ -241,7 +244,7 @@ Lorsqu'une fonction est sélectionnée dans le menu, les variables doivent être
 
 
 \subsection{Gestion des fichiers}
-Certaines fonctions peuvent cependant prendre comme argument des noms de fichiers, nous avons donc mis en place une gestion dynamique des fichiers présents dans le sous-répertoire "ressources" (voir structure du répertoire \ref{arbre}). La gestion des fichiers de notre programme s'articule autour de la fonction "\textit{choixFichier}". Cette dernière permet à l'utilisateur de choisir un fichier existant présent dans le dossier "ressources", ou bien d'en créer un nouveau si c'est nécessaire. Elle ne prend pas d'argument et retourne le nom du fichier choisi ou crée. Afin que la gestion des fichiers soit dynamique et que par exemple, un fichier crée avec cette fonction puisse par la suite être sélectionné par cette même fonction, nous avons créé une liste "liFichier" qui répertorie l'ensemble des fichiers consultables. La fonction "\textit{choixFichier}" consiste donc à lire ou modifier la liste "liFichier" ou fonction de ce que l'utilisateur choisi. Elle a donc comme effet de bord la modification de la variable "liFichier". Or cette variable est définie dans le programme principal, une fonction peut consulter mais pas modifier une variable issue du programme principal. Pour pallier ce problème, nous avons utilisé le mot-clé "global" qui permet de définir une variable comme globale, c’est-à-dire modifiable partout dans le programme. Plus précisément, nous avons déclaré "liFichier" comme étant globale mais dans la fonction "\textit{choixFichier}". Cela revient donc à ce que "liFichier" soit globale uniquement pour la fonction "\textit{choixFichier}", elle n'est ainsi pas réellement globale et ne peut pas être modifier par les autres fonctions comme la nomination "globale" le voudrait.
+Certaines fonctions peuvent cependant prendre comme argument des noms de fichiers, nous avons donc mis en place une gestion dynamique des fichiers présents dans le sous-répertoire "ressources" (cf.\ref{arbre}). La gestion des fichiers de notre programme s'articule autour de la fonction "\textit{choixFichier}". Cette dernière permet à l'utilisateur de choisir un fichier existant présent dans le dossier "ressources", ou bien d'en créer un nouveau si c'est nécessaire. Elle ne prend pas d'argument et retourne le nom du fichier choisi ou crée. Afin que la gestion des fichiers soit dynamique et que par exemple, un fichier crée avec cette fonction puisse par la suite être sélectionné par cette même fonction, nous avons créé une liste "liFichier" qui répertorie l'ensemble des fichiers consultables. La fonction "\textit{choixFichier}" consiste donc à lire ou modifier la liste "liFichier" ou fonction de ce que l'utilisateur choisi. Elle a donc comme effet de bord la modification de la variable "liFichier". Or cette variable est définie dans le programme principal, une fonction peut consulter mais pas modifier une variable issue du programme principal. Pour pallier ce problème, nous avons utilisé le mot-clé "global" qui permet de définir une variable comme globale, c’est-à-dire modifiable partout dans le programme. Plus précisément, nous avons déclaré "liFichier" comme étant globale mais dans la fonction "\textit{choixFichier}". Cela revient donc à ce que "liFichier" soit globale uniquement pour la fonction "\textit{choixFichier}", elle n'est ainsi pas réellement globale et ne peut pas être modifier par les autres fonctions comme la nomination "globale" le voudrait.
 \begin{exmp}
 Soit le programme suivant :
 \begin{lstlisting}
@@ -333,7 +336,34 @@ Cette arbre montre la structure de notre répertoire.\\
 ]
 \end{tikzpicture}%
 \hspace*{\fill}
+\subsection{afficher$\_$reussite$\_$num}\label{reussite}
+\begin{lstlisting}
+def afficher_reussite_num(liCartes):
+    i=0
+    li_saut=[]
+    for carte in liCartes:
+        print(carte_to_chaine(carte),end=" ")
+        if carte["valeur"]==10:
+            li_saut+=[True]
+        else:
+            li_saut+=[False]
+    print()
+    for saut in li_saut:
+        if saut:
+            print("^"*3,sep="",end=" ")
+        else:
+            print(" ","^"*2,sep="",end=" ")
+    print()
+    cpt=1
+    for saut in li_saut:
+        if cpt<10:
+            print(" "*2,cpt,sep="",end=" ")
+        else:
+            print(" ",cpt,sep="",end=" ")
+        cpt+=1
+    print("\n")
 
+\end{lstlisting}
 \subsection{Sources}
 \begin{itemize}
 \item xm1math.net\\
