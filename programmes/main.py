@@ -7,7 +7,7 @@ if __name__ == "__main__":
     liCartes=[{"valeur":9,"couleur":"C"},{"valeur":10, "couleur":"K"},{"valeur":9,"couleur":"T"}]
     liCartes2=[{"valeur":7,"couleur":"K"},{"valeur":"R","couleur":"C"},{"valeur":"A","couleur":"C"},{"valeur":10,"couleur":"K"},{"valeur":9,"couleur":"P"}]
     liCartes3=[{"valeur":9,"couleur":"K"}]
-    
+
     #fonctions.afficher_reussite(liCartes)
     #print(fonctions.carte_to_chaine(carte1))
     
