@@ -17,7 +17,7 @@
 \usepackage{tikz-qtree}
 \usepackage{tikz-qtree-compat}
 \usepackage{geometry}
-\geometry{hmargin=3cm,vmargin=1.5cm}
+\geometry{hmargin=3cm,vmargin=3cm}
 
 
 \lstset{
@@ -92,7 +92,7 @@
 \section{La réussite des alliances: structuration du jeu}
 \subsection{Rappel des règles du jeu}
 Quelques rappels des règles: \\
-Prenez un paquet de cartes (32 ou 52) mélangez le pour créer une pioche, ensuite tirez les cartes une par une en les posant de gauche à droite faces visibles. Une fois que trois cartes ont été posées vous pouvez commencer à jouer. On procédera ainsi, on suppose que la carte la plus à gauche est la numéro une la carte à sa droite la numéro deux celle à sa droite numéro trois et ainsi de suite. Si la carte numéro trois a une similarité (même couleur ou même valeur) avec la carte numéro une il y a alors alliance de cartes, vous pouvez alors faire un saut dans ce cas-là la carte qui est située entre nos deux cartes passe sur le tas de celle qui la précède. Si aucun saut n'est possible il faudra continuer à piocher les cartes jusqu'à ce qu'un ou plusieurs saut soit possible le jeu s'arrête lorsqu'il n'est plus possible de piocher une carte et qu'il n'est pas possible de faire de saut non plus. On compte alors le nombre de tas restant et selon le nombre de tas requis pour gagner vous savez si oui ou non vous avez réussi.
+Prenez un paquet de cartes (32 ou 52) mélangez le pour créer une pioche, ensuite tirez les cartes une par une en les posant de gauche à droite faces visibles. Une fois que trois cartes ont été posées vous pouvez commencer à jouer. On procédera ainsi, on suppose que la carte la plus à gauche est la numéro une, la carte à sa droite la numéro deux, celle à sa droite numéro trois et ainsi de suite. Si la carte numéro trois a une similarité (même couleur ou même valeur) avec la carte numéro une il y a alors alliance de cartes, vous pouvez alors faire un saut: la carte qui est située entre nos deux cartes passe sur le tas de celle qui la précède. Si aucun saut n'est possible il faudra continuer à piocher les cartes jusqu'à ce qu'un ou plusieurs saut soit possible. Le jeu s'arrête lorsqu'il n'est plus possible de piocher de cartes et qu'il n'est pas possible de faire de saut non plus. On compte alors le nombre de tas restant et selon le nombre de tas requis pour gagner vous savez si oui ou non vous avez réussi.
 
 \subsection{Création des fonctions (partie guidée)}
 Pour représenter informatiquement le jeu de la réussite des alliances, nous avions à notre disposition une partie guidée intégrée au sujet. Ce "cahier des charges" détaillé nous a fourni un certain confort quant à l'architecture du programme en lui même. En effet, comme les entrées, sorties et effets de bords de nos fonctions nous étaient déjà indiqué, nous n'avions pas à réfléchir à comment nos fonctions allaient interagir entre elles. Les appels à des fonctions antérieures, s'il y en avait, nous étaient eux aussi indiqués ou tout du moins suggérés. Cette souplesse de travail nous a permis de nous concentrer sur l'algorithmique de nos fonctions et comment optimiser ces dernières.
@@ -104,13 +104,13 @@ Néanmoins, le sujet nous permettait également de prendre certaines libertés. 
     		liste_tas+=[pioche.pop(0)]
 \end{lstlisting}
 \begin{center}
-\textit{fonction "piocher" : ligne 133 de fonctions.py}
+\textit{Fonction "piocher" : ligne 133 de fonctions.py}
 \end{center}
 
-Nous n'avons cependant pas jugé nécessaire de faire d'autres compartimentations pour fluidifier cette fonction.
+Nous n'avons cependant pas jugé nécessaire de faire d'autres compartimentations pour fluidifier la fonction "\textit{une\_etape\_reussite}".
 
 \subsubsection{Fonctions "reussite\_mode\_manuel" et "afficher\_reussite\_num"}\label{fctreu}
-La fonction "\textit{reussite\_mode\_manuel}" nous a permis à nouveau de pouvoir prendre des libertés cette fois-ci quant à l'affichage des éléments et plus globalement l'interface utilisateur. Pour rappel, cette fonction a pour but de laisser l'utilisateur jouer une partie. Ceci nécessite une interface pour que l'utilisateur puisse choisir ce qu'il veut faire. Ainsi, afin de présenter au mieux ses options de jeu à l'utilisateur, nous avons réaliser un menu contenant un choix pour piocher, un choix pour réaliser un saut et un choix pour mettre fin à la partie. En plus de ce menu, nous avons décider de réaliser un affichage de la réussite plus poussé permettant de relier chaque carte à un nombre et ainsi faciliter la sélection de la carte à faire sauter. 
+La fonction "\textit{reussite\_mode\_manuel}" nous a permis à nouveau de pouvoir prendre des libertés cette fois-ci quant à l'affichage des éléments et plus globalement l'interface utilisateur. Pour rappel, cette fonction a pour but de laisser l'utilisateur jouer une partie. Ceci nécessite une interface pour que l'utilisateur puisse choisir ce qu'il veut faire. Ainsi, afin de présenter au mieux ses options de jeu à l'utilisateur, nous avons réaliser un menu contenant un choix pour piocher, un choix pour réaliser un saut et un choix pour mettre fin à la partie. En plus de ce menu, nous avons décidé de réaliser un affichage de la réussite plus poussé permettant de relier chaque carte à un nombre et ainsi faciliter la sélection de la carte à faire sauter. 
 Pour cela, nous avons réaliser la fonction "\textit{afficher\_reussite\_num}". Elle prends pour argument la liste de cartes à afficher, ne renvoie rien et a pour effet de bord l'affichage détaillé de la réussite. Cette fonction consiste en 3 boucles affichant respectivement les cartes de la réussite, les
 accents circonflexes permettant de souligner les cartes, et les nombres désignant les cartes. A noter que bien que semblant être des index, ces nombres n'en sont pas tout à fait car: soit une liste $li$, $u$ l'index d'un élément de cette liste et $v$ un des nombres utilisés dans la fonction , alors:
 \begin{align*}
@@ -124,7 +124,7 @@ Lors de la création de cette fonction, nous avons constaté des bugs survenant 
 \includegraphics[scale=0.5]{img/bug_afficher_reussite_num.PNG}
 \end{center}
 \begin{center}
-\textit{bug d'affichage relatif à la fonction "afficher\_reussite\_num" telle qu'écrite au commit 728144c (cf.\ref{reussite})}
+\textit{Bug d'affichage relatif à la fonction "afficher\_reussite\_num" telle qu'écrite au commit 728144c (cf.\ref{reussite})}
 \end{center}
 
 Nous avons résolu ce problème en imbriquant les trois boucles d'affichage dans une plus grande boucle, et en changeant la condition de la première boucle. Maintenant, la première boucle conditionne les deux suivantes puisqu'elles sont des boucles "for" tournant sur une liste (li\_dix) ayant un nombre d'éléments équivalent au nombre de passage dans la première boucle. Cette boucle s'arrête soit lorsqu'il n'y a plus de cartes dans la liste, soit si l'affichage dépasse la taille du terminal. 
@@ -168,12 +168,42 @@ def afficher_reussite_num(liCartes):
         print("\n")
 \end{lstlisting}
 \begin{center}
-\textit{fonction "afficher\_reussite\_num" : ligne 24 de fonctions.py}
+\textit{Fonction "afficher\_reussite\_num" : ligne 24 de fonctions.py}
 \end{center}
 
-\subsubsection{Fonction "texte\_encadre"}
+\subsubsection{Fonction "texte\_encadre"}\label{textencadre}
 Finalement, nous avons réalisé la fonction "\textit{texte\_encadre}" qui permet d'encadrer un texte pour le mettre en valeur. Nous avons paramétré cette fonction avec deux modes d’encadrement : le premier pour le texte "normal" et l'autre pour les titres. Ainsi, cette fonction prend en arguments une chaine de caractère "texte" correspondante au texte à afficher et un booléen "titre" optionnel correspondant au mode d'affichage. Il est donc de base sur False, ce qui correspond au mode "normal". Comme pour "\textit{afficher\_reussite\_num}" vu précédement  (cf.\ref{fctreu}), cette fonction utilise le module "shutil" et sa fonction "\textit{get\_terminal\_size}". Pour rappel, elle permet d'obtenir deux entiers correspondant respectivement à la largeur et à la hauteur du terminal. L'utilisation de cette fonction nous permettra donc d'obtenir la largeur du terminal pour que l'encadrement prenne bien toute la longueur de la ou les lignes qu'il occupera. Après une syntaxe conditionnelle vérifiant la valeur de l'argument "titre", le code de cette fonction correspond à un enchainement de boucles "for" parcourant une range variable. Pour les textes normaux, l'affichage se fait sur une ligne tandis que pour les titres, l'affichage se fait sur trois lignes. La range de la boucle "for" variera en fonction de la ligne sur laquelle elle se trouve.
+\begin{lstlisting}
+def texte_encadre(texte,titre=False):
+    columns, rows = shutil.get_terminal_size()
+    columns-=len(texte)+2 # le +2 pour un espace de chaque côté du texte
+    columns=columns//2
+    if titre:
+        for i in range((columns*2)+len(texte)+2):
+            print("=",end="")
+        print()
+        for i in range(columns):
+            print("=",end="")
+        print(" "+texte+" ",end="")
+        for i in range(columns):
+            print("=",end="")
+        print()
+        for i in range((columns*2)+len(texte)+2):
+            print("=",end="")
+        print()
+    else:
+        for i in range(columns):
+            print("=",end="")
+        print(" "+texte+" ",end="")
+        for i in range(columns):
+            print("=",end="")
+        print()
+\end{lstlisting}
+\begin{center}
+\textit{Fonction "texte\_encadre" : ligne 56 de fonctions.py}
+\end{center}
 \section{Les Extensions: ajouts de fonctionnalités.}
+Dans une seconde partie du sujet, il nous a été demandé de réaliser des fonctions supplémentaires à celles décrites dans la partie guidée.
 \subsection{Vérification de la pioche}
 Parmi les idées d'extensions que propose le sujet, nous avons choisi la fonction permettant de vérifier que la pioche de cartes ne soit pas truquée. Nommée "\textit{vérifier\_pioche}", elle prend en arguments la liste que l'on souhaite vérifier ainsi que le nombre de cartes qu'elle contient - ou tout du moins qu'elle est censée contenir ! Elle n'a pas d'effets de bord et renvoie un booléen pour statuer de la conformité de la pioche : True si la pioche est conforme et False si la pioche est truquée. Notre algorithme se base sur la comparaison de la liste passée en argument avec une liste conforme. Une pioche peut être truquée de différentes manières :
 \begin{itemize}
@@ -181,31 +211,71 @@ Parmi les idées d'extensions que propose le sujet, nous avons choisi la fonctio
 \item on peut sinon placer les cartes que l'on souhaite à l'index d'une autre carte. On remplace donc une carte par une autre, ce qui reviens à réécrire les cartes pour qu'elles nous arrangent. Il faudra donc veiller à ce qu'il n'y est pas de double. Pour cela, et comme nous savons que la taille de la liste sera contrôlée ensuite, il nous suffit juste de veiller à ce que toutes les cartes présentes dans une pioche conventionnelle le soient aussi dans la pioche que l'on contrôle. Ainsi, s'il y a des doubles, cette dernière sera forcément d'une taille non conforme.\\
 \end{itemize}
 
-Nous avons donc fait appel à notre fonction "\textit{init\_pioche\_alea}" crée lors de la partie guidée qui permet de générer une pioche de 32 ou 52 cartes mélangées aléatoirement\label{piochealea}. Cette pioche nous sert donc de comparaison. Nous passons tout d'abord en revue la pioche suspecte en veillant à ce que chaque carte de la pioche conforme soit dans la pioche suspecte. Si ce n'est pas le cas, la fonction renvoie False. La fonction procède ensuite à une vérification de la longueur de la pioche suspecte. Pareil, si la pioche a plus de cartes qu'elle ne devrait en avoir, la fonction renvoie False. Si la pioche possède toutes les cartes de la pioche conforme tout en ayant le bon nombre de cartes, alors la fonction renvoie True.
+Nous avons donc fait appel à notre fonction "\textit{init\_pioche\_alea}" crée lors de la partie guidée qui permet de générer une pioche de 32 ou 52 cartes mélangées aléatoirement\label{piochealea}. Cette pioche nous servira de comparaison. Nous passons tout d'abord en revue la pioche suspecte en veillant à ce que chaque carte de la pioche conforme soit dans la pioche suspecte. Si ce n'est pas le cas, la fonction renvoie False. La fonction procède ensuite à une vérification de la longueur de la pioche suspecte. Pareil, si la pioche a plus de cartes qu'elle ne devrait en avoir, la fonction renvoie False. Si la pioche possède toutes les cartes de la pioche conforme tout en ayant le bon nombre de cartes, alors la fonction renvoie True.
+\begin{lstlisting}
+def verifier_pioche(liCartes,nb_cartes=32):
+    liCartesVerif=init_pioche_alea(nb_cartes)
+    for carteV in liCartesVerif:
+        if not(carteV in liCartes):
+            return False
+    if len(liCartes)!=nb_cartes:
+        return False
+    return True
+\end{lstlisting}
+\begin{center}
+\textit{Fonction "verifier\_pioche" : ligne 220 de fonctions.py}
+\end{center}
+\subsection{Statistiques}\label{stats}
+Nous avons aussi choisi de réaliser deux fonctions liées aux statistiques : \\
+La première étant nommée "\textit{res\_multi\_simulation}" qui va comme son nom l'indique nous servir à faire de multiples simulations de parties en même temps. Elle prend en argument le nombre de simulation que nous voulons faire ainsi que le nombre de carte que notre jeu contient. Voilà comment cette fonction procède, elle crée d'abord une boucle qui va faire appel à deux fonctions de la partie guidée, "\textit{init\_pioche\_alea}" qui comme décrite précédemment génère une pioche de 32 ou 52 cartes mélangées aléatoirement ainsi que "\textit{reussite\_mode\_auto}" qui permet de jouer une partie de réussite des alliances automatiquement. Ces deux fonctions nous permettent de faire des simulations différentes à chaque boucle. Après avoir fait chaque simulation de partie, "\textit{res\_multi\_simulation}" rajoute le résultat dans une liste qui est finalement renvoyée à la fin de la fonction. Cette liste qui est renvoyée correspond donc aux nombres de tas restants pour chaque simulation.\\
 
-\subsection{Statistiques}
-Nous avons aussi choisi deux fonctions liées aux statistiques : \\
-La première étant nommée "\textit{res\_multi\_simulation}" qui va comme son nom l'indique nous servir à faire de multiples simulations de parties en même temps. Elle prend en argument le nombre de simulation que nous voulons faire ainsi que le nombre de carte que notre jeu contient. Voilà comment cette fonction procède, elle crée d'abord une boucle qui va faire appel à deux fonctions de la partie guidée, "\textit{init\_pioche\_alea}" qui comme décrite précédemment génère une pioche de 32 ou 52 cartes mélangées aléatoirement ainsi que "\textit{reussite\_mode\_auto}" qui permet de jouer une partie de réussite des alliances automatiquement. Ces deux fonctions nous permettent de faire des simulations différentes à chaque boucle. Après avoir fait chaque simulation de partie elle rajoute le résultat dans une liste qui est finalement renvoyée à la fin de la fonction. Cette liste qui est renvoyée correspond donc aux nombres de tas restants pour chaque simulation.\\
+La seconde fonction se nomme "\textit{statistiques\_nb\_tas}". Elle va nous permettre de connaitre certaines statistiques. Elle prend en argument le nombre de simulation que nous souhaitons faire ainsi que le nombre de carte contenu dans le jeu (32 ou 52). Cette fonction a pour but de faire un nombre défini de simulation puis de trouver ou calculer la moyenne, le maximum ainsi que le minimum de tas obtenus. Pour faire cela elle va d'abord faire appel à la fonction "\textit{res\_multi\_simulation}" vu précédemment. Nous allons créer une boucle qui va nous servir à trois choses : premièrement grâce à cette boucle nous allons pouvoir additionner toutes les valeurs de la liste obtenue par l'appel de "\textit{res\_multi\_simulation}" dans une seule variable nommée "moyenne". Nous allons aussi pouvoir trouver le maximum et le minimum en comparant les valeurs de la liste entre elles.
 
-La seconde fonction se nomme "\textit{statistiques\_nb\_tas}" elle va nous servir à connaitre certaines statistiques. Elle prend en argument le nombre de simulation que nous souhaitons faire ainsi que le nombre de carte contenu dans le jeu (32 ou 52). Cette fonction a pour but de faire un nombre défini de simulation puis de trouver ou calculer la moyenne, le maximum ainsi que le minimum de tas obtenus. Pour faire cela elle va d'abord faire appel à la fonction "\textit{res\_multi\_simulation}" vu précédemment qui va servir à donner une liste depuis laquelle nous allons pouvoir calculer les statistiques dont nous avons besoins pour cela nous allons créer une boucle qui va nous servir à trois choses : premièrement grâce à cette boucle nous allons pouvoir additionner toutes les valeurs d'une liste dans une seul variable. Nous allons aussi pouvoir trouver le maximum et le minimum en comparant les valeurs entre elles.
+Une fois sorti de cette boucle nous pouvons alors diviser notre variable "moyenne" par la longueur de la liste pour trouver la moyenne. Cette fonction nous affiche donc la moyenne, le maximum et le minimum de tas pour un nombre prédéfinis de simulations. Grâce à cette fonction nous avons pu voir que pour dix milles simulations il y a 21.133 tas en moyenne 2 au minimum et 47 au maximum.
 
-Une fois sorti de cette boucle nous pouvons alors diviser notre variable moyenne par la longueur de la liste pour trouver la moyenne. Cette fonction nous affiche donc la moyenne, le maximum et le minimum de tas pour un nombre prédéfinis de simulations. Grâce à cette fonction nous avons pu voir que pour dix milles simulations il y a 21.133 tas en moyenne 2 au minimum et 47 au maximum.
-
-
+\begin{lstlisting}
+def res_multi_simulation(nb_sim,nb_cartes=32):
+    result=[]
+    for i in range(nb_sim):
+        pioche=init_pioche_alea(nb_cartes)
+        liCartes=reussite_mode_auto(pioche)
+        result+=[len(liCartes)]
+    return result
+def statistiques_nb_tas(nb_sim,nb_cartes=32):
+    appel = res_multi_simulation(nb_sim,nb_cartes)
+    if nb_sim<=0:
+        print("Pas de valeur dans la liste")
+        return None
+    moyenne = 0
+    maxi = None
+    mini = None
+    for i in range(len(appel)):
+        moyenne += appel[i]
+        if maxi == None or appel[i] > maxi:
+            maxi = appel[i]
+        if mini == None or appel[i] < mini:
+            mini = appel[i]
+    moyenne = moyenne/nb_sim
+    print("La moyenne est :",moyenne)
+    print("le minimum est :",mini)
+    print("le maximum est :",maxi)
+\end{lstlisting}
+\begin{center}
+\textit{Fonctions "res\_multi\_simulation" et "statistiques\_nb\_tas": ligne 229 à 253 de fonctions.py}
+\end{center}
 \subsection{Probabilités}
-Pour finaliser nos extensions, nous avons décidé de compléter notre partie "Statistiques" avec une partie "Probabilités". Nous avons réalisé dans un premier temps la fonction "\textit{proba}" qui nous permet de calculer les pourcentages de réussite en fonction du nombre de tas de cartes maximum pour gagner. Cette fonction ne prend comme argument optionnel que le nombre de cartes présentes dans le jeu (32 ou 52), n'a pas d'effets de bord et retourne une liste contenant les pourcentages de réussite triés par ordre croissant du nombre palier de réussite. L'appel à la fonction précédemment présentée "\textit{res\_multi\_simulation}" constitue la base de notre algorithme. Pour rappel, elle permet d'obtenir une liste d'entiers correspondants aux nombres de tas restant respectivement à la fin de chaque réussite simulée.
+Pour finaliser nos extensions, nous avons décidé de compléter notre partie "Statistiques" avec une partie "Probabilités". Nous avons réalisé dans un premier temps la fonction "\textit{proba}" qui nous permet de calculer les pourcentages de réussite en fonction du nombre de tas de cartes maximum pour gagner (nombre palier de réussite). Cette fonction ne prend comme argument optionnel que le nombre de cartes présentes dans le jeu (32 ou 52), n'a pas d'effets de bord et retourne une liste contenant les pourcentages de réussite triés par ordre croissant du nombre palier de réussite. L'appel à la fonction précédemment présentée "\textit{res\_multi\_simulation}"(cf.\ref{stats}) constitue la base de notre algorithme. Pour rappel, elle permet d'obtenir une liste d'entiers correspondants aux nombres de tas restant respectivement à la fin de chaque réussite simulée.
 Donc, si nous réalisons cent simulations, nous pouvons compter combien respectent le palier de réussite et donc établir un pourcentage de victoire avec tel palier de réussite.\\
 
-Ainsi, une boucle "for" se charge de vérifier si chaque valeur de la liste est inférieure ou égale au nombre palier. Si oui, une variable "\textit{prctage}" 
-correspondante au pourcentage est incrémentée. Au bout des cent passages de boucle, la valeur de cette variable est ajoutée à la liste de retour puis est remise à zéro. Cette remise à zéro permet l'itération des étapes décrites dans une grande boucle "\textit{while}" ayant pour condition de sortie qu'un compteur soit supérieur au nombre de cartes du jeu. Ce compteur se nomme "i" et représente le nombre palier pour la réussite. Ainsi, en l'incrémentant à la fin de chaque passage dans sa boucle on peut établir le pourcentage de réussite pour les différentes valeurs de palier. Nous pouvons représenter notre fonction comme suit : 
+Ainsi, une boucle "for" se charge de vérifier si chaque valeur de la liste est inférieure ou égale au nombre palier. Si oui, une variable "\textit{prctage}" correspondante au pourcentage est incrémentée. Au bout des cent passages de boucle, la valeur de cette variable est ajoutée à la liste de retour puis est remise à zéro. Cette remise à zéro permet l'itération des étapes décrites dans une grande boucle "while" ayant pour condition de sortie qu'un compteur soit supérieur au nombre de cartes du jeu. Ce compteur se nomme "i" et représente le nombre palier pour la réussite. Ainsi, en l'incrémentant à la fin de chaque passage dans sa boucle on peut établir le pourcentage de réussite pour les différentes valeurs de palier. Nous pouvons représenter notre fonction comme suit : 
 Soit $i$ le compteur du même nom, $y$ le compteur permettant de parcourir la liste retourné par "\textit{res\_multi\_simulation}"\footnote{y n'est pas présent dans le code mais est algorithmiquement sous-entendu par la boucle "for".}, $li$ la liste que retourne "\textit{proba}", et $c$ le nombre de cartes du jeu \footnote{c est représenté par l'argument optionnel "\textit{nb\_cartes}" dans le code de "\textit{proba}".} (32 ou 52), alors:
 
 \begin{center}
 \begin{tabular}{|p{3cm}|l|c|r|}
   \hline
-  Nombre palier pour victoire & 2 & i & c\\
+  Nombre palier de réussite & 2 & i & c\\
   \hline
-  Valeur de la liste & li[0] & li[y] & li[$c-2$] \\
+  Valeur de la liste retournée par "\textit{proba}" & li[0] & li[y] & li[$c-2$] \\
   \hline
 \end{tabular}
 \end{center}
@@ -214,19 +284,48 @@ Donc :
 &i \in [2;c]\\
 &y \in [0;c-2]
 \end{align*}
+
 Nous disposons maintenant de pourcentages décrivant les probabilités de réussite des alliances en fonction d'un certain nombre de tas restant à la fin de la partie. Nous avons créé une seconde fonction nommée "\textit{affiche\_proba}" afin de représenter graphiquement les probabilités de victoire. Comme la fonction "\textit{proba}", "\textit{affiche\_proba}" a pour seul argument un entier indiquant le nombre de cartes présentes dans le jeu. Cependant, elle ne renvoie rien et a pour effet de bord l'affichage du graphique. Nous avons fait appel dans un premier temps à notre fonction "\textit{proba}" afin de remplir notre axe des ordonnées. Les valeurs en abscisses sont générées par une boucle
-"for". Nous pouvons exprimer x et y, respectivement pour les abscisses et les ordonnées comme ceci, avec c le nombre de cartes du jeu :
+"for". Nous pouvons exprimer $x$ et $y$, respectivement pour les abscisses et les ordonnées comme ceci, avec c le nombre de cartes du jeu :
 
 \begin{align*}
 &x \in [2;c] \\
 &y \in [0;100]
 \end{align*}
+
 Pour l'affichage, nous avons fait appel au module python "\textit{matplotlib.pyplot}" donnant accès à de nombreuses fonctions d'affichage graphique. Pour notre part, nous avons dans un premier temps utilisé la fonction "\textit{plot}" permettant de créer le graphique en lui passant en argument les listes représentant les différents axes du graphique. Pour rendre le graphique plus compréhensible, nous avons également utilisé les fonctions "\textit{xlabel}" et "\textit{ylabel}" permettant de donner un titre aux abscisses et aux ordonnées. Pour finir, afin d'afficher le graphique, nous avons utilisé la fonction "\textit{show}".
 
+\begin{lstlisting}
+def proba(nb_cartes=32):
+    i=2
+    prctage=0
+    result=[]
+    while i<=nb_cartes:
+        li=res_multi_simulation(100,nb_cartes)
+        for e in li:
+            if e<=i:
+                prctage+=1
+        result+=[prctage]
+        i+=1
+        prctage=0
+    return result
+def affiche_proba(nb_cartes=32):
+    x=[]
+    y=proba(nb_cartes)
+    for e in range(2,nb_cartes+1):
+        x+=[str(e)]
+    plt.plot(x,y)
+    plt.xlabel("Nombres de cartes limite pour la victoire")
+    plt.ylabel("Pourcentage de réussite")
+    plt.show()
+\end{lstlisting}
+\begin{center}
+\textit{Fonctions "proba" et "affiche\_proba": ligne 255 à 276 de fonctions.py}
+\end{center}
 \section{Le debug\_mode}
 Nous sommes arrivés à un moment dans le projet ou nous avions du mal à tester nos fonctions et l’interface de notre main ne nous convenais pas. Nous avons alors décidé de créer un espace de test de fonction qui serait plus facile et plus rapide pour tester différentes fonctions avec différentes entrées. Il nous est alors venu à l’esprit de faire un debug$\_$mode qui nous permettrait de tester toutes nos fonctions facilement et rapidement.
 \subsection{Structure du programme}
-Notre débug\_mode se présente donc comme un répertoire de l'ensemble de nos fonctions. Il permet d'y faire appel via une interface prenant en charge le choix des arguments (listes, entiers, chaines de caractères). Il prend également en compte une gestion des fichiers de sauvegardes.  Les fonctions sont présentées dans un menu à choix multiples et rangées par rubriques. Par exemple, les fonctions d'affichage sont rangées dans le premier choix du menu : "1.Fonctions d'affichage". Un sous-menu s'affiche alors pour sélectionner la fonction dans sa rubrique. L'utilisateur peut à tout moment revenir au menu principal avec le choix "r.Retour" et quitter le programme avec le choix présent dans le menu principal "q.Fermer debug\_mode". Des variables sont également incluses dans le programme. Elles permettent de sauvegarder pendant la durée de l'utilisation du programme des cartes, des listes
+Notre debug\_mode se présente donc comme un répertoire de l'ensemble de nos fonctions. Il permet d'y faire appel via une interface prenant en charge le choix des arguments (listes, entiers, chaines de caractères). Il prend également en compte une gestion des fichiers de sauvegardes.  Les fonctions sont présentées dans un menu à choix multiples et rangées par rubriques. Par exemple, les fonctions d'affichage sont rangées dans le premier choix du menu : "1.Fonctions d'affichage". Un sous-menu s'affiche alors pour sélectionner la fonction dans sa rubrique. L'utilisateur peut à tout moment revenir au menu principal avec le choix "r.Retour" et quitter le programme avec le choix présent dans le menu principal "q.Fermer debug\_mode". Des variables sont également incluses dans le programme. Elles permettent de sauvegarder pendant la durée de l'utilisation du programme des cartes, des listes
 de cartes, etc ... Nous avons implémenté dans notre programme:\\
 \begin{itemize}
 \item 4 listes: "liCartes", "liCartes2", "liCartes3 et "liFichier"\\
@@ -235,40 +334,26 @@ de cartes, etc ... Nous avons implémenté dans notre programme:\\
 \item un entier (négligeable): "entier"\\
 \end{itemize}
 
-Les listes servent de listes de cartes, c'est à dire de listes de dictionnaires, sauf "liFichier" dont la fonction sera détaillée ci-dessous. Les dictionnaires représentent des cartes conforme à celles que le sujet demande. \\
+Les listes servent de listes de cartes, c'est à dire de listes de dictionnaires, sauf "liFichier" dont la fonction sera détaillée plus tard (cf. \ref{gestfich}). Les dictionnaires représentent des cartes conforme à celles que le sujet demande. \\
 
 Ces variables peuvent être utilisées à la guise de l'utilisateur via les différentes fonctions. Le menu principal est accompagné d'un tableau affichant les valeurs des 
 différentes variables. Pour éclaircir notre code, nous avons compartimenté l'affichage de ce tableau dans la fonction "\textit{tabVar}". Elle ne prend par conséquent aucun
-argument ni ne renvoie rien. Cette fonction fait d'abord appel à la fonction "\textit{texte\_encadre}" qui permet d'entourer un texte avec des '=' pour le mettre en valeur.Nous affichons donc le titre du tableau puis les différentes variables avec leurs valeurs. Comme le tableau s'affiche en même temps que le menu, si une variable viens à être modifié par une fonction, sa valeur mise à jour sera affichée dans le tableau à la fin de l'appel de la fonction.
+argument ni ne renvoie rien. Cette fonction fait d'abord appel à la fonction "\textit{texte\_encadre}" vue précédemment (cf.\ref{textencadre}) qui permet d'entourer un texte avec des '=' pour le mettre en valeur. Nous affichons donc le titre du tableau puis les différentes variables avec leurs valeurs. Comme le tableau s'affiche en même temps que le menu, si une variable viens à être modifié par une fonction, sa valeur mise à jour sera affichée dans le tableau à la fin de l'appel de la fonction.
 
-Lorsqu'une fonction est sélectionnée dans le menu, les variables doivent être sélectionnées avant que l'appel à la fonction ne soit fait. La fonction "\textit{choixVar}" permet d'afficher à l'utilisateur les variables pour qu'il puisse en choisir une. Elle prend comme argument une chaine de caractère représentant le type de variable que l'utilisateur doit choisir. Ainsi, si l'utilisateur veut réaliser un appel à la fonction "\textit{carte\_to\_chaine}", prenant pour unique argument un dictionnaire, le programme principal de debug\_mode fera appel à sa fonction " \textit{choixVar} " avec en argument la chaîne de caractère "c" (pour carte). Un menu s'ouvrira pour que l'utilisateur puisse choisir entre "carte1" et "carte2". Un appel à la fonction "\textit{carte\_to\_chaîne}" sera ensuite réalisé dans le programme principal avec pour argument un des deux dictionnaires choisis.
+Lorsqu'une fonction est sélectionnée dans le menu, les variables doivent être sélectionnées avant que l'appel à la fonction ne soit fait. La fonction "\textit{choixVar}" permet d'afficher à l'utilisateur les variables pour qu'il puisse en choisir une. Elle prend comme argument une chaine de caractère représentant le type de variable que l'utilisateur doit choisir. Ainsi, si l'utilisateur veut réaliser un appel à la fonction "\textit{carte\_to\_chaine}", prenant pour unique argument un dictionnaire, le programme principal de debug\_mode fera appel à sa fonction "\textit{choixVar}" avec en argument la chaîne de caractère "c" (pour carte). Un menu s'ouvrira pour que l'utilisateur puisse choisir entre "carte1" et "carte2". Un appel à la fonction "\textit{carte\_to\_chaîne}" sera ensuite réalisé dans le programme principal avec pour argument l'un des deux dictionnaires choisi.
 
 
-\subsection{Gestion des fichiers}
-Certaines fonctions peuvent cependant prendre comme argument des noms de fichiers, nous avons donc mis en place une gestion dynamique des fichiers présents dans le sous-répertoire "ressources" (cf.\ref{arbre}). La gestion des fichiers de notre programme s'articule autour de la fonction "\textit{choixFichier}". Cette dernière permet à l'utilisateur de choisir un fichier existant présent dans le dossier "ressources", ou bien d'en créer un nouveau si c'est nécessaire. Elle ne prend pas d'argument et retourne le nom du fichier choisi ou crée. Afin que la gestion des fichiers soit dynamique et que par exemple, un fichier crée avec cette fonction puisse par la suite être sélectionné par cette même fonction, nous avons créé une liste "liFichier" qui répertorie l'ensemble des fichiers consultables. La fonction "\textit{choixFichier}" consiste donc à lire ou modifier la liste "liFichier" ou fonction de ce que l'utilisateur choisi. Elle a donc comme effet de bord la modification de la variable "liFichier". Or cette variable est définie dans le programme principal, une fonction peut consulter mais pas modifier une variable issue du programme principal. Pour pallier ce problème, nous avons utilisé le mot-clé "global" qui permet de définir une variable comme globale, c’est-à-dire modifiable partout dans le programme. Plus précisément, nous avons déclaré "liFichier" comme étant globale mais dans la fonction "\textit{choixFichier}". Cela revient donc à ce que "liFichier" soit globale uniquement pour la fonction "\textit{choixFichier}", elle n'est ainsi pas réellement globale et ne peut pas être modifier par les autres fonctions comme la nomination "globale" le voudrait.
-\begin{exmp}
-Soit le programme suivant :
-\begin{lstlisting}
-def modif():
-    global oui
-    oui=5
-def modifBis():
-    oui=1
-oui=1
-modif()
-modifBis()
-print(oui)
-\end{lstlisting}
-Le programme affiche "5", la fonction "\textit{modifBis}" ne modifie pas la variable "oui". Elle n'est donc globale que pour la fonction "\textit{modif}".
-\end{exmp}
+\subsection{Gestion des fichiers}\label{gestfich}
+Certaines fonctions peuvent cependant prendre comme argument des noms de fichiers, nous avons donc mis en place une gestion dynamique des fichiers présents dans le sous-répertoire "ressources" (cf.\ref{arbre}). La gestion des fichiers de notre programme s'articule autour de la fonction "\textit{choixFichier}". Cette dernière permet à l'utilisateur de choisir un fichier existant présent dans le dossier "ressources", ou bien d'en créer un nouveau si c'est nécessaire. Afin que la gestion des fichiers soit dynamique et que par exemple, un fichier crée avec cette fonction puisse par la suite être sélectionné par cette même fonction, nous avons créé une liste "liFichier" qui répertorie l'ensemble des fichiers consultables. La fonction "\textit{choixFichier}" consiste donc à lire ou modifier la liste "liFichier" ou fonction de ce que l'utilisateur choisi. Elle prend donc pour argument la liste à modifier (liFichier), retourne le nom du fichier choisi ou crée et a comme effet de bord la modification de la variable "liFichier". 
 
 Notre fonction "\textit{choixFichier}" fait appel à plusieurs autres fonctions afin de compartimenter des actions spécifiques. La fonction "\textit{affich\_liFichier}" permet
 l'affichage de la liste "liFichier" sous la forme d'un menu numéroté. En effet, cette fonction a été réalisé dans l'optique d'être appelé par "\textit{choixFichier}" juste avant un input de l'utilisateur pour choisir un fichier existant. Elle n'a donc pas d'arguments ni de valeur de sortie et a pour effet de bord l'affichage. 
 
-L'autre fonction appelée par "\textit{choixFichier}" permet la sauvegarde sur le long-terme de la modification de la liste "liFichier". Cette dernière possède une sauvegarde de ses valeurs dans le fichier "liFich.csv". Ainsi, lorsque "liFichier" est modifiée par "\textit{choixFichier}", la nouvelle version de "liFichier" est écrite dans "liFich.csv". Afin que cette sauvegarde soit persistante lors des redémarrages du debug$\_$mode, la fonction "\textit{init\_liFichier}" est appelé lors de l'initialisation de la variable "liFichier" par le programme principal. Elle ne possède pas d'arguments, ne réalise pas d'effets de bords et renvoie une liste correspondante à "liFichier". Elle permet la lecture du fichier "liFich.csv" pour collecter tout les nom de fichiers présents dans le dossier "ressources" et les envoyés sous forme d'une liste. 
+L'autre fonction appelée par "\textit{choixFichier}" permet la sauvegarde sur le long-terme de la modification de la liste "liFichier". Cette dernière possède une sauvegarde de ses valeurs dans le fichier "liFich.csv". Ainsi, lorsque "liFichier" est modifiée par "\textit{choixFichier}", la nouvelle version de "liFichier" est écrite dans "liFich.csv". Afin que cette sauvegarde soit persistante lors des redémarrages du debug$\_$mode, la fonction "\textit{init\_liFichier}" est appelé lors de l'initialisation de la variable "liFichier" par le programme principal. Elle ne possède pas d'arguments, ne réalise pas d'effets de bords et renvoie une liste correspondante à "liFichier". Elle permet la lecture du fichier "liFich.csv" pour collecter tout les nom de fichiers présents dans le dossier "ressources" et les envoyer sous forme d'une liste. 
 \subsection{Limites et Erreurs}
+Lors du développement de debug\_mode, nous avons été confrontés à de multiples problèmes. Le premier, et selon nous plus important a été le manque de préparation et d'organisation dans la réalisation de la structure du programme. Nous n'avons pour ainsi dire pas réfléchi à l'architecture du programme, ou comment les différentes fonctionnalités de ce programme allaient exister entre elles. Alors que nous avions bien en tête l'objectif principal du programme, c’est-à-dire une interface utilisateur permettant de faciliter l'appel de fonctions pour les tester, nous n'avions pas encore réfléchi à comment réaliser cet objectif. Nous avons résolu ce problème au fur et à mesure du développement du programme. En résulte un programme manquant, à notre goût, d'une certaine rigueur dans l'exécution des tâches qu'il lui est demandé.
 \subsubsection{La redondance}
-Lors du développement de debug\_mode, nous avons été confrontées à de multiples problèmes. Le premier, et selon nous plus important a été le manque de préparation et d'organisation dans la réalisation de la structure du programme. Nous n'avons pour ainsi dire pas réfléchis à l'architecture du programme, ou comment les différentes fonctionnalités de ce programme allaient exister entre elles. Alors que nous avions bien en tête l'objectif principal du programme, c’est-à-dire une interface utilisateur permettant de faciliter l'appel de fonctions pour les tester, nous n'avions pas encore réfléchi à comment réaliser cet objectif. Nous avons résolu ce problème au fur et à mesure du développement du programme. En résulte un programme manquant, à notre goût, d'une certaine rigueur dans l'exécution des tâches qu'il lui est demandé. La redondance dans les instructions est également selon nous un symptôme de cette mauvaise préparation. Par exemple, lorsqu’une fonction retourne une valeur, le programme principal répète la même instruction pour tous les choix de variables de l’utilisateur :
+La redondance dans les instructions est selon nous un symptôme de cette mauvaise préparation. Par exemple, lorsqu’une fonction retourne une valeur, le programme principal répète la même instruction pour tous les choix de variables de l’utilisateur :
 \begin{exmp}
 Sélectionnons une partie du code principal de debug\_mode:
 \begin{lstlisting}
@@ -287,9 +372,9 @@ elif choix=="3":
     input("(Appuyer sur entrer pour revenir au menu)")
 	conti=False
 \end{lstlisting}
-Le code de la ligne 228 à la ligne 237 représente une redondance car seul le nom de la variable recevant la valeur retour change.
+Le code de la ligne 227 à la ligne 240 représente une redondance car seul le nom de la variable recevant la valeur retour change.
 \end{exmp}
-Nous aurions pu pallier cette redondance en regroupant l'ensemble des variables pouvant être sélectionnées par l'utilisateur dans une liste ou un dictionnaire. Cela aurait nous aurait permis d'éviter la redondance de nos instructions car le choix de l'utilisateur aurait pu se porter sur l'indice d'une liste ou la clé d'une entrée de dictionnaire.
+Nous aurions pu pallier cette redondance en regroupant l'ensemble des variables pouvant être sélectionnées par l'utilisateur dans une liste ou un dictionnaire. Cela nous aurait permis d'éviter la redondance de nos instructions car le choix de l'utilisateur aurait pu se porter sur l'indice d'une liste ou la clé d'une entrée de dictionnaire.
 \begin{exmp}
 Reprenons le dernier exemple.
 \begin{lstlisting}
@@ -318,11 +403,11 @@ input("(Appuyer sur entrer pour revenir au menu)")
 
 print(var[chVar])
 \end{lstlisting}
-Nous avons ici utilisé une paire de liste, "nomvar" pour le nom des variables et "var" pour la valeur des variables. Comme vous pouvez le constater, nous n'avons plus besoin de nous répéter dans les instructions.
 \end{exmp}
-A noter que l'on aurait ainsi pu éviter l'utilisation des variables globales avec les fonctions de gestion de fichiers. Cette méthode meilleure en tout point à celle mise en place dans la version actuelle du programme aurait néanmoins nécessité une réécriture complète du code de debug\_mode pour être effective. Pour des raisons de gestion du temps, nous n'avons pas pu nous le permettre.
+
+Nous avons ici utilisé une paire de liste, "nomvar" pour le nom des variables et "var" pour la valeur des variables. Comme vous pouvez le constater, nous n'avons plus besoin de nous répéter dans les instructions. Cette méthode meilleure en tout point à celle mise en place dans la version actuelle du programme aurait néanmoins nécessité une réécriture complète du code de debug\_mode pour être effective. Pour des raisons de gestion du temps, nous n'avons pas pu nous le permettre.
 \subsubsection{Une gestion partielle des fichiers}
-Un autre symptôme du manque d'architecture dans la réalisation d'un programme est l'ajout successif de fonctionnalités non prévues. Une gestion des fichiers s'est imposé lorsque nous avons essayé d'implémenter les fonctions \\"\textit{init\_pioche\_fichier}" et "\textit{ecrire\_fichier\_reussite}" dans notre interface utilisateur. Il devait pouvoir sélectionner le fichier désiré pour pouvoir le lire avec "\textit{init\_pioche\_fichier}" mais également en créer de nouveaux pour pouvoir sauvegarder des listes de cartes avec "\textit{ecrire\_fichier\_reussite}". Nous avons donc dans un premier temps créé "liFichier" permettant de pouvoir garder en mémoire le nom des fichiers créés par l'utilisateur. Cependant, cette mémoire était à court-terme car lorsque le programme était fermé, les modifications apportées à "liFichier" n'étaient pas sauvegardées. Nous avons donc dans un second temps créé un système de sauvegarde de la liste dans le fichier "liFich.csv". Malgré cet ajout, la gestion des fichiers reste partielle : l'utilisateur ne peut par exemple pas supprimer de fichiers via le debug\_mode. Ces défauts peuvent néanmoins se justifier par le fait que debug\_mode ne s'adresse pas à des utilisateurs "grand-public" mais plutôt à des utilisateurs connaissant et ayant accès au code de l'ensemble du projet (des développeurs).
+Un autre symptôme du manque d'architecture dans la réalisation d'un programme est l'ajout successif de fonctionnalités non prévues. Un gestionnaire de fichiers s'est imposé lorsque nous avons essayé d'implémenter les fonctions "\textit{init\_pioche\_fichier}" et "\textit{ecrire\_fichier\_reussite}" dans notre interface utilisateur. Il devait pouvoir sélectionner le fichier désiré pour pouvoir le lire avec "\textit{init\_pioche\_fichier}" mais également en créer de nouveaux pour pouvoir sauvegarder des listes de cartes avec "\textit{ecrire\_fichier\_reussite}". Nous avons donc dans un premier temps créé "liFichier" permettant de pouvoir garder en mémoire le nom des fichiers créés par l'utilisateur. Cependant, cette mémoire était à court-terme car lorsque le programme se fermait, les modifications apportées à "liFichier" n'étaient pas sauvegardées. Nous avons donc dans un second temps créé un système de sauvegarde de la liste dans le fichier "liFich.csv". Malgré cet ajout, la gestion des fichiers reste partielle : l'utilisateur ne peut par exemple pas supprimer de fichiers via le debug\_mode. Ces défauts peuvent néanmoins se justifier par le fait que debug\_mode ne s'adresse pas à des utilisateurs "grand-public" mais plutôt à des utilisateurs connaissant et ayant accès au code de l'ensemble du projet (des développeurs).
 \subsubsection{Une syntaxe conditionnelle lourde.}
 Enfin, nous avons également pu relever que la syntaxe "if/elif/else" pouvait paraître elle aussi redondante, ou tout du moins lourde. Nous avons cherché des solutions en utilisant d'autres syntaxes conditionnelles comme "match-case". Semblable à la syntaxe "switch-case" en langage C, "match-case" nous aurait permis une syntaxe plus légère pour l'écriture de nos menus et sous-menus. Malheureusement, cette fonctionnalité est sortie avec le patch 3.10 de Python en octobre dernier. Jugeant cette date beaucoup trop proche et afin d'éviter d'éventuels conflits de versions de Python, nous avons renoncer à implémenter cette fonctionnalité.
 \section{Annexes}
