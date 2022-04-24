@@ -9,6 +9,7 @@
 \usepackage{amsthm}
 \usepackage{mathtools}
 \usepackage{listings}
+\usepackage{float}
 \usepackage[pdftex]{hyperref}
 \usepackage{amssymb}
 \usepackage{tabto}
@@ -89,6 +90,7 @@
 \begin{document}
 \maketitle
 \tableofcontents
+\listoffigures
 \section{La réussite des alliances: structuration du jeu}
 \subsection{Rappel des règles du jeu}
 Quelques rappels des règles: \\
@@ -100,15 +102,16 @@ Pour représenter informatiquement le jeu de la réussite des alliances, nous av
 Néanmoins, le sujet nous permettait également de prendre certaines libertés. Par exemple, il nous était suggéré de réaliser des fonctions auxiliaires pour programmer la fonction "\textit{une$\_$etape$\_$re-\linebreak[4]ussite}". C'est ce que nous avons fait avec la fonction "\textit{piocher}" qui compartimente l'action de piocher une carte. Elle prends en argument deux listes, une qui représente la liste des tas de la réussite, l'autre qui représente la pioche. Elle a  pour effet de bord de déplacer la première carte de la pioche (c'est à dire d'indice 0) au dernier emplacement de la liste des tas. Pour cela, nous  avons utilisé la fonction "\textit{pop}" qui a elle même pour effet de bord de supprimer un élément d'une liste à un index précis et qui retourne cet élément. Nous avons donc redirigé la sortie de la fonction "\textit{pop}" comme ceci:\\
 Pour représenter informatiquement le jeu de la réussite des alliances, nous avions à notre disposition une partie guidée intégrée au sujet. Ce "cahier des charges" détaillé nous a fourni un certain confort quant à l'architecture du programme en lui-même. En effet, comme les entrées, sorties et effets de bords de nos fonctions nous étaient déjà indiqué, nous n'avions pas à réfléchir à comment nos fonctions allaient interagir entre elles. Les appels à des fonctions antérieures, s'il y en avait, nous étaient eux aussi indiqués ou tout du moins suggérés. Cette souplesse de travail nous a permis de nous concentrer sur l'algorithmique de nos fonctions et comment optimiser ces dernières.\\
 
-Néanmoins, le sujet nous permettait également de prendre certaines libertés. Par exemple, il nous était suggéré de réaliser des fonctions auxiliaires pour programmer la fonction "\textit{une\_etape\_re-\linebreak[4]ussite}". C'est ce que nous avons fait avec la fonction "\textit{piocher}" qui compartimente l'action de piocher une carte. Elle prend en argument deux listes, une qui représente la liste des tas de la réussite, l'autre qui représente la pioche. Elle a pour effet de bord de déplacer la première carte de la pioche (c'est à dire d'indice 0) au dernier emplacement de la liste des tas. Pour cela, nous avons utilisé la fonction "\textit{pop}" qui a elle-même pour effet de bord de supprimer un élément d'une liste à un index précis et qui retourne cet élément. Nous avons donc redirigé la sortie de la fonction "\textit{pop}" comme ceci : \\
+Néanmoins, le sujet nous permettait également de prendre certaines libertés. Par exemple, il nous était suggéré de réaliser des fonctions auxiliaires pour programmer la fonction "\textit{une\_etape\_re-\linebreak[4]ussite}". C'est ce que nous avons fait avec la fonction "\textit{piocher}" qui compartimente l'action de piocher une carte. Elle prend en argument deux listes, une qui représente la liste des tas de la réussite, l'autre qui représente la pioche. Elle a pour effet de bord de déplacer la première carte de la pioche (c'est à dire d'indice 0) au dernier emplacement de la liste des tas. Pour cela, nous avons utilisé la fonction "\textit{pop}" qui a elle-même pour effet de bord de supprimer un élément d'une liste à un index précis et qui retourne cet élément. Nous avons donc redirigé la sortie de la fonction "\textit{pop}" comme ceci : 
 
+
+\begin{figure}[H]
 \begin{lstlisting}
-	def piocher(liste_tas,pioche):
-    		liste_tas+=[pioche.pop(0)]
+def piocher(liste_tas,pioche):
+    	liste_tas+=[pioche.pop(0)]
+\end{lstlisting}\caption{fonction : ligne 133}
+\end{figure}
 
-\end{lstlisting}
-
-~~~fonction : ligne 118\\
 
 Nous n'avons cependant pas jugé nécéssaire de faire d'autres compartimentations pour fluidifier cette fonction.
 
@@ -126,7 +129,7 @@ Lors de la création de cette fonction, nous avons constaté des bugs survenant 
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.5]{img/bug_afficher_reussite_num.PNG}\caption{bug d'affichage relatif à la fonction "\textit{afficher$\_$reussite$\_$num}" telle qu'écrite au commit 728144c (cf.\ref{reussite})}
+\includegraphics[scale=0.5]{img/bug_afficher_reussite_num.PNG}\caption{bug d'affichage relatif à la fonction "\textit{afficher$\_$reussite$\_$num}" telle qu'écrite au commit 728144c (cf.\ref{blabla})}
 \end{center}
 \end{figure}
 
@@ -136,7 +139,7 @@ Nous avons résolu ce problème en imbriquant les trois boucles d'affichage dans
 Le compteur "$y$" est incrémenté à chaque passage dans la boucle, c'est à dire à chaque impression de carte. Il permet donc de savoir où nous en sommes dans la lecture/impression de la réussite et par conséquent, poser une condition de sortie de boucle lorsque qu'on arrive au bout de la liste de cartes. Le compteur "$i$" qui est incrémenté lui aussi à chaque impression mais réinitialisé à chaque passage dans la grande boucle (ce qui reviens à une réinitialisation à la sortie de la "petite" boucle). 
 
 Donc, multiplié par 4, il permet de compter le nombre de caractères imprimés à chaque passage de grande boucle. Il faut maintenant connaître la largeur du terminal pour pouvoir la comparer à "$i$". Pour obtenir la taille du terminal, nous avons utilisé le module intégré à python : "\textit{shutil}". Avec la fonction "\textit{get$\_$terminal$\_$size}", on peut obtenir le nombre de caractères que peut contenir le terminal en longueur. Ainsi, nous pouvons construire la deuxième condition de sortie de boucle en spécifiant que la boucle est valide tant que $i \times 4$ est inférieur ou égal à la largeur du terminal. Après modifications, la fonction est donc comme suit :
-
+\begin{figure}[H]
 \begin{lstlisting}
 def afficher_reussite_num(liCartes):
     columns, rows = shutil.get_terminal_size()
@@ -170,8 +173,9 @@ def afficher_reussite_num(liCartes):
                 print(" ",cpt,sep="",end=" ")
             cpt+=1
         print("\n")
-\end{lstlisting}
-~~~fonction: ligne 24
+\end{lstlisting}\caption{fonction : ligne 24}
+\end{figure}
+
 
 \subsubsection{Fonction "texte$\_$encadre"}
 Finalement, nous avons réalisé la fonction "\textit{texte$\_$encadre}" qui permet d'encadrer un texte pour le mettre en valeur. Nous avons paramétré cette fonction avec deux modes d’encadrement : le premier pour le texte "normal" et l'autre pour les titres. Ainsi, cette fonction prend en arguments une chaine de caractère "texte" correspondante au texte à afficher et un booléen "titre" optionnel correspondant au mode d'affichage. Il est donc de base sur False, ce qui correspond au mode "normal". Comme pour "\textit{afficher$\_$reussite$\_$num}" vu précédement  (cf.\ref{fctreu}), cette fonction utilise le module "shutil" et sa fonction "\textit{get$\_$terminal$\_$size}". Pour rappel, elle permet d'obtenir deux entiers correspondant respectivement à la largeur et à la hauteur du terminal. L'utilisation de cette fonction nous permettra donc d'obtenir la largeur du terminal pour que l'encadrement prenne bien toute la longueur de la ou les lignes qu'il occupera. Après une syntaxe conditionnelle vérifiant la valeur de l'argument "titre", le code de cette fonction correspond à un enchainement de boucles "for" parcourant une range variable. Pour les textes normaux, l'affichage se fait sur une ligne tandis que pour les titres, l'affichage se fait sur trois lignes. La range de la boucle "for" variera en fonction de la ligne sur laquelle elle se trouve.
@@ -247,6 +251,7 @@ Lorsqu'une fonction est sélectionnée dans le menu, les variables doivent être
 Certaines fonctions peuvent cependant prendre comme argument des noms de fichiers, nous avons donc mis en place une gestion dynamique des fichiers présents dans le sous-répertoire "ressources" (cf.\ref{arbre}). La gestion des fichiers de notre programme s'articule autour de la fonction "\textit{choixFichier}". Cette dernière permet à l'utilisateur de choisir un fichier existant présent dans le dossier "ressources", ou bien d'en créer un nouveau si c'est nécessaire. Elle ne prend pas d'argument et retourne le nom du fichier choisi ou crée. Afin que la gestion des fichiers soit dynamique et que par exemple, un fichier crée avec cette fonction puisse par la suite être sélectionné par cette même fonction, nous avons créé une liste "liFichier" qui répertorie l'ensemble des fichiers consultables. La fonction "\textit{choixFichier}" consiste donc à lire ou modifier la liste "liFichier" ou fonction de ce que l'utilisateur choisi. Elle a donc comme effet de bord la modification de la variable "liFichier". Or cette variable est définie dans le programme principal, une fonction peut consulter mais pas modifier une variable issue du programme principal. Pour pallier ce problème, nous avons utilisé le mot-clé "global" qui permet de définir une variable comme globale, c’est-à-dire modifiable partout dans le programme. Plus précisément, nous avons déclaré "liFichier" comme étant globale mais dans la fonction "\textit{choixFichier}". Cela revient donc à ce que "liFichier" soit globale uniquement pour la fonction "\textit{choixFichier}", elle n'est ainsi pas réellement globale et ne peut pas être modifier par les autres fonctions comme la nomination "globale" le voudrait.
 \begin{exmp}
 Soit le programme suivant :
+\begin{figure}[H]
 \begin{lstlisting}
 def modif():
     global oui
@@ -257,13 +262,15 @@ oui=1
 modif()
 modifBis()
 print(oui)
-\end{lstlisting}
+\end{lstlisting}\caption{}
+\end{figure}
 Le programme affiche "5", la fonction "\textit{modifBis}" ne modifie pas la variable "oui". Elle n'est donc globale que pour la fonction "\textit{modif}".
 \end{exmp}
 \subsection{Limites et Erreurs}
 \subsubsection{La redondance}
 Lors du développement de debug$\_$mode, nous avons été confrontées à de multiples problèmes. Le premier, et selon nous plus important a été le manque de préparation et d'organisation dans la réalisation de la structure du programme. Nous n'avons pour ainsi dire pas réfléchis à l'architecture du programme, ou comment les différentes fonctionnalités de ce programme allaient exister entre elles. Alors que nous avions bien en tête l'objectif principal du programme, c’est-à-dire une interface utilisateur permettant de faciliter l'appel de fonctions pour les tester, nous n'avions pas encore réfléchi à comment réaliser cet objectif. Nous avons résolu ce problème au fur et à mesure du développement du programme. En résulte un programme manquant, à notre goût, d'une certaine rigueur dans l'exécution des tâches qu'il lui est demandé. La redondance dans les instructions est également selon nous un symptôme de cette mauvaise préparation. Par exemple, lorsqu’une fonction retourne une valeur, le programme principal répète la même instruction pour tous les choix de variables de l’utilisateur :
 \begin{exmp}
+\begin{figure}[H]
 \begin{lstlisting}
 elif choix=="3":
 	chVar=choixVar("lc")
@@ -279,12 +286,14 @@ elif choix=="3":
 		print("Erreur: variable inconnue, code retour choixVar() 		inconnu")
     input("(Appuyer sur entrer pour revenir au menu)")
 	conti=False
-\end{lstlisting}
+\end{lstlisting}\caption{}
+\end{figure}
 Le code de la ligne 228 à la ligne 237 représente une redondance car seul le nom de la variable recevant la valeur retour change.
 \end{exmp}
 Nous aurions pu pallier cette redondance en regroupant l'ensemble des variables pouvant être sélectionnées par l'utilisateur dans une liste ou un dictionnaire. Cela aurait nous aurait permis d'éviter la redondance de nos instructions car le choix de l'utilisateur aurait pu se porter sur l'indice d'une liste ou la clé d'une entrée de dictionnaire.
 \begin{exmp}
 Reprenons le dernier exemple.
+\begin{figure}[H]
 \begin{lstlisting}
 nomvar=[
     "carte1",
@@ -310,7 +319,8 @@ var[chVar]=init_pioche_alea(chNbCartes)
 input("(Appuyer sur entrer pour revenir au menu)")
 
 print(var[chVar])
-\end{lstlisting}
+\end{lstlisting}\caption{}
+\end{figure}
 Nous avons ici utilisé une paire de liste, "nomvar" pour le nom des variables et "var" pour la valeur des variables. Comme vous pouvez le constater, nous n'avons plus besoin de nous répéter dans les instructions.
 \end{exmp}
 A noter que l'on aurait ainsi pu éviter l'utilisation des variables globales avec les fonctions de gestion de fichiers. Cette méthode meilleure en tout point à celle mise en place dans la version actuelle du programme aurait néanmoins nécessité une réécriture complète du code de debug$\_$mode pour être effective. Pour des raisons de gestion du temps, nous n'avons pas pu nous le permettre.
@@ -318,7 +328,6 @@ A noter que l'on aurait ainsi pu éviter l'utilisation des variables globales av
 Un autre symptôme du manque d'architecture dans la réalisation d'un programme est l'ajout successif de fonctionnalités non prévues. Une gestion des fichiers s'est imposé lorsque nous avons essayé d'implémenter les fonctions \\"\textit{init$\_$pioche$\_$fichier}" et "\textit{ecrire$\_$fichier$\_$reussite}" dans notre interface utilisateur. Il devait pouvoir sélectionner le fichier désiré pour pouvoir le lire avec "\textit{init$\_$pioche$\_$fichier}" mais également en créer de nouveaux pour pouvoir sauvegarder des listes de cartes avec "\textit{ecrire$\_$fichier$\_$reussite}". Nous avons donc dans un premier temps créé "liFichier" permettant de pouvoir garder en mémoire le nom des fichiers créés par l'utilisateur. Cependant, cette mémoire était à court-terme car lorsque le programme était fermé, les modifications apportées à "liFichier" n'étaient pas sauvegardées. Nous avons donc dans un second temps créé un système de sauvegarde de la liste dans le fichier "liFich.csv". Malgré cet ajout, la gestion des fichiers reste partielle : l'utilisateur ne peut par exemple pas supprimer de fichiers via le debug$\_$mode. Ces défauts peuvent néanmoins se justifier par le fait que debug$\_$mode ne s'adresse pas à des utilisateurs "grand-public" mais plutôt à des utilisateurs connaissant et ayant accès au code de l'ensemble du projet (des développeurs).
 \subsubsection{Une syntaxe conditionnelle lourde.}
 Enfin, nous avons également pu relever que la syntaxe "if/elif/else" pouvait paraître elle aussi redondante, ou tout du moins lourde. Nous avons cherché des solutions en utilisant d'autres syntaxes conditionnelles comme "match-case". Semblable à la syntaxe "switch-case" en langage C, "match-case" nous aurait permis une syntaxe plus légère pour l'écriture de nos menus et sous-menus. Malheureusement, cette fonctionnalité est sortie avec le patch 3.10 de Python en octobre dernier. Jugeant cette date beaucoup trop proche et afin d'éviter d'éventuels conflits de versions de Python, nous avons renoncer à implémenter cette fonctionnalité.
-\section{Interface utilisateur: proposer un produit fini.}
 \section{Annexes}
 \subsection{Structure du répertoire}\label{arbre}
 
@@ -336,7 +345,8 @@ Cette arbre montre la structure de notre répertoire.\\
 ]
 \end{tikzpicture}%
 \hspace*{\fill}
-\subsection{afficher$\_$reussite$\_$num}\label{reussite}
+\subsection{afficher$\_$reussite$\_$num au commit 728144c}\label{blabla}
+\begin{figure}[H]
 \begin{lstlisting}
 def afficher_reussite_num(liCartes):
     i=0
@@ -363,7 +373,8 @@ def afficher_reussite_num(liCartes):
         cpt+=1
     print("\n")
 
-\end{lstlisting}
+\end{lstlisting}\caption{}
+\end{figure}
 \subsection{Sources}
 \begin{itemize}
 \item xm1math.net\\
